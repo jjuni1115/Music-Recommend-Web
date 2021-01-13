@@ -1,0 +1,183 @@
+{
+  "kind": "youtube#searchListResponse",
+  "etag": "8o4oeERVB976O1IO60ccQWs_Hk0",
+  "nextPageToken": "CAUQAA",
+  "regionCode": "KR",
+  "pageInfo": {
+    "totalResults": 209187,
+    "resultsPerPage": 5
+  },
+  "items": [
+    {
+      "kind": "youtube#searchResult",
+      "etag": "2YmFeA3f7otJibepMEqduFnIMBA",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "z3szNvgQxHo"
+      },
+      "snippet": {
+        "publishedAt": "2021-01-11T09:00:14Z",
+        "channelId": "UCritGVo7pLJLUS8wEu32vow",
+        "title": "(여자)아이들((G)I-DLE) - &#39;화(火花)(HWAA)&#39; Official Music Video",
+        "description": "(여자)아이들((G)I-DLE) - '화(火花)(HWAA)' Official Music Video Composed by 소연, Pop Time Lyrics by 소연 Arranged by Pop Time, 소연 차디찬 한겨울이 덮친 듯 ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/z3szNvgQxHo/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/z3szNvgQxHo/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/z3szNvgQxHo/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "(G)I-DLE (여자)아이들 (Official YouTube Channel)",
+        "liveBroadcastContent": "none",
+        "publishTime": "2021-01-11T09:00:14Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "kg2271SNNJz-r21lyDddsaaf2SQ",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "heduzJKSKvk"
+      },
+      "snippet": {
+        "publishedAt": "2021-01-11T09:42:36Z",
+        "channelId": "UCmth4hMyizG-_W9jidBqs_A",
+        "title": "(G)-IDLE &#39;HWAA&#39; Lyrics ((여자)아이들 화(火花) 가사) (Color Coded Lyrics)",
+        "description": "All Rights Administered by CUBE Entertainment ? Artist: (G)-IDLE ((여자)아이들) ? Song ?: 화(火花) (HWAA) ? Album: I burn ? Released: 21.01.11 .",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/heduzJKSKvk/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/heduzJKSKvk/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/heduzJKSKvk/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Jaeguchi",
+        "liveBroadcastContent": "none",
+        "publishTime": "2021-01-11T09:42:36Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "Lb8b3Lp1AONC-wZQDzoadrfWWGE",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "MLrSdfX0ZXY"
+      },
+      "snippet": {
+        "publishedAt": "2021-01-12T08:00:04Z",
+        "channelId": "UCqq-ovGE01ErlXakPihhKDA",
+        "title": "(여자)아이들?_?화(火花) | (G)I-DLE _ HWAA |?스페셜클립?|?퍼포먼스?| Special Clip | Performance |?미연 민니 수진 소연 우기 슈화",
+        "description": "(여자)아이들 _ 화(火花) | (G)I-DLE _ HWAA | 스페셜클립 | 퍼포먼스 | Special Clip | Performance | 미연 민니 수진 소연 우기 슈화 ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/MLrSdfX0ZXY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/MLrSdfX0ZXY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/MLrSdfX0ZXY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "1theK Originals - 원더케이 오리지널",
+        "liveBroadcastContent": "none",
+        "publishTime": "2021-01-12T08:00:04Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "r7gJVYecWiPRNv-BJMAjEJUXpIc",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "DOjxbtafGYk"
+      },
+      "snippet": {
+        "publishedAt": "2021-01-11T09:13:50Z",
+        "channelId": "UCWT2ZfW7d8YI-HinHEVhyCA",
+        "title": "HWAA (화(火花)",
+        "description": "Provided to YouTube by CUBE Entertainment HWAA (화(火花) · (여자)아이들 (G)I-DLE I burn ? CUBE ENTERTAINMENT INC. Producer: (여자)아이들 (G)I-DLE ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/DOjxbtafGYk/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/DOjxbtafGYk/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/DOjxbtafGYk/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "(G)I-DLE - Topic",
+        "liveBroadcastContent": "none",
+        "publishTime": "2021-01-11T09:13:50Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "OEE_HcZLTCfm2d4d18sHdNz20qs",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "55TEB82zfVk"
+      },
+      "snippet": {
+        "publishedAt": "2021-01-11T10:00:01Z",
+        "channelId": "UCritGVo7pLJLUS8wEu32vow",
+        "title": "(여자)아이들((G)I-DLE) - &#39;화(火花)(HWAA)&#39; : ONLINE MEDIA SHOWCASE Ver.",
+        "description": "(여자)아이들((G)I-DLE) - '화(火花)(HWAA)' : ONLINE MEDIA SHOWCASE Ver. (G)I-DLE Official YouTube: http://www.youtube.com/gidleofficial (G)I-DLE Official ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/55TEB82zfVk/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/55TEB82zfVk/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/55TEB82zfVk/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "(G)I-DLE (여자)아이들 (Official YouTube Channel)",
+        "liveBroadcastContent": "none",
+        "publishTime": "2021-01-11T10:00:01Z"
+      }
+    }
+  ]
+}
+{  "kind": "youtube#searchListResponse",  "etag": "8o4oeERVB976O1IO60ccQWs_Hk0",  "nextPageToken": "CAUQAA",  "regionCode": "KR",  "pageInfo": {    "totalResults": 209187,    "resultsPerPage": 5  },  "items": [    {      "kind": "youtube#searchResult",      "etag": "2YmFeA3f7otJibepMEqduFnIMBA",      "id": {        "kind": "youtube#video",        "videoId": "z3szNvgQxHo"      },      "snippet": {        "publishedAt": "2021-01-11T09:00:14Z",        "channelId": "UCritGVo7pLJLUS8wEu32vow",        "title": "(여자)아이들((G)I-DLE) - &#39;화(火花)(HWAA)&#39; Official Music Video",        "description": "(여자)아이들((G)I-DLE) - '화(火花)(HWAA)' Official Music Video Composed by 소연, Pop Time Lyrics by 소연 Arranged by Pop Time, 소연 차디찬 한겨울이 덮친 듯 ...",        "thumbnails": {          "default": {            "url": "https://i.ytimg.com/vi/z3szNvgQxHo/default.jpg",            "width": 120,            "height": 90          },          "medium": {            "url": "https://i.ytimg.com/vi/z3szNvgQxHo/mqdefault.jpg",            "width": 320,            "height": 180          },          "high": {            "url": "https://i.ytimg.com/vi/z3szNvgQxHo/hqdefault.jpg",            "width": 480,            "height": 360          }        },        "channelTitle": "(G)I-DLE (여자)아이들 (Official YouTube Channel)",        "liveBroadcastContent": "none",        "publishTime": "2021-01-11T09:00:14Z"      }    },    {      "kind": "youtube#searchResult",      "etag": "kg2271SNNJz-r21lyDddsaaf2SQ",      "id": {        "kind": "youtube#video",        "videoId": "heduzJKSKvk"      },      "snippet": {        "publishedAt": "2021-01-11T09:42:36Z",        "channelId": "UCmth4hMyizG-_W9jidBqs_A",        "title": "(G)-IDLE &#39;HWAA&#39; Lyrics ((여자)아이들 화(火花) 가사) (Color Coded Lyrics)",        "description": "All Rights Administered by CUBE Entertainment ? Artist: (G)-IDLE ((여자)아이들) ? Song ?: 화(火花) (HWAA) ? Album: I burn ? Released: 21.01.11 .",        "thumbnails": {          "default": {            "url": "https://i.ytimg.com/vi/heduzJKSKvk/default.jpg",            "width": 120,            "height": 90          },          "medium": {            "url": "https://i.ytimg.com/vi/heduzJKSKvk/mqdefault.jpg",            "width": 320,            "height": 180          },          "high": {            "url": "https://i.ytimg.com/vi/heduzJKSKvk/hqdefault.jpg",            "width": 480,            "height": 360          }        },        "channelTitle": "Jaeguchi",        "liveBroadcastContent": "none",        "publishTime": "2021-01-11T09:42:36Z"      }    },    {      "kind": "youtube#searchResult",      "etag": "Lb8b3Lp1AONC-wZQDzoadrfWWGE",      "id": {        "kind": "youtube#video",        "videoId": "MLrSdfX0ZXY"      },      "snippet": {        "publishedAt": "2021-01-12T08:00:04Z",        "channelId": "UCqq-ovGE01ErlXakPihhKDA",        "title": "(여자)아이들?_?화(火花) | (G)I-DLE _ HWAA |?스페셜클립?|?퍼포먼스?| Special Clip | Performance |?미연 민니 수진 소연 우기 슈화",        "description": "(여자)아이들 _ 화(火花) | (G)I-DLE _ HWAA | 스페셜클립 | 퍼포먼스 | Special Clip | Performance | 미연 민니 수진 소연 우기 슈화 ...",        "thumbnails": {          "default": {            "url": "https://i.ytimg.com/vi/MLrSdfX0ZXY/default.jpg",            "width": 120,            "height": 90          },          "medium": {            "url": "https://i.ytimg.com/vi/MLrSdfX0ZXY/mqdefault.jpg",            "width": 320,            "height": 180          },          "high": {            "url": "https://i.ytimg.com/vi/MLrSdfX0ZXY/hqdefault.jpg",            "width": 480,            "height": 360          }        },        "channelTitle": "1theK Originals - 원더케이 오리지널",        "liveBroadcastContent": "none",        "publishTime": "2021-01-12T08:00:04Z"      }    },    {      "kind": "youtube#searchResult",      "etag": "r7gJVYecWiPRNv-BJMAjEJUXpIc",      "id": {        "kind": "youtube#video",        "videoId": "DOjxbtafGYk"      },      "snippet": {        "publishedAt": "2021-01-11T09:13:50Z",        "channelId": "UCWT2ZfW7d8YI-HinHEVhyCA",        "title": "HWAA (화(火花)",        "description": "Provided to YouTube by CUBE Entertainment HWAA (화(火花) · (여자)아이들 (G)I-DLE I burn ? CUBE ENTERTAINMENT INC. Producer: (여자)아이들 (G)I-DLE ...",        "thumbnails": {          "default": {            "url": "https://i.ytimg.com/vi/DOjxbtafGYk/default.jpg",            "width": 120,            "height": 90          },          "medium": {            "url": "https://i.ytimg.com/vi/DOjxbtafGYk/mqdefault.jpg",            "width": 320,            "height": 180          },          "high": {            "url": "https://i.ytimg.com/vi/DOjxbtafGYk/hqdefault.jpg",            "width": 480,            "height": 360          }        },        "channelTitle": "(G)I-DLE - Topic",        "liveBroadcastContent": "none",        "publishTime": "2021-01-11T09:13:50Z"      }    },    {      "kind": "youtube#searchResult",      "etag": "OEE_HcZLTCfm2d4d18sHdNz20qs",      "id": {        "kind": "youtube#video",        "videoId": "55TEB82zfVk"      },      "snippet": {        "publishedAt": "2021-01-11T10:00:01Z",        "channelId": "UCritGVo7pLJLUS8wEu32vow",        "title": "(여자)아이들((G)I-DLE) - &#39;화(火花)(HWAA)&#39; : ONLINE MEDIA SHOWCASE Ver.",        "description": "(여자)아이들((G)I-DLE) - '화(火花)(HWAA)' : ONLINE MEDIA SHOWCASE Ver. (G)I-DLE Official YouTube: http://www.youtube.com/gidleofficial (G)I-DLE Official ...",        "thumbnails": {          "default": {            "url": "https://i.ytimg.com/vi/55TEB82zfVk/default.jpg",            "width": 120,            "height": 90          },          "medium": {            "url": "https://i.ytimg.com/vi/55TEB82zfVk/mqdefault.jpg",            "width": 320,            "height": 180          },          "high": {            "url": "https://i.ytimg.com/vi/55TEB82zfVk/hqdefault.jpg",            "width": 480,            "height": 360          }        },        "channelTitle": "(G)I-DLE (여자)아이들 (Official YouTube Channel)",        "liveBroadcastContent": "none",        "publishTime": "2021-01-11T10:00:01Z"      }    }  ]}
