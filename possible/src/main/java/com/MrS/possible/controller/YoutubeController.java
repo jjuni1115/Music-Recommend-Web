@@ -40,6 +40,7 @@ public class YoutubeController {
         VideoId = youtubeService.search(youtubedt); // Service.search impl, return MostView videoId
         System.out.println(VideoId);
 
+        // Video ID update to DB music table
         youtubeDao.temp(VideoId, youtubedt);
 
         return VideoId;  // redirection Error 2021.01.13
