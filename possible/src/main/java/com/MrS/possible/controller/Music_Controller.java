@@ -57,7 +57,6 @@ public class Music_Controller {
 
         for (int i=0;i<jArray.length();i++){
             JSONObject obj = jArray.getJSONObject(i);
-            //JSONArray artistList=obj.getJSONArray("artistList");
             JSONObject artistList=obj.getJSONObject("representationArtist");
             JSONObject album=obj.getJSONObject("album");
             String artist=artistList.getString("name");
@@ -76,24 +75,15 @@ public class Music_Controller {
                 e.printStackTrace();
             }
             String transdate= after.format(temp);
-
-            //JSONObject artist=artistList.getJSONObject(0);
             String name=obj.getString("name");
-            //String artist_name=artist.getString("name");
             String adult=obj.getString("adultAuthYn");
             int adultAuthYn=0;
             if(adult=="Y"){
                 adultAuthYn=1;
             }
             int id=obj.getInt("id");
-            //System.out.println("title: "+name);
-            //System.out.println("artist: "+artist);
-            //System.out.println("adult: "+adult);
-            //System.out.println("release_date: "+releasedate);
-            //System.out.println("genre: 발라드");
             Music music=new Music(id,name,artist,"발라드",transdate,adultAuthYn);
             musicList.add(music);
-            //System.out.println(music);
         }
         System.out.println(musicList.getClass());
         musicService.insert(musicList);
