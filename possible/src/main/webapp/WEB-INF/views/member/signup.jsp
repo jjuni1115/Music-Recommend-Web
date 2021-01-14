@@ -51,6 +51,33 @@
                     $('#register').attr("disabled", false);
                 }
             });
+            /*$(function (){
+                $('#password1').keyup(function (){
+                    $('#chkNotice').html('');
+                });
+                $('#password2').keyup(function (){
+                    if($('password1').val()!=$('password2').val()){
+                        $('#chkNotice').html('비밀번호 일치하지 않음<br><br>');
+                        $('#chkNotice').attr('color','#f82a2aa3');
+                    }else{
+                        $('#chkNotice').html('비밀번호 일치함<br><br>');
+                        $('#chkNotice').attr('color', '#199894b3');
+                    }
+                });
+            });*/
+            $(function(){
+
+//비밀번호 확인
+                $('#password2').blur(function(){
+                    if($('#password1').val() != $('#password2').val()){
+                        if($('#password2').val()!=''){
+                            alert("비밀번호가 일치하지 않습니다.");
+                            $('#password2').val('');
+                            $('#password2').focus();
+                        }
+                    }
+                })
+            });
         }
     </script>
 
@@ -61,8 +88,11 @@
     <form action="/member/register" method="post">
         First Name <input type="text" name="first_name" required="required"><br>
         Last Name  <input type="text" name="last_name" required="required"><br>
-        ID         <input type="text" name="account" class="account_input" required="required"><br>
-        PW         <input type="password" name="password" required="required" minlength="8"><br>
+        ID         <input type="text" name="account" class="account_input" required="required">
+        <button type="button" onclick="id_check_func()" id="check">ID 중복 체크</button><br>
+        PW         <input type="password" id="password1" name="password" required="required" minlength="8"><br>
+        PW확인      <input type="password" id="password2" name="password2" required="required" minlength="="8><br>
+        <font id="chkNotice" size=""2></font>
         Age        <input type="number" name="age" required="required" min="0"><br>
         Sex        <select name="sex">
                     <option value=0>Female</option>
@@ -71,9 +101,8 @@
         <input type="hidden" name="class_" value=1 />
         <input type="hidden" name="money" value=0 />
 
-        <button type="submit" id="register" disabled="disabled">회원가입</button>
+        <button type="submit"  id="register" disabled="disabled">회원가입</button>
     </form>
-    <button type="button" onclick="id_check_func()" id="check">ID 중복 체크</button>
 </div>
 
 <button onclick="javascript:location.href='/';">메인으로</button>
