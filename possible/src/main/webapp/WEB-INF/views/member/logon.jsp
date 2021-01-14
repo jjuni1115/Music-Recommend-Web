@@ -22,13 +22,51 @@
     <script lang="javascript">
         //after all document read, function start -> so, you can use doc.variance, jsp value
         $(document).ready(function(){
+            let player = -1;
             // id : #, class : .
             $('#submit').click(function(){
+                player += 1;
+                if (player == 10){
+                    window.location.reload();
+                }
+                var iframe_id = "player" + player;
                 var json = {
                     artist : $('#artist').val(),
                     title : $('#title').val()
                 };
 
+                // This code loads the IFrame Player API code asynchronously. // It must be out of .ajax Scope. because it is loads Iframe Player API
+                // https://stackoverflow.com/questions/31065032/yt-is-not-defined-uncaught-referenceerror-youtube-api hint.
+                // https://developers.google.com/youtube/iframe_api_reference?hl=ko#Loading_a_Video_Player
+                const tag = document.createElement('script');
+                tag.src = "https://www.youtube.com/iframe_api";
+                var firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+                // The API will call this function when the video player is ready.
+                function onPlayerReady(event) {
+                    console.log("플레이어 자동 실행");
+                    event.target.playVideo();
+                }
+
+
+                // This function creates an <iframe> (and YouTube player)
+                // after the API code downloads.
+                function onYouTubeIframeAPIReady(data){
+                    console.log("iframe ready: " + data);
+                    var player = new YT.Player(iframe_id, {
+                        height: 140,
+                        width: 220,
+                        videoId: data,
+                        playerVars: {'wmode': 'opaque', 'autohide': 1 , 'enablejsapi': 1 , 'origin': 'http://localhost:8080/member/logon', 'rel': 0},
+                        events: {
+                            'onReady' : onPlayerReady
+                        }
+                    });
+                    player.setPlayerQuality = "small";
+                }
+
+                // AJAX : get VideoID & setting Iframe to show Video.
                 $.ajax({
                     type: "post",
                     url: "/ytube/search.do",
@@ -36,51 +74,11 @@
                     data: json,
                     success: function(data){
                         $("#videoID").empty();
-                        $("#videoID").append(data);
-                        $("#videoIDcheck").empty();
-                        $("#videoIDcheck").append(data);
+                        $("#videoID").text(data);
+                        $("#videoIDd").empty();
+                        $("#videoIDd").text(data);
 
-                        // This code loads the IFrame Player API code asynchronously.
-                        const tag = document.createElement('script');
-
-                        tag.src = "https://www.youtube.com/iframe_api";
-                        var firstScriptTag = document.getElementsByTagName('script')[0];
-                        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-                        // This function creates an <iframe> (and YouTube player)
-                        // after the API code downloads.
-                        var player;
-                        function onYouTubeIframeAPIReady(){
-                            player = new YT.Player('player', {
-                                height: 480,
-                                width: 854,
-                                videoId: data,
-                                event: {
-                                    'onReady': onPlayerReady,
-                                    'onStateChange': onPlayerStateChange
-                                }
-                            });
-                        }
-
-                        onYouTubeIframeAPIReady();
-
-                        // 4. The API will call this function when the video player is ready.
-                        function onPlayerReady(event) {
-                            alert("on playerReady")
-                            event.target.playVideo();
-                        }
-
-                        var done = false;
-                        function onPlayerStateChange(event){
-                            if (event.data == YT.PlayerState.PLAYING && !done){
-                                alert("onplayer if")
-                                setTimeout(stopVideo, 300000);
-                                done=true;
-                            }
-                        }
-                        function stopVideo(){
-                            player.stopVideo();
-                        }
+                        onYouTubeIframeAPIReady(data);
 
                     },
                     error: function(err){
@@ -88,8 +86,8 @@
                     }
                 });
             });
-        });
 
+        });
     </script>
 </head>
 <body>
@@ -102,9 +100,6 @@ age = ${sessionScope.member.age}
     ${sessionScope.member.account}님 로그인 성공
 </c:if>
 
-<div id="player">
-
-</div>
 
 <div>
     <button onclick="javascript:location.href='/';">홈</button>
@@ -126,9 +121,28 @@ age = ${sessionScope.member.age}
     Artist : <input type="text" name="artist" id="artist" minlength="1"/><br>
     Title : <input type="text" name="title" id="title" minlength="1"/>
     <button id="submit" type="submit">음악검색</button><br>
-    Serial : <p id="videoID"></p>
+    Serial ID : <p id="videoIDd"></p>
+</div>
+<div id="player0" class="youtube">
+</div>
+<div id="player1" class="youtube">
+</div>
+<div id="player2" class="youtube">
+</div>
+<div id="player3" class="youtube">
+</div>
+<div id="player4" class="youtube">
+</div>
+<div id="player5" class="youtube">
+</div>
+<div id="player6" class="youtube">
+</div>
+<div id="player7" class="youtube">
+</div>
+<div id="player8" class="youtube">
+</div>
+<div id="player9" class="youtube">
 </div>
 
-<%--<iframe id="player" type="text/html" width="854" height="480" frameborder="0"></iframe>--%>
 </body>
 </html>
