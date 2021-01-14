@@ -27,7 +27,9 @@ public class YoutubeServiceImpl implements YoutubeService {
     private static final JsonFactory JSON_FACTORY = new JacksonFactory();
     private static final long NUMBER_OF_VIDEOS_RETURNED = 1;
     public static YouTube youtube_type;
-    private static final String API_KEY = "AIzaSyABoT_EDIh6ydzpPeregb-5jNTe1rjzBTY";  // Youtube API Key
+    // AIzaSyBqqNfLZ8URYN-W1jbReGlsyYMlP8wnTUI
+    // AIzaSyABoT_EDIh6ydzpPeregb-5jNTe1rjzBTY
+    private static final String API_KEY = "AIzaSyBqqNfLZ8URYN-W1jbReGlsyYMlP8wnTUI";  // Youtube API Key
     private static final String MAX_RESULT = "3"; // When you Search by Youtube API, Number of Videos to get
 
     private static double put_youtubeDT(Iterator<Video> iteratorSearchResults, YoutubeDT youtubeDT){
