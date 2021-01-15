@@ -120,11 +120,11 @@ public class YoutubeServiceImpl implements YoutubeService {
     }
 
     // Make URL, Setting
-    private String getAPI_URL(YoutubeDT youtubedt){
+    private String getAPI_URL(YoutubeDT youtubedt) throws UnsupportedEncodingException {
         String apiurl = "https://www.googleapis.com/youtube/v3/search";
         apiurl += "?key=" + API_KEY;
         apiurl += "&part=snippet&type=video&videoDuration<6&maxResults=" + MAX_RESULT + "&videoEmbeddable=true";
-        apiurl += "&q=" + URLEncoder.encode(youtubedt.getArtist() + " " + youtubedt.getTitle(), StandardCharsets.UTF_8);
+        apiurl += "&q=" + URLEncoder.encode(youtubedt.getArtist() + " " + youtubedt.getTitle(), "UTF-8");
         // &q= 이후 query 준비
 
         return apiurl;

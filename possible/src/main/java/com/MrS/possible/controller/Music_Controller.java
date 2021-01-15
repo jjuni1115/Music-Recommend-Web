@@ -82,7 +82,7 @@ public class Music_Controller {
                 adultAuthYn=1;
             }
             int id=obj.getInt("id");
-            Music music=new Music(id,name,artist,"발라드",transdate,adultAuthYn);
+            Music music=new Music(id,name,artist,"Ballad",transdate,adultAuthYn);
             musicList.add(music);
         }
         System.out.println(musicList.getClass());
