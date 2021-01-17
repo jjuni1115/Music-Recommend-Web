@@ -122,6 +122,13 @@ age = ${sessionScope.member.age}
     Title : <input type="text" name="title" id="title" minlength="1"/>
     <button id="submit" type="submit">음악검색</button><br>
     Serial ID : <p id="videoIDd"></p>
+    <form action="/py/recommend" method="post">
+        <input type="hidden" name="id" value=${sessionScope.member.id} />
+        <input type="hidden" name="account" value=${sessionScope.member.account} />
+        <input type="hidden" name="pw" value=${sessionScope.member.password} />
+
+        Music Recommend : <button type="submit" id="submit_recommend" >음악 추천</button><br>
+    </form>
 </div>
 <div id="player0" class="youtube">
 </div>

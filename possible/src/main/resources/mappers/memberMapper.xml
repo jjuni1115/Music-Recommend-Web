@@ -24,7 +24,6 @@
 
 
 
-
     <insert id="create">
         insert into member(account, password)
         values(#{account}, #{password});

@@ -41,7 +41,7 @@ public class YoutubeController {
         System.out.println(VideoId);
 
         // Video ID update to DB music table
-        youtubeDao.temp(VideoId, youtubedt);
+        youtubeDao.videoidInsert(VideoId, youtubedt);
 
         return VideoId;  // redirection Error 2021.01.13
     }
