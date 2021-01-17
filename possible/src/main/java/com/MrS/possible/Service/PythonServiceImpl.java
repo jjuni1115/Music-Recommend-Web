@@ -29,7 +29,7 @@ public class PythonServiceImpl implements PythonService{
         executor.setStreamHandler(pumpStreamHandler);
         int result = executor.execute(commandLine);
         System.out.println("result: " + result);  // check request
-        System.out.println("output: " + outputStream.toString());
+        System.out.println("output: " + outputStream.toString());  // temp
 
     }
 
