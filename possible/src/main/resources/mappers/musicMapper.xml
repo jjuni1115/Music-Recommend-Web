@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="music">
     <insert id="insert" parameterType="java.util.List">
-       insert into music(id,title,artist,genre,release_time,adult_authen) values
+       insert ignore into music(id,title,artist,genre,release_time,adult_authen) values
        <foreach collection="list" item="i" separator=",">
        (#{i.id},#{i.title},#{i.artist},#{i.genre},#{i.release_time},#{i.adult_authen})
        </foreach>
