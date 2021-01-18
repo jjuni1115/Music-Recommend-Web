@@ -1,6 +1,7 @@
 package com.MrS.possible.Service;
 
 import com.MrS.possible.domain.Member;
+import com.MrS.possible.domain.YoutubeDT;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.PumpStreamHandler;
@@ -35,21 +36,22 @@ public class PythonServiceImpl implements PythonService{
 
     // method override & recommend python script compute
     @Override
-    public String recommend(Member member) {
+    public String recommend(Member member, YoutubeDT youtubedt) {
         System.out.println("Python Call");
 
-        String[] command = new String[4];
+        String[] command = new String[5];
         command[0] = "python";
         command[1] = "/Users/jinwoo/IdeaProjects/yscec/possible/src/main/resources/python_recommend.py";   // you need to input Local Root python_recommend.py!!!
         command[2] = "-i " + member.getId();  // Type : long to String
         command[3] = "-a" + member.getAccount();
+        command[4] = "-m" + youtubedt.getVideoID();
         try {
             execPython(command);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        System.out.println(member.getId() + member.getAccount());
+        System.out.println(member.getId() + member.getAccount() + youtubedt.getVideoID());
 
 //        String cmds = "sh /Users/jinwoo/PycharmProjects/code_test/python_recommend.py";
 //        String[] callCmd = {"/bin/bash", "-i", id};

@@ -24,6 +24,10 @@ public class YoutubeDT {
         this.thumbnailPath = thumbnailPath;
     }
 
+    public YoutubeDT(String videoID) {
+        this.videoID = videoID;
+    }
+
     public String getThumbnailPath() {
         return thumbnailPath;
     }
