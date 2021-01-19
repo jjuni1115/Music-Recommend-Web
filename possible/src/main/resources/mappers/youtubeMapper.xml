@@ -15,12 +15,9 @@
         FROM rel
         GROUP BY music_ID
         HAVING playlist_ID IN (
-           SELECT ID
-           FROM playlist
-           WHERE user_ID IN (
-              SELECT distinct user_ID
-              from playlist, rel, music
-              where playlist.ID = rel.playlist_ID AND music.ID = rel.music_ID AND music.videoid like CONCAT('%', #{video_ID}, '%')))
+            SELECT A.ID
+            FROM playlist A, playlist B, rel, music
+            WHERE A.user_ID IN (B.user_ID) AND B.ID = rel.playlist_ID AND music.ID = rel.music_ID AND music.videoid LIKE CONCAT('%', #{video_ID}, '%'))
         ORDER BY dupl DESC
         LIMIT 12;
     </select>
