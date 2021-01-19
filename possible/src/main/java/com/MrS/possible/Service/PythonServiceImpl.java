@@ -1,22 +1,26 @@
 package com.MrS.possible.Service;
 
+import com.MrS.possible.dao.YoutubeDao;
 import com.MrS.possible.domain.Member;
+import com.MrS.possible.domain.RecResult;
 import com.MrS.possible.domain.YoutubeDT;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.PumpStreamHandler;
-import org.junit.Test;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class PythonServiceImpl implements PythonService{
+    private final YoutubeDao youtubeDao;
+
+    public PythonServiceImpl(YoutubeDao youtubeDao) {
+        this.youtubeDao = youtubeDao;
+    }
 
     public static void execPython(String[] command) throws IOException, InterruptedException {
         CommandLine commandLine = CommandLine.parse(command[0]);
@@ -34,9 +38,19 @@ public class PythonServiceImpl implements PythonService{
 
     }
 
-    // method override & recommend python script compute
+    // get recommend by user & playlist
+    public List<RecResult>[] recBySQL(String videoID){
+        List<RecResult>[] Result_array;
+
+        // Compute SQL & get Result of Recommend tuples(Music)
+        Result_array = youtubeDao.rec(videoID);
+
+        return Result_array;
+    }
+
+    // method override & recommend python script compute & Return Type is List type of RecResult []
     @Override
-    public String recommend(Member member, YoutubeDT youtubedt) {
+    public List<RecResult>[] recommend(Member member, YoutubeDT youtubedt) {
         System.out.println("Python Call");
 
         String[] command = new String[5];
@@ -45,26 +59,26 @@ public class PythonServiceImpl implements PythonService{
         command[2] = "-i " + member.getId();  // Type : long to String
         command[3] = "-a" + member.getAccount();
         command[4] = "-m" + youtubedt.getVideoID();
-        try {
-            execPython(command);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        // python Script Exec 임시로 주석 01.19
+//        try {
+//            execPython(command);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         System.out.println(member.getId() + member.getAccount() + youtubedt.getVideoID());
+
+        // Analysis By SQL & get Result  -> Recommended Music List
+        List<RecResult>[] Rec_Result;  // List type of RecResult Class [array]
+        Rec_Result = recBySQL(youtubedt.getVideoID());
+        return Rec_Result;
+    }
+}
 
 //        String cmds = "sh /Users/jinwoo/PycharmProjects/code_test/python_recommend.py";
 //        String[] callCmd = {"/bin/bash", "-i", id};
 //        Map map = SR.execCommand(callCmd);
 //
 //        System.out.println(map);
-
-        return null;
-
-    }
-}
-
-
 
 
 
