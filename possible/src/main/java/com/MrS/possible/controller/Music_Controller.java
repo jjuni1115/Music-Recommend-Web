@@ -1,6 +1,7 @@
 package com.MrS.possible.controller;
 
 import com.MrS.possible.Service.MusicService;
+import com.MrS.possible.domain.Member;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import com.MrS.possible.domain.Music;
@@ -11,8 +12,10 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,6 +32,14 @@ import java.util.*;
 public class Music_Controller {
     @Autowired
     private MusicService musicService;
+
+    // Go to playlist & recommend page
+    @PostMapping(value="/playlist")
+    public void recommend(Member member, HttpSession session){
+        Member member_ = new Member(member.getId(), member.getAccount());
+        session.setAttribute("member", member_);
+    }
+
     @GetMapping("/parsing")
     public void crawling(){
         Calendar cal =Calendar.getInstance();

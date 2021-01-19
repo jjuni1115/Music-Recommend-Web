@@ -30,12 +30,7 @@ public class PythonController {
         this.pythonService = pythonService;
     }
 
-    // Go to recommend page
-    @PostMapping(value="/recommend")
-    public void recommend(Member member, HttpSession session){
-        Member member_ = new Member(member.getId(), member.getAccount());
-        session.setAttribute("member", member_);
-    }
+
 
     // Compute Python Script & get recommend Music list & show
     @GetMapping(value="/recommend_list")

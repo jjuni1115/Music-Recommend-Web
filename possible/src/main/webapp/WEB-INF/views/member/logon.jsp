@@ -58,7 +58,7 @@ age = ${sessionScope.member.age}
     </form>
 <%--    Serial ID : <p id="videoIDd"></p>--%>
 
-    <form action="/py/recommend" method="post">
+    <form action="/Music_info/playlist" method="post">
         <input type="hidden" name="id" value=${sessionScope.member.id} />
         <input type="hidden" name="account" value=${sessionScope.member.account} />
         Music Recommend : <button type="submit" id="submit_recommend" >플레이 리스트 & 음악 추천</button><br>
