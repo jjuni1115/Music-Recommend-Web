@@ -15,5 +15,8 @@ public class MusicServicelmpl implements MusicService {
     public int insert(List<Music> musicList){
         return musicDao.insert(musicList);
     }
-    public List<result> search(String keyword){return musicDao.search(keyword);}
+    public List<result> search(String keyword){return musicDao.search(keyword); }
+    public int insert_playlist(result keyword){
+        return musicDao.insert_playlist(keyword);
+    }
 }

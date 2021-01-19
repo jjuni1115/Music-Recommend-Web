@@ -21,21 +21,35 @@
                     data:params,
                     datatype: "json",
                     success:function (args){
-                        console.log(args);
-                        if(args.length>0){
-                            $("#songs").find('option').remove();
-                            for(var idx=0;idx<args.length;idx++){
-                                $("#songs").append("<option value='"+args[idx]['title']+"'>"
-                                +args[idx]['title']+"</option>");
-                                console.log(args['title'])
-                            }
-                        }
+                        $(args).find("item").each(function (){
+                            console.log($(this).find("title").text())
+                            $("#songs").append("<option value='"+$(this).find("title").text()+"'>"+$(this).find("title").text()+" - "+$(this).find("artist").text()+"'</option>");
+                        })
                     },
                     error:function (error){
                         alert("err :" + error);
                     }
                 })
             })
+        })
+    </script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script> <!-- JQuery -->
+    <script type="text/javascript">
+        $(function (){
+            $('.songs').click(function(){
+                $.ajax({
+                    type:"POST",
+                    url:"/Music_info/insert_playlist",
+                    data:params,
+                    datatype: "json",
+                    success:function (args) {
+
+                    },
+                    error:function (error){
+                    alert("err :" + error);
+                }
+            })
+        })
         })
     </script>
 </head>

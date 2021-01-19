@@ -26,4 +26,8 @@ public class MusicDaolmpl implements MusicDao{
         System.out.println(keyword);
         return sqlSession.selectList("music.search",keyword);
     }
+
+    public int insert_playlist(result keyword){
+        return sqlSession.insert("music.playlist",keyword);
+    }
 }

@@ -46,11 +46,16 @@ public class Music_Controller {
     @ResponseBody
     @PostMapping(value = "/list")
     public List<result> search(String keyword){
-        System.out.println(keyword);
         List<result> musicList = new ArrayList<>();
         musicList=musicService.search(keyword);
-        System.out.println(musicList);
         return musicList;
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/insert_playlist")
+    public int insert(result keyword){
+        musicService.insert_playlist(keyword);
+        return 1;
     }
 
     @GetMapping("/parsing")

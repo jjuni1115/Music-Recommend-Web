@@ -9,5 +9,6 @@ import java.util.List;
 public interface MusicDao {
     public int insert(List<Music> musicList);
     public List<result> search(String keyword);
+    public int insert_playlist(result keyword);
 
 }
