@@ -2,6 +2,8 @@ package com.MrS.possible.controller;
 
 import com.MrS.possible.Service.MusicService;
 import com.MrS.possible.domain.Member;
+import com.MrS.possible.domain.result;
+import com.google.api.client.json.Json;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import com.MrS.possible.domain.Music;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
@@ -38,6 +41,16 @@ public class Music_Controller {
     public void recommend(Member member, HttpSession session){
         Member member_ = new Member(member.getId(), member.getAccount());
         session.setAttribute("member", member_);
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/list")
+    public List<result> search(String keyword){
+        System.out.println(keyword);
+        List<result> musicList = new ArrayList<>();
+        musicList=musicService.search(keyword);
+        System.out.println(musicList);
+        return musicList;
     }
 
     @GetMapping("/parsing")

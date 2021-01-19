@@ -1,7 +1,10 @@
 package com.MrS.possible.domain;
 
+import org.apache.ibatis.type.Alias;
+
 import java.util.Date;
 
+@Alias("music")
 public class Music {
     private int id;
     private String title;

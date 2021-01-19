@@ -1,6 +1,8 @@
 package com.MrS.possible.dao;
 
 import com.MrS.possible.domain.Music;
+import com.MrS.possible.domain.result;
+import com.google.api.client.json.Json;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,5 +19,11 @@ public class MusicDaolmpl implements MusicDao{
     public int insert(List<Music> musicList){
         System.out.println(musicList);
         return sqlSession.insert("music.insert",musicList);
+    }
+
+    @Override
+    public List<result> search(String keyword) {
+        System.out.println(keyword);
+        return sqlSession.selectList("music.search",keyword);
     }
 }

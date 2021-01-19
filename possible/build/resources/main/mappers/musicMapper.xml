@@ -7,4 +7,11 @@
        (#{i.id},#{i.title},#{i.artist},#{i.genre},#{i.release_time},#{i.adult_authen})
        </foreach>
     </insert>
+
+    <select id="search" resultType="result">
+        select title,artist
+        from music
+        where title like CONCAT('%',#{keyword},'%');
+    </select>
+
 </mapper>
