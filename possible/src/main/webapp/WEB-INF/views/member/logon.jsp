@@ -22,71 +22,6 @@
     <script lang="javascript">
         //after all document read, function start -> so, you can use doc.variance, jsp value
         $(document).ready(function(){
-            let player = -1;
-            // id : #, class : .
-            $('#submit').click(function(){
-                player += 1;
-                if (player == 10){
-                    window.location.reload();
-                }
-                var iframe_id = "player" + player;
-                var json = {
-                    artist : $('#artist').val(),
-                    title : $('#title').val()
-                };
-
-                // This code loads the IFrame Player API code asynchronously. // It must be out of .ajax Scope. because it is loads Iframe Player API
-                // https://stackoverflow.com/questions/31065032/yt-is-not-defined-uncaught-referenceerror-youtube-api hint.
-                // https://developers.google.com/youtube/iframe_api_reference?hl=ko#Loading_a_Video_Player
-                const tag = document.createElement('script');
-                tag.src = "https://www.youtube.com/iframe_api";
-                var firstScriptTag = document.getElementsByTagName('script')[0];
-                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-                // The API will call this function when the video player is ready.
-                function onPlayerReady(event) {
-                    console.log("플레이어 자동 실행");
-                    event.target.playVideo();
-                }
-
-
-                // This function creates an <iframe> (and YouTube player)
-                // after the API code downloads.
-                function onYouTubeIframeAPIReady(data){
-                    console.log("iframe ready: " + data);
-                    var player = new YT.Player(iframe_id, {
-                        height: 140,
-                        width: 220,
-                        videoId: data,
-                        playerVars: {'wmode': 'opaque', 'autohide': 1 , 'enablejsapi': 1 , 'origin': 'http://localhost:8080/member/logon', 'rel': 0},
-                        events: {
-                            'onReady' : onPlayerReady
-                        }
-                    });
-                    player.setPlayerQuality = "small";
-                }
-
-                // AJAX : get VideoID & setting Iframe to show Video.
-                $.ajax({
-                    type: "post",
-                    url: "/ytube/search.do",
-                    datatype: "json",
-                    data: json,
-                    success: function(data){
-                        $("#videoID").empty();
-                        $("#videoID").text(data);
-                        $("#videoIDd").empty();
-                        $("#videoIDd").text(data);
-
-                        onYouTubeIframeAPIReady(data);
-
-                    },
-                    error: function(err){
-                        alert("err :" + err);
-                    }
-                });
-            });
-
         });
     </script>
 </head>
@@ -107,50 +42,95 @@ age = ${sessionScope.member.age}
 </div>
 
 <br>
-<form action="/member/detail" method="post">
-    <input type="hidden" name="id" value="${sessionScope.member.id}"/>
-    <input type="hidden" name="account" value="${sessionScope.member.account}" />
-    <button type="submit" name="detail" value="회원정보">회원정보</button>
-</form>
 <div>
-    <form action="/ytube/youtube_get" method="get">
-        <button type="submit" name="youtube_get" value="value">youtube 값 가져와보기</button>
+    <form action="/member/detail" method="post">
+        <input type="hidden" name="id" value="${sessionScope.member.id}"/>
+        <input type="hidden" name="account" value="${sessionScope.member.account}" />
+        <button type="submit" name="detail" value="회원정보">회원정보</button>
     </form>
 </div>
+
 <div>
-    Artist : <input type="text" name="artist" id="artist" minlength="1"/><br>
-    Title : <input type="text" name="title" id="title" minlength="1"/>
-    <button id="submit" type="submit">음악검색</button><br>
-    Serial ID : <p id="videoIDd"></p>
+    <form action="/ytube/searchDo" method="post">
+        Artist : <input type="text" name="artist" id="artist"/><br>
+        Title : <input type="text" name="title" id="title" minlength="1"/>
+        <button id="submit" type="submit">음악검색</button><br>
+    </form>
+<%--    Serial ID : <p id="videoIDd"></p>--%>
+
     <form action="/py/recommend" method="post">
-        <input type="hidden" name="videoID" value="z3szNvgQxHo" />
         <input type="hidden" name="id" value=${sessionScope.member.id} />
         <input type="hidden" name="account" value=${sessionScope.member.account} />
-        <input type="hidden" name="pw" value=${sessionScope.member.password} />
-
-        Music Recommend : <button type="submit" id="submit_recommend" >음악 추천</button><br>
+        Music Recommend : <button type="submit" id="submit_recommend" >플레이 리스트 & 음악 추천</button><br>
     </form>
 </div>
-<div id="player0" class="youtube">
+<div id="player" class="youtube">
 </div>
-<div id="player1" class="youtube">
-</div>
-<div id="player2" class="youtube">
-</div>
-<div id="player3" class="youtube">
-</div>
-<div id="player4" class="youtube">
-</div>
-<div id="player5" class="youtube">
-</div>
-<div id="player6" class="youtube">
-</div>
-<div id="player7" class="youtube">
-</div>
-<div id="player8" class="youtube">
-</div>
-<div id="player9" class="youtube">
-</div>
+
 
 </body>
 </html>
+
+
+
+<script>
+    // id : #, class : .
+    // $('#submit').click(function(){
+    //     var iframe_id = "player" + player;
+    //     var json = {
+    //         artist : $('#artist').val(),
+    //         title : $('#title').val()
+    //     };
+    //
+    //     // This code loads the IFrame Player API code asynchronously. // It must be out of .ajax Scope. because it is loads Iframe Player API
+    //     // https://stackoverflow.com/questions/31065032/yt-is-not-defined-uncaught-referenceerror-youtube-api hint.
+    //     // https://developers.google.com/youtube/iframe_api_reference?hl=ko#Loading_a_Video_Player
+    //     const tag = document.createElement('script');
+    //     tag.src = "https://www.youtube.com/iframe_api";
+    //     var firstScriptTag = document.getElementsByTagName('script')[0];
+    //     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    //
+    //     // The API will call this function when the video player is ready.
+    //     function onPlayerReady(event) {
+    //         console.log("플레이어 자동 실행");
+    //         event.target.playVideo();
+    //     }
+    //
+    //
+    //     // This function creates an <iframe> (and YouTube player)
+    //     // after the API code downloads.
+    //     function onYouTubeIframeAPIReady(data){
+    //         console.log("iframe ready: " + data);
+    //         var player = new YT.Player(iframe_id, {
+    //             height: 140,
+    //             width: 220,
+    //             videoId: data,
+    //             playerVars: {'wmode': 'opaque', 'autohide': 1 , 'enablejsapi': 1 , 'origin': 'http://localhost:8080/member/logon', 'rel': 0},
+    //             events: {
+    //                 'onReady' : onPlayerReady
+    //             }
+    //         });
+    //         player.setPlayerQuality = "small";
+    //     }
+    //
+    //     // AJAX : get VideoID & setting Iframe to show Video.
+    //     $.ajax({
+    //         type: "post",
+    //         url: "/ytube/search.do",
+    //         datatype: "json",
+    //         data: json,
+    //         success: function(data){
+    //             $("#videoID").empty();
+    //             $("#videoID").text(data);
+    //             $("#videoIDd").empty();
+    //             $("#videoIDd").text(data);
+    //
+    //             onYouTubeIframeAPIReady(data);
+    //
+    //         },
+    //         error: function(err){
+    //             alert("err :" + err);
+    //         }
+    //     });
+    // });
+</script>

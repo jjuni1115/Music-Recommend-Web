@@ -1,6 +1,7 @@
 package com.MrS.possible.controller;
 
 import com.MrS.possible.Service.YoutubeService;
+import com.MrS.possible.domain.Member;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.MrS.possible.dao.YoutubeDao;
 import com.MrS.possible.domain.YoutubeDT;
@@ -28,22 +29,22 @@ public class YoutubeController {
     }
 
     // search Music at Youtube, using Youtube API : U must Issue your API key and insert into YoutubeServiceImpl method
-    @ResponseBody
-    @PostMapping(value="/search.do", produces="text/plain")
-    public String search(YoutubeDT resources, HttpSession session) throws GeneralSecurityException, IOException, GoogleJsonResponseException {
+//    @ResponseBody
+    @PostMapping(value="/searchDo")
+    public void search(YoutubeDT resources, HttpSession session) throws GeneralSecurityException, IOException, GoogleJsonResponseException {
         System.out.println(resources);
         // Make YoutubeDT field & get (title, artist) to search music
         YoutubeDT youtubedt = new YoutubeDT(resources.getTitle(), resources.getArtist());
-        System.out.println(youtubedt.getArtist() + youtubedt.getTitle());
+        System.out.println(youtubedt.getArtist() + " " + youtubedt.getTitle());
 
         String VideoId;
         VideoId = youtubeService.search(youtubedt); // Service.search impl, return MostView videoId
+        youtubedt.setVideoID(VideoId);
         System.out.println(VideoId);
 
         // Video ID update to DB music table
         youtubeDao.videoidInsert(VideoId, youtubedt);
 
-        return VideoId;  // redirection Error 2021.01.13
+        session.setAttribute("youtubedt", youtubedt); // 2021.01.19
     }
 }
-

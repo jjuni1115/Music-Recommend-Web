@@ -8,10 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Playlist & Recommend</title>
 </head>
 <body>
-노래 추천 페이지
+${sessionScope.member.id} <br>
+${sessionScope.member.account} <br>
+노래 추천 페이지<br>
 
  현재 재생 음악 기준
 

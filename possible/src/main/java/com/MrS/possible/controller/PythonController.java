@@ -11,6 +11,7 @@ import com.MrS.possible.domain.Member;
 import com.MrS.possible.domain.YoutubeDT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,17 +30,21 @@ public class PythonController {
         this.pythonService = pythonService;
     }
 
-    // Compute Python Script & get recommend Music list & show
+    // Go to recommend page
     @PostMapping(value="/recommend")
-    public String recommend(Member member, YoutubeDT youtubedt, HttpSession session){
+    public void recommend(Member member, HttpSession session){
         Member member_ = new Member(member.getId(), member.getAccount());
-        YoutubeDT youtubedt_ = new YoutubeDT(youtubedt.getVideoID());
-        // call recommend class & data analysis + SQL in Python
-        System.out.println(youtubedt_.getVideoID());
-        pythonService.recommend(member_, youtubedt_);
-//        session.setAttribute();
+        session.setAttribute("member", member_);
+    }
 
-        return "/py/recommend";
+    // Compute Python Script & get recommend Music list & show
+    @GetMapping(value="/recommend_list")
+    public String yourlist(Member member, YoutubeDT youtubedt, HttpSession session){
+        Member member_ = new Member();
+        YoutubeDT youtubedt_ = new YoutubeDT();
+        // call recommend class & data analysis + SQL in Python
+        pythonService.recommend(member_, youtubedt_);
+        return "";
     }
 
 }

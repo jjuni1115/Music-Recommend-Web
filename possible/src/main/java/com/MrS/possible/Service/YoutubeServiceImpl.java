@@ -30,7 +30,7 @@ public class YoutubeServiceImpl implements YoutubeService {
     // AIzaSyBqqNfLZ8URYN-W1jbReGlsyYMlP8wnTUI
     // AIzaSyABoT_EDIh6ydzpPeregb-5jNTe1rjzBTY
     private static final String API_KEY = "AIzaSyBqqNfLZ8URYN-W1jbReGlsyYMlP8wnTUI";  // Youtube API Key
-    private static final String MAX_RESULT = "3"; // When you Search by Youtube API, Number of Videos to get
+    private static final String MAX_RESULT = "4"; // When you Search by Youtube API, Number of Videos to get
 
     private static double put_youtubeDT(Iterator<Video> iteratorSearchResults, YoutubeDT youtubeDT){
         System.out.println("+====================================================+");
@@ -105,7 +105,7 @@ public class YoutubeServiceImpl implements YoutubeService {
         double[] result = new double[Integer.parseInt(MAX_RESULT)];
         double temp = 0.0;
         int answer = 0;
-        for (int i=0; i<3; i++){
+        for (int i=0; i<Integer.parseInt(MAX_RESULT); i++){
             result[i] = get_youtubeDT(videoId[i]);
             if (result[i] > temp){
                 temp = result[i];
