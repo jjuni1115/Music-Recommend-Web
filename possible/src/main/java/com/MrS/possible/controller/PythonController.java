@@ -47,7 +47,7 @@ public class PythonController {
         System.out.println(Rec_Result[0].get(0).getMusicID());
         System.out.println("User 기반 추천 행 수" + Rec_Result[0].size());
         System.out.println("playlist 기반 추천 행 수" + Rec_Result[1].size());
-
+//        ModelAndView
         session.setAttribute("recommend", Rec_Result);
     }
 }
