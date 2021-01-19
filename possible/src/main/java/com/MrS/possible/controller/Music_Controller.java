@@ -46,7 +46,7 @@ public class Music_Controller {
         DateFormat df=new SimpleDateFormat("yyyyMMdd");
         Date date=null;
         try {
-            date=df.parse("20131212");   //setting current date
+            date=df.parse("20131212");   //setting current date  20131212
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -54,7 +54,7 @@ public class Music_Controller {
         while(true) {
             List<Music> musicList = new ArrayList<>();
             String curr=df.format(cal.getTime());
-            if(curr.equals("20060922")){    //setting target date
+            if(curr.equals("20060922")){    //setting target date  20060922
                 break;
             }
             String url = "https://music.bugs.co.kr/chart/track/day/total?chartdate=" + curr;
