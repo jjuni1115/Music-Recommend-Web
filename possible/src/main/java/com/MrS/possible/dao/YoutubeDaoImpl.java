@@ -29,10 +29,8 @@ public class YoutubeDaoImpl implements YoutubeDao{
     @Override
     public List<RecResult>[] rec(String videoID) {
         List<RecResult> arr[] = new List[2]; // List <RecResult> array[]
-
         arr[0] = sqlSession.selectList(Namespace + "userRecommend", videoID); // by user
         arr[1] = sqlSession.selectList(Namespace + "playlistRecommend", videoID); // by playlist
-
         // Two of Results are Return Together <- Using  List<>[]
         return arr;
     }

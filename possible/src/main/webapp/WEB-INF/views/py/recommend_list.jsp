@@ -7,7 +7,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ page import="java.lang.Integer" %>
 <html>
 <head>
     <title>Recommend</title>
@@ -15,19 +15,60 @@
 
     <script lang="javascript">
         $(document).ready(function() {
-            console.log("hello");
+            var output_data = "";
+            for(var i=0; i<${recresult[0].size()}; i++){
+                <%--var k = Number(i);--%>
+                <%--var a = ${recresult[0].musicID[i]};--%>
+                // console.log(a);
+                i = parseInt(i);
+                output_data += "<tr>";
+                output_data += "<td>" + ${recresult[0].get(i).musicID} + "</td>";
+                output_data += "<td>" + ${recresult[0].get(i).count} + "</td>";
+                output_data += "<td>" + ${recresult[0].get(i).playlistID} + "</td>";
+                output_data += "</tr>";
+            }
+            $("#dynamicTableBody").append(output_data);
 
-            console.log($('#recresult').val());
+            var output_data2 = "";
+            for(let i=0; i<${recresult[1].size()}; i++){
+                output_data2 += "<tr>";
+                output_data2 += "<td>" + ${recresult[1].get(i).musicID} + "</td>";
+                output_data2 += "<td>" + ${recresult[1].get(i).count} + "</td>";
+                output_data2 += "<td>" + ${recresult[1].get(i).playlistID} + "</td>";
+                output_data2 += "</tr>";
+            }
+            $("#dynamicTableBody2").append(output_data2);
         });
     </script>
 
 </head>
 <body>
 Hello
-<input type="hidden" id="recresult" value=${recresult[0]}>
-${recresult}
-${recresult[0]}
-${recresult[0].get(0).musicID}
+<input type="file" id="recresult" value=${recresult[0].get(0)}>
+
+<table id="dynamicTable">
+<thead>
+<tr>
+    <th>MusicID</th>
+    <th>Count</th>
+    <th>playlistID</th>
+</tr>
+</thead>
+<tbody id="dynamicTableBody">
+</tbody>
+</table>
+
+<table id="dynamicTable2">
+    <thead>
+    <tr>
+        <th>MusicID</th>
+        <th>Count</th>
+        <th>playlistID</th>
+    </tr>
+    </thead>
+    <tbody id="dynamicTableBody2">
+    </tbody>
+</table>
 
 </body>
 </html>
