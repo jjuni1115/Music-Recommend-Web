@@ -41,6 +41,7 @@ public class Music_Controller {
         session.setAttribute("member", member_);
     }
 
+    //search music
     @ResponseBody
     @PostMapping(value = "/list")
     public List<result> search(String keyword){
@@ -49,6 +50,7 @@ public class Music_Controller {
         return musicList;
     }
 
+    //insert into playlist
     @ResponseBody
     @PostMapping(value = "/insert_playlist")
     public int insert(String keyword){
@@ -59,6 +61,7 @@ public class Music_Controller {
         return 1;
     }
 
+    //load my playlist
     @ResponseBody
     @PostMapping(value = "/load_playlist")
     public List<result> load_playlist(String keyword){
@@ -68,6 +71,8 @@ public class Music_Controller {
         return playlist;
     }
 
+
+    //load & parsing music information
     @GetMapping("/parsing")
     public void crawling(){
         Calendar cal =Calendar.getInstance();

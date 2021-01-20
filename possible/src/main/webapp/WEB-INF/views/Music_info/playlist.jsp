@@ -46,10 +46,12 @@
                     datatype: "json",
                     success:function (args) {
                         console.logs(args);
+                        $("#playlist").append("<option value='"+$("#songs").val()+"'>"+$("#songs").text()+"</option>");
                     },
                     error:function (error){
                     alert("error: add playlist");
                 }
+
             })
         })
         })
