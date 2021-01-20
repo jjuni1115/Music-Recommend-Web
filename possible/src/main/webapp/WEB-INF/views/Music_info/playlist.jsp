@@ -12,7 +12,7 @@
     <title>playlist</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script> <!-- JQuery -->
     <script type="text/javascript">
-        $(document).ready(function (){
+        $(document).ready(function (){                       //search music
             $("#To_search").click(function (){
                 var params={"keyword":$("#keyword").val()};
                 $.ajax({
@@ -21,13 +21,14 @@
                     data:params,
                     datatype: "json",
                     success:function (args){
+                        $('#songs').find('option').remove();
                         $(args).find("item").each(function (){
                             console.log($(this).find("title").text())
                             $("#songs").append("<option value='"+$(this).find("title").text()+"//"+$(this).find("artist").text()+"'>"+$(this).find("title").text()+" - "+$(this).find("artist").text()+"</option>");
                         })
                     },
                     error:function (error){
-                        alert("err :" + error);
+                        alert("error: search music");
                     }
                 })
             })
@@ -36,10 +37,7 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script> <!-- JQuery -->
     <script type="text/javascript">
         $(function (){
-            $("#songs").dblclick(function(){
-                var arr=[];
-                arr.push(${sessionScope.member.id});
-                arr.push($("#songs").val());
+            $("#songs").dblclick(function(){                 //add playlist
                 var params={"keyword":${sessionScope.member.id}+"//"+$("#songs").val()};
                 $.ajax({
                     type:"POST",
@@ -50,12 +48,41 @@
                         console.logs(args);
                     },
                     error:function (error){
-                    alert("err :" + error);
+                    alert("error: add playlist");
                 }
             })
         })
         })
     </script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script> <!-- JQuery -->
+    <script type="text/javascript">
+        $(function (){                               //load my playlist
+            //$('#playlist').change(function(){
+                var param={'keyword':${sessionScope.member.id}};
+                $.ajax({
+                    type:'POST',
+                    url:'/Music_info/load_playlist',
+                    data:param,
+                    datatype:'json',
+                    success:function(args) {
+                        $(args).find("item").each(function () {
+                            $("#playlist").append("<option value='"+$(this).find("title").text()+"//"+$(this).find("artist").text()+"'>"+$(this).find("title").text()+" - "+$(this).find("artist").text()+"</option>");
+                        })
+
+                    },error:function(error){
+                        alert("error: load playlist");
+                }
+                //})
+            })
+        })
+    </script>
+    <style>
+        .right{
+            position: absolute;
+            top: 50px;
+            left:700px;
+        }
+    </style>
 </head>
 <body>
 <button onclick="history.back()">뒤로가기</button> &nbsp; ID : ${sessionScope.member.id} &nbsp; ACCOUNT : ${sessionScope.member.account}
@@ -72,6 +99,11 @@
 <select name="songs" id="songs" size="15">
     <option value="" selected>--선택--</option>
 </select>
-
+<div class="right">
+    플레이리스트<br>
+    <select name="playlist" id="playlist" size="15">
+        <option value="" selected>--선택--</option>
+    </select>
+</div>
 </body>
 </html>

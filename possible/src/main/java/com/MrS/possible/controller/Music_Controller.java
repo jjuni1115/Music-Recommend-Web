@@ -59,6 +59,15 @@ public class Music_Controller {
         return 1;
     }
 
+    @ResponseBody
+    @PostMapping(value = "/load_playlist")
+    public List<result> load_playlist(String keyword){
+        System.out.println(keyword);
+        List<result> playlist = new ArrayList<>();
+        playlist=musicService.load(keyword);
+        return playlist;
+    }
+
     @GetMapping("/parsing")
     public void crawling(){
         Calendar cal =Calendar.getInstance();

@@ -32,4 +32,8 @@ public class MusicDaolmpl implements MusicDao{
 
         return sqlSession.insert("music.playlist",keyword);
     }
+
+    public List<result> load(String keyword) {
+        return sqlSession.selectList("music.load",Integer.parseInt(keyword));
+    }
 }
