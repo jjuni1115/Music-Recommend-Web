@@ -15,17 +15,19 @@
 
     <script lang="javascript">
         $(document).ready(function() {
+            console.log("hello");
+
             console.log($('#recresult').val());
-            console.log($('#recresult').val()[0].get(0));
         });
     </script>
 
 </head>
 <body>
 Hello
-${sessionScope.Rec_Result[0].get(0).getMusicID()}
-<input type="hidden" id="recresult" value=${sessionScope.Rec_Result} />
-${sessionScope.Rec_Result.MusicID}
+<input type="hidden" id="recresult" value=${recresult[0]}>
+${recresult}
+${recresult[0]}
+${recresult[0].get(0).musicID}
 
 </body>
 </html>
