@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 
@@ -35,7 +36,7 @@ public class PythonController {
 
     // Compute Python Script & get recommend Music list & show
     @GetMapping(value="/recommend_list")
-    public void yourlist(Member resources, YoutubeDT youtubedt, HttpSession session){
+    public ModelAndView yourlist(Member resources, YoutubeDT youtubedt, HttpSession session){
         // Save Parameter ID, Account, VideoID
         Member member = new Member(resources.getId(), resources.getAccount());
         YoutubeDT youtubedt_ = new YoutubeDT(youtubedt.getVideoID());
@@ -47,7 +48,17 @@ public class PythonController {
         System.out.println(Rec_Result[0].get(0).getMusicID());
         System.out.println("User 기반 추천 행 수" + Rec_Result[0].size());
         System.out.println("playlist 기반 추천 행 수" + Rec_Result[1].size());
-//        ModelAndView
-        session.setAttribute("recommend", Rec_Result);
+
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("recresult", Rec_Result);
+        mv.setViewName("/py/recommend_list");
+        return mv;
+//        session.setAttribute("recommend", Rec_Result);
     }
 }
+
+//    ModelAndView mv = new ModelAndView();
+//        System.out.println("in Controller");
+//        mv.addObject("message", "hello world");
+//        mv.setViewName("index");
+//        return mv;
