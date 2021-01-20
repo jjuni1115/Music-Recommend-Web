@@ -23,7 +23,7 @@
                     success:function (args){
                         $(args).find("item").each(function (){
                             console.log($(this).find("title").text())
-                            $("#songs").append("<option value='"+$(this).find("title").text()+"'>"+$(this).find("title").text()+" - "+$(this).find("artist").text()+"'</option>");
+                            $("#songs").append("<option value='"+$(this).find("title").text()+"//"+$(this).find("artist").text()+"'>"+$(this).find("title").text()+" - "+$(this).find("artist").text()+"</option>");
                         })
                     },
                     error:function (error){
@@ -36,14 +36,18 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script> <!-- JQuery -->
     <script type="text/javascript">
         $(function (){
-            $('.songs').click(function(){
+            $("#songs").dblclick(function(){
+                var arr=[];
+                arr.push(${sessionScope.member.id});
+                arr.push($("#songs").val());
+                var params={"keyword":${sessionScope.member.id}+"//"+$("#songs").val()};
                 $.ajax({
                     type:"POST",
                     url:"/Music_info/insert_playlist",
                     data:params,
                     datatype: "json",
                     success:function (args) {
-
+                        console.logs(args);
                     },
                     error:function (error){
                     alert("err :" + error);

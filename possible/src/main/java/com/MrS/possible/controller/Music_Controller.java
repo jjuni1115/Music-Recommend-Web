@@ -2,6 +2,7 @@ package com.MrS.possible.controller;
 
 import com.MrS.possible.Service.MusicService;
 import com.MrS.possible.domain.Member;
+import com.MrS.possible.domain.add_playlist;
 import com.MrS.possible.domain.result;
 import com.google.api.client.json.Json;
 import org.json.JSONArray;
@@ -13,10 +14,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
@@ -53,8 +51,11 @@ public class Music_Controller {
 
     @ResponseBody
     @PostMapping(value = "/insert_playlist")
-    public int insert(result keyword){
-        musicService.insert_playlist(keyword);
+    public int insert(String keyword){
+        System.out.println(keyword);
+        String[] array =keyword.split("//");
+        add_playlist param=new add_playlist(Integer.parseInt(array[0]),array[1],array[2]);
+        musicService.insert_playlist(param);
         return 1;
     }
 

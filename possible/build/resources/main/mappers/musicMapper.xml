@@ -14,4 +14,8 @@
         where title like CONCAT('%',#{keyword},'%');
     </select>
 
+    <insert id="playlist" parameterType="add_playlist">
+        insert ignore into rel values((select ID from playlist where user_ID=#{user_ID}),(select ID from music where title=#{title} and artist=#{artist}))
+    </insert>
+
 </mapper>
