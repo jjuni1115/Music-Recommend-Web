@@ -21,6 +21,7 @@
                     data:params,
                     datatype: "json",
                     success:function (args){
+                        console.log(args);
                         $('#songs').find('option').remove();
                         $(args).find("item").each(function (){
                             console.log($(this).find("title").text())
@@ -34,7 +35,7 @@
             })
         })
     </script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script> <!-- JQuery -->
+
     <script type="text/javascript">
         $(function (){
             $("#songs").dblclick(function(){                 //add playlist
@@ -45,20 +46,18 @@
                     data:params,
                     datatype: "json",
                     success:function (args) {
-                        console.logs(args);
-                        $("#playlist").append("<option value='"+$("#songs").val()+"'>"+$("#songs").text()+"</option>");
+                        $("#playlist").append("<option value='"+$("#songs").val()+"'>"+$("#songs").val()"</option>");
                     },
                     error:function (error){
                     alert("error: add playlist");
                 }
-
             })
         })
         })
     </script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script> <!-- JQuery -->
+
     <script type="text/javascript">
-        $(function (){                               //load my playlist
+        $(function load (){                               //load my playlist
             //$('#playlist').change(function(){
                 var param={'keyword':${sessionScope.member.id}};
                 $.ajax({
@@ -92,7 +91,7 @@
 <form action="/py/recommend_list" method="get">
     <input type="hidden" id="ID" name="id" value=${sessionScope.member.id} />
     <input type="hidden" id="account" name="account" value=${sessionScope.member.account} />
-    <input type="hidden" id="videoID" name="videoID" value="z3szNvgQxHo" />
+    <input type="hidden" id="videoID" name="videoID" value="abc" />
     <button type="submit">노래 추천 받기</button>
 </form>
 
@@ -101,7 +100,7 @@
 <select name="songs" id="songs" size="15">
     <option value="" selected>--선택--</option>
 </select>
-<div class="right">
+<div class="right" id="list">
     플레이리스트<br>
     <select name="playlist" id="playlist" size="15">
         <option value="" selected>--선택--</option>
