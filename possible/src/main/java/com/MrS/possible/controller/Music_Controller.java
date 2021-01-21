@@ -45,8 +45,15 @@ public class Music_Controller {
     @ResponseBody
     @PostMapping(value = "/list")
     public List<result> search(String keyword){
+        System.out.println(keyword);
+        String[] array =keyword.split("//");
         List<result> musicList = new ArrayList<>();
-        musicList=musicService.search(keyword);
+        if(array[0].equals("title")) {
+            musicList=musicService.search(array[1]);
+        }
+        else{
+            musicList=musicService.search_artist(array[1]);
+        }
         return musicList;
     }
 
@@ -124,5 +131,45 @@ public class Music_Controller {
             cal.add(Calendar.DATE, -1);
             musicService.insert(musicList);
         }
+    }
+
+    @GetMapping("/new_song")
+    public void crawling_newsong() {                            //saving new song in database
+
+        Calendar cal =Calendar.getInstance();
+        List<Music> musicList = new ArrayList<>();
+        String url="https://music.bugs.co.kr/newest/track/totalpicked?nation=ALL";
+        Elements tmp;
+        Elements title;
+        Elements artist;
+        Document doc = null;
+        try {
+            doc = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        tmp = doc.select("table tbody tr");
+        title = tmp.select("p.title");
+        artist = tmp.select("p.artist");
+        String artist_name;
+        for (int i = 0; i < 50; i++) {
+            int adult;
+            if (tmp.get(i).attr("multiartist").equals("Y")) {           //Store only representative artists if there are many artists
+                artist_name = artist.get(i).select("a").first().text();
+            } else {
+                artist_name = artist.get(i).text();
+
+            }
+            if (title.get(i).attr("adult_yn").equals("Y")) {          //setting adult information
+                adult = 1;
+            } else {
+                adult = 0;
+            }
+            Music music = new Music(Integer.parseInt(tmp.get(i).attr("trackid")), title.get(i).text(), artist_name, null, null, adult);
+            musicList.add(music);
+        }
+        cal.add(Calendar.DATE, -1);
+        musicService.insert(musicList);
+
     }
 }

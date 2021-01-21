@@ -24,4 +24,10 @@
         WHERE user.ID=playlist.user_ID AND playlist.ID=rel.playlist_ID AND rel.music_ID=music.ID AND user.ID=#{keyword}
     </select>
 
+    <select id="search_artist" resultType="result">
+        select title,artist
+        from music
+        where artist like CONCAT('%',#{keyword},'%');
+    </select>
+
 </mapper>

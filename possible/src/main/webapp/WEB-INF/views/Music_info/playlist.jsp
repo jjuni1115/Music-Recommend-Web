@@ -78,67 +78,15 @@
         })
     </script>
     <style>
-
-        h1 {
-            FONT-SIZE: 78px;
-            COLOR: #eeeeee;
-            PADDING-BOTTOM: 10px;
-            TEXT-ALIGN: left;
-            PADDING-TOP: 10px;
-            PADDING-LEFT: 10px;
-            BORDER-LEFT: #00b5ff 8px solid;
-        }
-
-        h2 {
-            FONT-SIZE: 12px;
-            COLOR: #eeeeee;
-            PADDING-BOTTOM: 10px;
-            TEXT-ALIGN: left;
-            PADDING-TOP: 10px;
-            PADDING-LEFT: 10px;
-            BORDER-LEFT: #00b5ff 8px solid;
-        }
-
-        button {
-            background-color: #00b5ff;
-            border: none;
-            color: #ffffff;
-            cursor: pointer;
-            display: inline-block;
-            font-family: 'BenchNine', Arial, sans-serif;
-            font-size: 1em;
-            font-size: 10px;
-            line-height: 1em;
-            outline: none;
-            padding: 12px 40px 10px;
-            position: relative;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .left{
-            float:left;
-        }
-
         .right{
-            float:right;
-            margin-right : 200px;
+            position: absolute;
+            top: 50px;
+            left:700px;
         }
-
-
-
-
-
-
     </style>
 </head>
 <body>
-
-<h1> Muse </h1>
-<h2> 어서오세요 당신의 음악을 추천해드립니다. </h2>
-
-
-<button onclick="history.back()">뒤로가기</button> &nbsp;
+<button onclick="history.back()">뒤로가기</button> &nbsp; ID : ${sessionScope.member.id} &nbsp; ACCOUNT : ${sessionScope.member.account}
 <br><br>
 <form action="/py/recommend_list" method="get">
     <input type="hidden" id="ID" name="id" value=${sessionScope.member.id} />
@@ -149,13 +97,9 @@
 
 음악검색: <input type="text" id="keyword" name="keyword">
 <button type="submit" id="To_search">search</button><br>
-
-<div class="left">
 <select name="songs" id="songs" size="15">
     <option value="" selected>--선택--</option>
 </select>
-</div>
-
 <div class="right" id="list">
     플레이리스트<br>
     <select name="playlist" id="playlist" size="15">
