@@ -116,6 +116,8 @@
     <form action="/ytube/searchDo" method="post">
         Artist : <input type="text" name="artist" id="artist"/><br>
         Title : <input type="text" name="title" id="title" minlength="1"/>
+        <input type="hidden" name="id" value="${sessionScope.member.id}"/>
+        <input type="hidden" name="account" value="${sessionScope.member.account}" />
         <button id="submit" type="submit">음악검색</button><br>
     </form>
 </div>

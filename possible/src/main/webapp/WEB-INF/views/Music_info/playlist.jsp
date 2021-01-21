@@ -138,12 +138,6 @@
 </div>
 <button onclick="history.back()">뒤로가기</button> &nbsp; ID : ${sessionScope.member.id} &nbsp; ACCOUNT : ${sessionScope.member.account}
 <br><br>
-<form action="/py/recommend_list" method="get">
-    <input type="hidden" id="ID" name="id" value=${sessionScope.member.id} />
-    <input type="hidden" id="account" name="account" value=${sessionScope.member.account} />
-    <input type="hidden" id="videoID" name="videoID" value="abc" />
-    <button type="submit">노래 추천 받기</button>
-</form>
 
 
 <input type="radio" name="chk_info" value="title" checked="checked">제목

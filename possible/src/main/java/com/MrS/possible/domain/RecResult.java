@@ -5,24 +5,27 @@ import org.apache.ibatis.type.Alias;
 // This Class using for Music Recommend Result Type
 @Alias("RecResult")
 public class RecResult {
-    private int MusicID;
+    public int userCount;
     private String Count;
     private String PlaylistID;
+    private String Artist;
+    private String Title;
 
     public RecResult(){}
 
-    public RecResult(int musicID, String count, String playlistID) {
-        this.MusicID = musicID;
+    public int getUserCount() {
+        return userCount;
+    }
+
+    public void setUserCount(int userCount) {
+        this.userCount = userCount;
+    }
+
+    public RecResult(String count, String playlistID, String artist, String title) {
         this.Count = count;
         this.PlaylistID = playlistID;
-    }
-
-    public int getMusicID() {
-        return MusicID;
-    }
-
-    public void setMusicID(int musicID) {
-        MusicID = musicID;
+        this.Artist = artist;
+        this.Title = title;
     }
 
     public String getCount() {
@@ -39,5 +42,21 @@ public class RecResult {
 
     public void setPlaylistID(String playlistID) {
         PlaylistID = playlistID;
+    }
+
+    public String getArtist() {
+        return Artist;
+    }
+
+    public void setArtist(String artist) {
+        Artist = artist;
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
     }
 }

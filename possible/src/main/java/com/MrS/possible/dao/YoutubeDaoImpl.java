@@ -32,6 +32,7 @@ public class YoutubeDaoImpl implements YoutubeDao{
         arr[0] = sqlSession.selectList(Namespace + "userRecommend", videoID); // by user
         arr[1] = sqlSession.selectList(Namespace + "playlistRecommend", videoID); // by playlist
         // Two of Results are Return Together <- Using  List<>[]
+        System.out.println(arr[1].size());
         return arr;
     }
 

@@ -44,6 +44,7 @@ public class PythonServiceImpl implements PythonService{
 
         // Compute SQL & get Result of Recommend tuples(Music)
         Result_array = youtubeDao.rec(videoID);
+        System.out.println(Result_array[1].size());
 
         return Result_array;
     }
@@ -70,6 +71,7 @@ public class PythonServiceImpl implements PythonService{
         // Analysis By SQL & get Result  -> Recommended Music List
         List<RecResult>[] Rec_Result;  // List type of RecResult Class [array]
         Rec_Result = recBySQL(youtubedt.getVideoID());
+        System.out.println(Rec_Result[1].size());
         return Rec_Result;
     }
 }

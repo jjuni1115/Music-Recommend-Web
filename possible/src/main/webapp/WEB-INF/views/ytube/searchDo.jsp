@@ -59,28 +59,58 @@
             });
 
 
-        // AJAX : get VideoID & setting Iframe to show Video.
-        // $.ajax({
-        //     type: "post",
-        //     url: "/ytube/search.do",
-        //     datatype: "json",
-        //     data: json,
-        //     success: function(data){
-        //         $("#videoID").empty();
-        //         $("#videoID").text(data);
-        //         $("#videoIDd").empty();
-        //         $("#videoIDd").text(data);
-        //
-        //         onYouTubeIframeAPIReady(data);
-        //
-        //     },
-        //     error: function(err){
-        //         alert("err :" + err);
-        //     }
-        // });
-        // });
+          $("#recommend").click(function (){
+              var json = {
+                  "id": ${sessionScope.member.id},
+                  "account": '${sessionScope.member.account}',
+                  "videoID": 'abc'
+              }
+              $.ajax({
+                  type:"get",
+                  url:"/py/recommend_list",
+                  data: json,
+                  datatype: json,
+                  success:function (data){
+                      console.log("helloooooo");
+                      console.log(data);
+                      var output_data = "";
+                      var output_data2 = "";
+                      var count = $(data).find("userCount").text()[0];
+                      console.log($(data).find("userCount").text())
+                      var tmp = 0;
+                      $(data).find("item").each(function(){
+                          console.log(tmp);
+                          if(count > tmp){
+                              output_data += "<tr>";
+                              output_data += "<td>" + $(this).find("artist").text() + "</td>";
+                              output_data += "<td>" + $(this).find("title").text() + "</td>";
+                              output_data += "</tr>";
+                          }
+                          else{
+                              output_data2 += "<tr>";
+                              output_data2 += "<td>" + $(this).find("artist").text() + "</td>";
+                              output_data2 += "<td>" + $(this).find("title").text() + "</td>";
+                              output_data2 += "</tr>";
+                          }
+                          tmp = tmp + 1;
+                      })
+                      $("#dynamicTableBody").append(output_data);
+                      $("#dynamicTableBody2").append(output_data2);
+                      // success:function (args){
+                      //     $('#songs').find('option').remove();
+                      //     $(args).find("item").each(function (){
+                      //         console.log($(this).find("title").text())
+                      //         $("#songs").append("<option value='"+$(this).find("title").text()+"//"+$(this).find("artist").text()+"'>"+$(this).find("title").text()+" - "+$(this).find("artist").text()+"</option>");
+                      //     })
+                      // },
 
-        });
+                  },
+                  error:function (error){
+                      alert("error: search music");
+                  }
+              })
+          })
+        })
     </script>
 
     <style>
@@ -141,5 +171,39 @@
 <button id="play" type="button" id="play">재생하기</button>
 <input type="hidden" id="videoID" value=${sessionScope.youtubedt.videoID} /><br>
 <div id="player"></div>
+
+<div>
+    <input type="hidden" id="ID" name="id" value=${sessionScope.member.id} />
+    <input type="hidden" id="account" name="account" value=${sessionScope.member.account} />
+    <input type="hidden" id="videoID" name="videoID" value="${sessionScope.youtubedt.videoID}" />
+    <button type="submit" id="recommend">노래 추천 받기</button>
+</div>
+
+<table id="dynamicTable">
+    <thead>
+    ${sessionScope.youtubedt.title} 곡을 들은 사람이 함께 듣는 노래
+    <tr>
+        <th colspan="400px">Artist</th>
+        <th colspan="500px">Title</th>
+    </tr>
+
+    </thead>
+    <tbody id="dynamicTableBody">
+    </tbody>
+</table>
+
+<table id="dynamicTable">
+    <thead>
+    ${sessionScope.youtubedt.title} 곡과 어울리는 노래
+    <tr>
+        <th colspan="400px">Artist</th>
+        <th colspan="500px">Title</th>
+    </tr>
+
+    </thead>
+    <tbody id="dynamicTableBody2">
+    </tbody>
+</table>
+
 </body>
 </html>

@@ -11,10 +11,10 @@
     </update>
 
     <select id="userRecommend" resultType="RecResult" resultMap="RecResult_Map">
-        SELECT music_ID, COUNT(playlist_ID) AS dupl, playlist_ID
-        FROM rel
-        GROUP BY music_ID
-        HAVING playlist_ID IN (
+        SELECT COUNT(playlist_ID) AS dupl, playlist_ID, title, artist
+        FROM rel, music
+        GROUP BY music_ID, ID
+        HAVING music_ID = ID and playlist_ID IN (
             SELECT A.ID
             FROM playlist A, playlist B, rel, music
             WHERE A.user_ID IN (B.user_ID) AND B.ID = rel.playlist_ID AND music.ID = rel.music_ID AND music.videoid LIKE CONCAT('%', #{video_ID}, '%'))
@@ -23,22 +23,23 @@
     </select>
 
     <select id="playlistRecommend" resultType="RecResult" resultMap="RecResult_Map">
-        SELECT music_ID, count(playlist_ID) AS dupl, playlist_ID
-        FROM rel
-        GROUP BY music_ID
-        HAVING playlist_ID IN (
-           SELECT playlist_ID
-           FROM rel, music
-           WHERE rel.music_ID = music.ID AND videoid like CONCAT('%', #{video_ID}, '%'))
+        SELECT count(playlist_ID) AS dupl, playlist_ID, artist, title
+        FROM rel, music
+        GROUP BY music_ID, ID
+        HAVING music_ID = ID and playlist_ID IN (
+            SELECT playlist_ID
+            FROM rel, music
+            WHERE rel.music_ID = music.ID AND videoid like CONCAT('%', #{video_ID}, '%'))
         ORDER BY dupl desc
         LIMIT 12;
     </select>
 
 <!-- Result of SQL Column's name mapping to RecResult's Field -->
     <resultMap type="RecResult" id="RecResult_Map">
-        <result column="music_ID" property="MusicID"/>
         <result column="dupl" property="Count"/>
         <result column="playlist_ID" property="PlaylistID"/>
+        <result column="artist" property="Artist"/>
+        <result column="title" property="Title"/>
     </resultMap>
 </mapper>
 
