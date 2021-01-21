@@ -60,9 +60,8 @@
     }
 /* 이미지 파일 불러오기 불가능 */
     body {
-      background-image: url("index.png");
-      width: 1920px;
-      height: 1080px;
+      background-image: url("../views/background2.png");
+      background-size : auto;
       font-family:"맑은고딕", "돋움";
       font-size:12px;
     }
@@ -115,12 +114,16 @@
       margin-left:10px;
       display:inline;
     }
+
+
   </style>
 
 </head>
 
 
 <body>
+
+
 
 <div class="box1">
   <h1>Muse</h1>
@@ -129,12 +132,13 @@
 
 
 
-<form action="/member/logon" method="post">
+
   <div id="login_box">
     <h3>Member Login</h3>
     <ul id="input_button">
       <li id="id_pass">
         <ul>
+          <form action="/member/logon" method="post">
           <li><span>ID</span> <input type="text" id="account"
                                      name="account" placeholder="아이디"><br></li>
           <!-- id -->
@@ -143,11 +147,14 @@
           <li>
             <!-- pass -->
           </li>
+
+            <li id="login_btn">
+              <button type="submit" id="To_login">To Login</button>
+            </li>
+          </form>
         </ul>
       </li>
-      <li id="login_btn">
-        <button type="submit" id="To_login">To Login</button>
-      </li>
+
     </ul>
     <ul id="btns">
       <li><form action="/member/signup" method="get">
@@ -157,7 +164,8 @@
       </form></li>
     </ul>
   </div>
-</form>
+
+
 
 
 <div>${msg}</div>

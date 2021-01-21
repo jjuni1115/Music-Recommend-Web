@@ -41,6 +41,17 @@
         });
     </script>
 
+    <style>
+
+
+
+
+
+
+
+
+    </style>
+
 </head>
 <body>
 Hello
@@ -48,11 +59,13 @@ Hello
 
 <table id="dynamicTable">
 <thead>
+
 <tr>
     <th>MusicID</th>
     <th>Count</th>
     <th>playlistID</th>
 </tr>
+
 </thead>
 <tbody id="dynamicTableBody">
 </tbody>
