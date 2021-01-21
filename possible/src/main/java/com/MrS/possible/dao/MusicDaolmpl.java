@@ -27,6 +27,10 @@ public class MusicDaolmpl implements MusicDao{
         return sqlSession.selectList("music.search",keyword);
     }
 
+    public List<result> search_artist(String keyword) {
+        return sqlSession.selectList("music.search_artist",keyword);
+    }
+
     public int insert_playlist(add_playlist keyword){
         System.out.println(keyword);
 

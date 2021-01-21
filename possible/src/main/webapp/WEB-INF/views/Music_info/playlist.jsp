@@ -14,14 +14,15 @@
     <script type="text/javascript">
         $(document).ready(function (){                       //search music
             $("#To_search").click(function (){
-                var params={"keyword":$("#keyword").val()};
+                //var radioVal = $('input[name="chk_info"]:checked').val();
+                //console.log(radioVal)
+                var params={"keyword":$('input[name="chk_info"]:checked').val()+"//"+$("#keyword").val()};
                 $.ajax({
                     type:"POST",
                     url:"/Music_info/list",
                     data:params,
                     datatype: "json",
                     success:function (args){
-                        console.log(args);
                         $('#songs').find('option').remove();
                         $(args).find("item").each(function (){
                             console.log($(this).find("title").text())
@@ -46,7 +47,8 @@
                     data:params,
                     datatype: "json",
                     success:function (args) {
-                        $("#playlist").append("<option value='"+$("#songs").val()+"'>"+$("#songs").val()"</option>");
+                        alert("플레이리스트 저장")
+                        $("#playlist").append("<option value='"+$("#songs").val()+"'>"+$("#songs").val()+"</option>");
                     },
                     error:function (error){
                     alert("error: add playlist");
@@ -77,6 +79,17 @@
             })
         })
     </script>
+
+    <script>
+        $(function(){                 //if search textbox is empty, disabled search button
+            $('#keyword').on('input',function(){
+                if($('#keyword').val=='')
+                    $("#To_search").attr("disabled",true);
+                else
+                    $("#To_search").attr("disabled",false);
+            })
+        })
+    </script>
     <style>
         .right{
             position: absolute;
@@ -95,9 +108,12 @@
     <button type="submit">노래 추천 받기</button>
 </form>
 
-음악검색: <input type="text" id="keyword" name="keyword">
+
+<input type="radio" name="chk_info" value="title" checked="checked">제목
+<input type="radio" name="chk_info" value="artist">가수
+<input type="text" id="keyword" name="keyword" required="required">
 <button type="submit" id="To_search">search</button><br>
-<select name="songs" id="songs" size="15">
+<select name="songs" style="width:300px" id="songs" size="10">
     <option value="" selected>--선택--</option>
 </select>
 <div class="right" id="list">
