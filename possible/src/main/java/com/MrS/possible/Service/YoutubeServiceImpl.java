@@ -29,7 +29,7 @@ public class YoutubeServiceImpl implements YoutubeService {
     public static YouTube youtube_type;
     // AIzaSyBqqNfLZ8URYN-W1jbReGlsyYMlP8wnTUI
     // AIzaSyABoT_EDIh6ydzpPeregb-5jNTe1rjzBTY
-    private static final String API_KEY = "AIzaSyBqqNfLZ8URYN-W1jbReGlsyYMlP8wnTUI";  // Youtube API Key
+    private static final String API_KEY = "AIzaSyABoT_EDIh6ydzpPeregb-5jNTe1rjzBTY";  // Youtube API Key
     private static final String MAX_RESULT = "4"; // When you Search by Youtube API, Number of Videos to get
 
     private static double put_youtubeDT(Iterator<Video> iteratorSearchResults, YoutubeDT youtubeDT){

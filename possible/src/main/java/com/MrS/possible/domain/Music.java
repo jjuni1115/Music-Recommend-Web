@@ -13,6 +13,8 @@ public class Music {
     private String release_time;
     private int adult_authen;
 
+    public Music() {};
+
     public Music(int id,String title, String artist, String genre, String release_time, int adult_authen) {
         this.id=id;
         this.title = title;

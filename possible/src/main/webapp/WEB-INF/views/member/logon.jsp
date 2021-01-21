@@ -114,7 +114,7 @@
 
 <div id="serch-form">
     <form action="/ytube/searchDo" method="post">
-        Artist : <input type="text" name="artist" id="artist"/><br>
+        Artist : <input type="text" name="Artist" id="artist"/><br>
         Title : <input type="text" name="title" id="title" minlength="1"/>
         <input type="hidden" name="id" value="${sessionScope.member.id}"/>
         <input type="hidden" name="account" value="${sessionScope.member.account}" />

@@ -35,6 +35,7 @@ public class YoutubeController {
         System.out.println(resources);
         // Make YoutubeDT field & get (title, artist) to search music
         YoutubeDT youtubedt = new YoutubeDT(resources.getTitle(), resources.getArtist());
+
         Member member = new Member(resources2.getId(), resources2.getAccount());
         System.out.println(youtubedt.getArtist() + " " + youtubedt.getTitle());
 

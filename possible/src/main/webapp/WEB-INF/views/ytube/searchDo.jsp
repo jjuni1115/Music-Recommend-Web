@@ -63,7 +63,7 @@
               var json = {
                   "id": ${sessionScope.member.id},
                   "account": '${sessionScope.member.account}',
-                  "videoID": 'abc'
+                  "videoID": '${sessionScope.youtubedt.videoID}'
               }
               $.ajax({
                   type:"get",
@@ -175,7 +175,7 @@
 <div>
     <input type="hidden" id="ID" name="id" value=${sessionScope.member.id} />
     <input type="hidden" id="account" name="account" value=${sessionScope.member.account} />
-    <input type="hidden" id="videoID" name="videoID" value="${sessionScope.youtubedt.videoID}" />
+    <input type="hidden" id="videoID" name="videoID2" value="${sessionScope.youtubedt.videoID}" />
     <button type="submit" id="recommend">노래 추천 받기</button>
 </div>
 

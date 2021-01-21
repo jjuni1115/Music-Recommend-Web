@@ -1,5 +1,6 @@
 package com.MrS.possible.dao;
 
+import com.MrS.possible.domain.Music;
 import com.MrS.possible.domain.RecResult;
 import com.MrS.possible.domain.YoutubeDT;
 import org.apache.ibatis.session.SqlSession;
@@ -22,7 +23,10 @@ public class YoutubeDaoImpl implements YoutubeDao{
     @Override
     public void videoidInsert(String videoId, YoutubeDT youtubedt) {
         youtubedt.setVideoID(videoId);
-//        sqlSession.insert(Namespace + "searchResult", youtubedt);  // music에 모든 data 들어가면 주석 풀기
+
+        youtubedt = sqlSession.selectOne(Namespace + "selectMusic", youtubedt);
+        System.out.println(youtubedt.getArtist());
+        sqlSession.insert(Namespace + "searchResult", youtubedt);  // music에 모든 data 들어가면 주석 풀기
     }
 
     // 노래와 관련있는 모든 사용자의 플레이 리스트 기준 & 노래를 포함한 플레이 리스트 기준 추천 곡 return

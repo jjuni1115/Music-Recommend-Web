@@ -5,10 +5,18 @@
 
 <mapper namespace="youtubeMapper">
     <update id="searchResult">
-        update member
-        set videoid = #{youtubedt.videoID}
-        where artist like #{youtubedt.Artist} and title like #{youtubedt.title};
+        update music
+        set videoid = #{videoID}
+        where artist like #{Artist} and title like #{title};
     </update>
+
+
+    <select id="selectMusic" resultType="YoutubeDT" resultMap="selResult_Map">
+        Select artist, title
+        from music
+        where artist like CONCAT('%', #{Artist}, '%') and title like CONCAT('%', #{title}, '%')
+            LIMIT 1;
+    </select>
 
     <select id="userRecommend" resultType="RecResult" resultMap="RecResult_Map">
         SELECT COUNT(playlist_ID) AS dupl, playlist_ID, title, artist
@@ -34,12 +42,18 @@
         LIMIT 12;
     </select>
 
+
 <!-- Result of SQL Column's name mapping to RecResult's Field -->
     <resultMap type="RecResult" id="RecResult_Map">
         <result column="dupl" property="Count"/>
         <result column="playlist_ID" property="PlaylistID"/>
         <result column="artist" property="Artist"/>
         <result column="title" property="Title"/>
+    </resultMap>
+
+    <resultMap type="YoutubeDT" id="selResult_Map">
+        <result column="artist" property="Artist"/>
+        <result column="title" property="title"/>
     </resultMap>
 </mapper>
 
