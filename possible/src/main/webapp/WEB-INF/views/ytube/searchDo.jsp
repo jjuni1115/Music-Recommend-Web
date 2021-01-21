@@ -106,7 +106,7 @@
 
                   },
                   error:function (error){
-                      alert("error: search music");
+                      alert("추천할 곡이 없습니다.");
                   }
               })
           })
