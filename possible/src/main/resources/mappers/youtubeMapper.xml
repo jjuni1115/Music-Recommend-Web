@@ -7,7 +7,7 @@
     <update id="searchResult">
         update music
         set videoid = #{videoID}
-        where artist like #{Artist} and title like #{title};
+        where artist like CONCAT('%', #{Artist}, '%') and title like CONCAT('%', #{title}, '%');
     </update>
 
 
