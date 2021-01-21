@@ -58,12 +58,32 @@
       PADDING-LEFT: 10px;
       BORDER-LEFT: #00b5ff 8px solid;
     }
-/* 이미지 파일 불러오기 불가능 */
+
+
+    button {
+      background-color: #00b5ff;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+      display: inline-block;
+      font-family: 'BenchNine', Arial, sans-serif;
+      font-size: 1em;
+      font-size: 10px;
+      line-height: 1em;
+      outline: none;
+      padding: 6px 20px 5px;
+      position: relative;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    /* 이미지 파일 불러오기 불가능 */
     body {
-      background-image: url("../views/background2.png");
+      background-image: url("../views/images/background2.png");
       background-size : auto;
       font-family:"맑은고딕", "돋움";
       font-size:12px;
+      color: deepskyblue;
     }
 
     * {
@@ -115,6 +135,16 @@
       display:inline;
     }
 
+    #To_login{
+      position: relative;
+      left:135px;
+      bottom:30px;
+
+
+    }
+
+
+
 
   </style>
 
@@ -144,13 +174,11 @@
           <!-- id -->
           <li id="pass"><span>PW</span> <input type="password"
                                                id="password" name="password" placeholder="비밀번호"><br>
-          <li>
-            <!-- pass -->
-          </li>
 
-            <li id="login_btn">
+            <li>
               <button type="submit" id="To_login">To Login</button>
             </li>
+
           </form>
         </ul>
       </li>

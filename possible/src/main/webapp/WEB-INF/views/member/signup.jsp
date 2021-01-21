@@ -81,8 +81,41 @@
         }
     </script>
 
+    <style>
+        h1 {
+            FONT-SIZE: 78px;
+            COLOR: #eeeeee;
+            PADDING-BOTTOM: 10px;
+            TEXT-ALIGN: left;
+            PADDING-TOP: 10px;
+            PADDING-LEFT: 10px;
+            BORDER-LEFT: #00b5ff 8px solid;
+        }
+
+        h2 {
+            FONT-SIZE: 12px;
+            COLOR: #eeeeee;
+            PADDING-BOTTOM: 10px;
+            TEXT-ALIGN: left;
+            PADDING-TOP: 10px;
+            PADDING-LEFT: 10px;
+            BORDER-LEFT: #00b5ff 8px solid;
+        }
+
+        .input{
+            border : 1px solid black;
+        }
+
+
+    </style>
+
 </head>
 <body>
+
+<h1> Muse </h1>
+
+<h2> 회원가입해주세요. 당신의 정보는 보호받습니다 .</h2>
+
 <div class="input">
     <!-- Member's field name = HTML tag name !!!-->
     <form action="/member/register" method="post">
