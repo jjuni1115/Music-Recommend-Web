@@ -82,11 +82,63 @@
 
         });
     </script>
+
+    <style>
+
+        h1 {
+            FONT-SIZE: 78px;
+            COLOR: #eeeeee;
+            PADDING-BOTTOM: 10px;
+            TEXT-ALIGN: left;
+            PADDING-TOP: 10px;
+            PADDING-LEFT: 10px;
+            BORDER-LEFT: #00b5ff 8px solid;
+        }
+
+        h2 {
+            FONT-SIZE: 12px;
+            COLOR: #eeeeee;
+            PADDING-BOTTOM: 10px;
+            TEXT-ALIGN: left;
+            PADDING-TOP: 10px;
+            PADDING-LEFT: 10px;
+            BORDER-LEFT: #00b5ff 8px solid;
+        }
+
+        button {
+            background-color: #00b5ff;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            display: inline-block;
+            font-family: 'BenchNine', Arial, sans-serif;
+            font-size: 1em;
+            font-size: 10px;
+            line-height: 1em;
+            outline: none;
+            padding: 6px 20px 5px;
+            position: relative;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        #play
+        {
+            position: relative;
+            left:135px;
+            bottom: 20px;
+        }
+
+
+
+
+    </style>
 </head>
 <body>
-YouTube Player
-<button type="button" onclick="history.back()">Back Page</button><br>
-${sessionScope.youtubedt.title} <button type="button" id="play">재생하기</button>
+<h1> Muse </h1>
+<h2>YouTube Player</h2>
+<button id="back page" type="button" onclick="history.back()">Back Page</button><br>
+<button id="play" type="button" id="play">재생하기</button>
 <input type="hidden" id="videoID" value=${sessionScope.youtubedt.videoID} /><br>
 <div id="player"></div>
 </body>

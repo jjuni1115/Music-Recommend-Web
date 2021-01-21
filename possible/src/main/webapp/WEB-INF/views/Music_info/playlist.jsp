@@ -10,39 +10,6 @@
 <html>
 <head>
     <title>playlist</title>
-
-    <style>
-        .right{
-            position: absolute;
-            top: 150px;
-            left:700px;
-        }
-        h1 {
-            FONT-SIZE: 78px;
-            COLOR: #eeeeee;
-            PADDING-BOTTOM: 10px;
-            TEXT-ALIGN: left;
-            PADDING-TOP: 10px;
-            PADDING-LEFT: 10px;
-            BORDER-LEFT: #00b5ff 8px solid;
-        }
-
-        h2 {
-            FONT-SIZE: 12px;
-            COLOR: #eeeeee;
-            PADDING-BOTTOM: 10px;
-            TEXT-ALIGN: left;
-            PADDING-TOP: 10px;
-            PADDING-LEFT: 10px;
-            BORDER-LEFT: #00b5ff 8px solid;
-        }
-
-        h2 {
-            font-family:"Arial";
-            margin-bottom:10px;
-        }
-    </style>
-
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script> <!-- JQuery -->
     <script type="text/javascript">
         $(document).ready(function (){                       //search music
@@ -113,18 +80,31 @@
             })
         })
     </script>
+    <style>
+        .right{
+            position: absolute;
+            top: 50px;
+            left:700px;
+        }
 
-    <script>
-        $(function(){                 //if search textbox is empty, disabled search button
-            $('#keyword').on('input',function(){
-                if($('#keyword').val=='')
-                    $("#To_search").attr("disabled",true);
-                else
-                    $("#To_search").attr("disabled",false);
-            })
-        })
-    </script>
 
+        button {
+            background-color: #00b5ff;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            display: inline-block;
+            font-family: 'BenchNine', Arial, sans-serif;
+            font-size: 1em;
+            font-size: 10px;
+            line-height: 1em;
+            outline: none;
+            padding: 6px 20px 5px;
+            position: relative;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+    </style>
 </head>
 <body>
 <div class="box1">

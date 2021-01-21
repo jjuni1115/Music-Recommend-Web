@@ -24,25 +24,87 @@
         $(document).ready(function(){
         });
     </script>
+
+    <style>
+        h1 {
+            FONT-SIZE: 78px;
+            COLOR: #eeeeee;
+            PADDING-BOTTOM: 10px;
+            TEXT-ALIGN: left;
+            PADDING-TOP: 10px;
+            PADDING-LEFT: 10px;
+            BORDER-LEFT: #00b5ff 8px solid;
+        }
+
+        /*버튼 디자인 */
+        button {
+            background-color: #00b5ff;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            display: inline-block;
+            font-family: 'BenchNine', Arial, sans-serif;
+            font-size: 1em;
+            font-size: 10px;
+            line-height: 1em;
+            outline: none;
+            padding: 12px 40px 10px;
+            position: relative;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+
+        #login info{
+            border:1px solid blue;
+        }
+
+        #up-menu {
+            border-bottom: 1px solid black;
+            padding-bottom: 5px;
+        }
+
+        #submit{
+            position: relative;
+            left:60px;
+            bottom:20px;
+        }
+
+        #serch-form{
+            margin-top: 30px;
+            margin-bottom: 100px;
+
+        }
+
+        body {
+            background-image: url("../images/background2.png");
+            background-size : auto;
+            font-family:"맑은고딕", "돋움";
+            font-size:12px;
+            color: deepskyblue;
+        }
+        #middle-menu{
+            border-bottom: 1px solid black;
+            padding-bottom: 5px;
+        }
+
+
+
+    </style>
+
 </head>
 <body>
-id = ${sessionScope.member.id}
-account = ${sessionScope.member.account}
-password = ${sessionScope.member.password}
-age = ${sessionScope.member.age}
-<br>
-<c:if test="${not empty sessionScope.member.id}">
-    ${sessionScope.member.account}님 로그인 성공
-</c:if>
+
+<h1>Muse</h1>
 
 
-<div>
+<div id="up-menu">
     <button onclick="javascript:location.href='/';">홈</button>
     <button onclick="javascript:location.href='/member/logout';">로그아웃</button>
 </div>
 
 <br>
-<div>
+<div id="middle-menu">
     <form action="/member/detail" method="post">
         <input type="hidden" name="id" value="${sessionScope.member.id}"/>
         <input type="hidden" name="account" value="${sessionScope.member.account}" />
@@ -50,12 +112,13 @@ age = ${sessionScope.member.age}
     </form>
 </div>
 
-<div>
+<div id="serch-form">
     <form action="/ytube/searchDo" method="post">
         Artist : <input type="text" name="artist" id="artist"/><br>
         Title : <input type="text" name="title" id="title" minlength="1"/>
         <button id="submit" type="submit">음악검색</button><br>
     </form>
+</div>
 <%--    Serial ID : <p id="videoIDd"></p>--%>
 
     <form action="/Music_info/playlist" method="post">
@@ -64,8 +127,19 @@ age = ${sessionScope.member.age}
         Music Recommend : <button type="submit" id="submit_recommend" >플레이 리스트 & 음악 추천</button><br>
     </form>
 </div>
-</div>
 <div id="player" class="youtube">
+</div>
+
+
+<div id="login info">
+    id = ${sessionScope.member.id}
+    account = ${sessionScope.member.account}
+    password = ${sessionScope.member.password}
+    age = ${sessionScope.member.age}
+<br>
+    <c:if test="${not empty sessionScope.member.id}">
+        ${sessionScope.member.account}님 로그인 성공
+    </c:if>
 </div>
 
 
@@ -134,4 +208,7 @@ age = ${sessionScope.member.age}
     //         }
     //     });
     // });
+
+
+
 </script>

@@ -48,7 +48,7 @@ public class MemberController {
     @GetMapping("/logout")
     public String logout(HttpSession session){
         session.invalidate();  // Session.Expire
-        return "/index";
+        return "index";
     }
 
     // To signup page (method : get), When you click sign up button
@@ -84,7 +84,7 @@ public class MemberController {
         name.add(member.getFirst_name());
         name.add(member.getLast_name() + " Congratulation for your Register!");
         mv.addObject("msg", name);
-        mv.setViewName("/index");
+        mv.setViewName("index");
         return mv;
     }
 
