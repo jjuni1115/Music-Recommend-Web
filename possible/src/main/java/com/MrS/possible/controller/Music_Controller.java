@@ -2,6 +2,9 @@ package com.MrS.possible.controller;
 
 import com.MrS.possible.Service.MusicService;
 import com.MrS.possible.domain.Member;
+import com.MrS.possible.domain.add_playlist;
+import com.MrS.possible.domain.result;
+import com.google.api.client.json.Json;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import com.MrS.possible.domain.Music;
@@ -11,9 +14,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
@@ -40,13 +41,45 @@ public class Music_Controller {
         session.setAttribute("member", member_);
     }
 
+    //search music
+    @ResponseBody
+    @PostMapping(value = "/list")
+    public List<result> search(String keyword){
+        List<result> musicList = new ArrayList<>();
+        musicList=musicService.search(keyword);
+        return musicList;
+    }
+
+    //insert into playlist
+    @ResponseBody
+    @PostMapping(value = "/insert_playlist")
+    public int insert(String keyword){
+        System.out.println(keyword);
+        String[] array =keyword.split("//");
+        add_playlist param=new add_playlist(Integer.parseInt(array[0]),array[1],array[2]);
+        musicService.insert_playlist(param);
+        return 1;
+    }
+
+    //load my playlist
+    @ResponseBody
+    @PostMapping(value = "/load_playlist")
+    public List<result> load_playlist(String keyword){
+        System.out.println(keyword);
+        List<result> playlist = new ArrayList<>();
+        playlist=musicService.load(keyword);
+        return playlist;
+    }
+
+
+    //load & parsing music information
     @GetMapping("/parsing")
     public void crawling(){
         Calendar cal =Calendar.getInstance();
         DateFormat df=new SimpleDateFormat("yyyyMMdd");
         Date date=null;
         try {
-            date=df.parse("20131212");   //setting current date
+            date=df.parse("20131212");   //setting current date  20131212
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -54,7 +87,7 @@ public class Music_Controller {
         while(true) {
             List<Music> musicList = new ArrayList<>();
             String curr=df.format(cal.getTime());
-            if(curr.equals("20060922")){    //setting target date
+            if(curr.equals("20060922")){    //setting target date  20060922
                 break;
             }
             String url = "https://music.bugs.co.kr/chart/track/day/total?chartdate=" + curr;

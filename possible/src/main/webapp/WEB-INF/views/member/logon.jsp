@@ -64,6 +64,7 @@ age = ${sessionScope.member.age}
         Music Recommend : <button type="submit" id="submit_recommend" >플레이 리스트 & 음악 추천</button><br>
     </form>
 </div>
+</div>
 <div id="player" class="youtube">
 </div>
 

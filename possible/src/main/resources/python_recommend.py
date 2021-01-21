@@ -51,7 +51,7 @@ class Code_test():
             return ID, account, music
 
         ID, account, music = get_argument()
-        
+
 
 
         result = ID + account

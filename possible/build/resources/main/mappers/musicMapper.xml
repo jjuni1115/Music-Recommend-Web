@@ -7,4 +7,21 @@
        (#{i.id},#{i.title},#{i.artist},#{i.genre},#{i.release_time},#{i.adult_authen})
        </foreach>
     </insert>
+
+    <select id="search" resultType="result">
+        select title,artist
+        from music
+        where title like CONCAT('%',#{keyword},'%');
+    </select>
+
+    <insert id="playlist" parameterType="add_playlist">
+        insert ignore into rel values((select ID from playlist where user_ID=#{user_ID}),(select ID from music where title=#{title} and artist=#{artist}))
+    </insert>
+
+    <select id="load" resultType="result">
+        SELECT title, artist
+        FROM music,user,playlist,rel
+        WHERE user.ID=playlist.user_ID AND playlist.ID=rel.playlist_ID AND rel.music_ID=music.ID AND user.ID=#{keyword}
+    </select>
+
 </mapper>
