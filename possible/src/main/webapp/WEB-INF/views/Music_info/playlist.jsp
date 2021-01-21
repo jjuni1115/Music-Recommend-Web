@@ -104,6 +104,31 @@
             text-transform: uppercase;
             font-weight: 700;
         }
+        .right{
+            position: absolute;
+            top: 150px;
+            left:700px;
+        }
+        h1 {
+            FONT-SIZE: 78px;
+            COLOR: #eeeeee;
+            PADDING-BOTTOM: 10px;
+            TEXT-ALIGN: left;
+            PADDING-TOP: 10px;
+            PADDING-LEFT: 10px;
+            BORDER-LEFT: #00b5ff 8px solid;
+        }
+
+        h2 {
+            FONT-SIZE: 12px;
+            COLOR: #eeeeee;
+            PADDING-BOTTOM: 10px;
+            TEXT-ALIGN: left;
+            PADDING-TOP: 10px;
+            PADDING-LEFT: 10px;
+            BORDER-LEFT: #00b5ff 8px solid;
+        }
+
     </style>
 </head>
 <body>
