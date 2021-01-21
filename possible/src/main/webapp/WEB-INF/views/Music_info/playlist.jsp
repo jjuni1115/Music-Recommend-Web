@@ -10,6 +10,39 @@
 <html>
 <head>
     <title>playlist</title>
+
+    <style>
+        .right{
+            position: absolute;
+            top: 150px;
+            left:700px;
+        }
+        h1 {
+            FONT-SIZE: 78px;
+            COLOR: #eeeeee;
+            PADDING-BOTTOM: 10px;
+            TEXT-ALIGN: left;
+            PADDING-TOP: 10px;
+            PADDING-LEFT: 10px;
+            BORDER-LEFT: #00b5ff 8px solid;
+        }
+
+        h2 {
+            FONT-SIZE: 12px;
+            COLOR: #eeeeee;
+            PADDING-BOTTOM: 10px;
+            TEXT-ALIGN: left;
+            PADDING-TOP: 10px;
+            PADDING-LEFT: 10px;
+            BORDER-LEFT: #00b5ff 8px solid;
+        }
+
+        h2 {
+            font-family:"Arial";
+            margin-bottom:10px;
+        }
+    </style>
+
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script> <!-- JQuery -->
     <script type="text/javascript">
         $(document).ready(function (){                       //search music
@@ -47,8 +80,9 @@
                     data:params,
                     datatype: "json",
                     success:function (args) {
-                        alert("플레이리스트 저장")
-                        $("#playlist").append("<option value='"+$("#songs").val()+"'>"+$("#songs").val()+"</option>");
+                        alert("플레이리스트 저장");
+                        var list=$("#songs").val().split("//");
+                        $("#playlist").append("<option value='"+$("#songs").val()+"'>"+list[0]+" - "+list[1]+"</option>");
                     },
                     error:function (error){
                     alert("error: add playlist");
@@ -90,15 +124,13 @@
             })
         })
     </script>
-    <style>
-        .right{
-            position: absolute;
-            top: 50px;
-            left:700px;
-        }
-    </style>
+
 </head>
 <body>
+<div class="box1">
+    <h1>Muse</h1>
+    <h2>어서오세요 당신만의 음악을 알려드립니다. </h2>
+</div>
 <button onclick="history.back()">뒤로가기</button> &nbsp; ID : ${sessionScope.member.id} &nbsp; ACCOUNT : ${sessionScope.member.account}
 <br><br>
 <form action="/py/recommend_list" method="get">
