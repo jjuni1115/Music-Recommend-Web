@@ -107,6 +107,24 @@
         }
 
 
+        button {
+            background-color: #00b5ff;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            display: inline-block;
+            font-family: 'BenchNine', Arial, sans-serif;
+            font-size: 1em;
+            font-size: 10px;
+            line-height: 1em;
+            outline: none;
+            padding: 6px 20px 5px;
+            position: relative;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+
     </style>
 
 </head>
