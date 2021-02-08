@@ -1,6 +1,6 @@
 package com.MrS.possible.domain;
 
-public class add_playlist {
+public class add_playlist {          //add playlist
    private int user_ID;
    private String title;
    private String artist;

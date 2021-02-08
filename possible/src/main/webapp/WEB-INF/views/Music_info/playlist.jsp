@@ -134,7 +134,7 @@
 <body>
 <div class="box1">
     <h1>Muse</h1>
-    <h2>어서오세요 당신만의 음악을 알려드립니다. </h2>
+    <h2>playlist</h2>
 </div>
 <button onclick="history.back()">뒤로가기</button> &nbsp; ID : ${sessionScope.member.id} &nbsp; ACCOUNT : ${sessionScope.member.account}
 <br><br>
@@ -148,6 +148,8 @@
     <option value="" selected>--선택--</option>
 </select>
 <div class="right" id="list">
+    <input type="text" id="add_playlist" name="add_playlist" required="required">
+    <button type="submit" id="new_playlist" name="new_playlist">생성</button><br>
     플레이리스트<br>
     <select name="playlist" id="playlist" size="15">
         <option value="" selected>--선택--</option>

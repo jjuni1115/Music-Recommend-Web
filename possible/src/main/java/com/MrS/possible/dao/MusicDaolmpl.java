@@ -24,10 +24,12 @@ public class MusicDaolmpl implements MusicDao{
 
     @Override
     public List<result> search(String keyword) {
+
         return sqlSession.selectList("music.search",keyword);
     }
 
     public List<result> search_artist(String keyword) {
+
         return sqlSession.selectList("music.search_artist",keyword);
     }
 
@@ -38,6 +40,7 @@ public class MusicDaolmpl implements MusicDao{
     }
 
     public List<result> load(String keyword) {
+
         return sqlSession.selectList("music.load",Integer.parseInt(keyword));
     }
 }

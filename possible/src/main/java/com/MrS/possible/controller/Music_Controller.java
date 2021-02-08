@@ -44,14 +44,14 @@ public class Music_Controller {
     //search music
     @ResponseBody
     @PostMapping(value = "/list")
-    public List<result> search(String keyword){
+    public List<result> search(String keyword){     //search music information using artist or title
         System.out.println(keyword);
-        String[] array =keyword.split("//");
+        String[] array =keyword.split("//");  // //를 기준으로 구분 ex) title//keyword
         List<result> musicList = new ArrayList<>();
-        if(array[0].equals("title")) {
+        if(array[0].equals("title")) {               //search by title
             musicList=musicService.search(array[1]);
         }
-        else{
+        else{                                        //search by artist
             musicList=musicService.search_artist(array[1]);
         }
         return musicList;
@@ -62,7 +62,7 @@ public class Music_Controller {
     @PostMapping(value = "/insert_playlist")
     public int insert(String keyword){
         System.out.println(keyword);
-        String[] array =keyword.split("//");
+        String[] array =keyword.split("//");   // //를 기준으로 구분 ex) id//title//artist
         add_playlist param=new add_playlist(Integer.parseInt(array[0]),array[1],array[2]);
         musicService.insert_playlist(param);
         return 1;
@@ -112,7 +112,7 @@ public class Music_Controller {
             title = tmp.select("p.title");
             artist = tmp.select("p.artist");
             String artist_name;
-            for (int i = 0; i < 90; i++) {
+            for (int i = 0; i < 95; i++) {
                 int adult;
                 if (tmp.get(i).attr("multiartist").equals("Y")) {           //Store only representative artists if there are many artists
                     artist_name = artist.get(i).select("a").first().text();
@@ -136,7 +136,6 @@ public class Music_Controller {
     @GetMapping("/new_song")
     public void crawling_newsong() {                            //saving new song in database
 
-        Calendar cal =Calendar.getInstance();
         List<Music> musicList = new ArrayList<>();
         String url="https://music.bugs.co.kr/newest/track/totalpicked?nation=ALL";
         Elements tmp;
@@ -168,7 +167,6 @@ public class Music_Controller {
             Music music = new Music(Integer.parseInt(tmp.get(i).attr("trackid")), title.get(i).text(), artist_name, null, null, adult);
             musicList.add(music);
         }
-        cal.add(Calendar.DATE, -1);
         musicService.insert(musicList);
 
     }

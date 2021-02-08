@@ -33,6 +33,7 @@ public class MusicServicelmpl implements MusicService {
     }
 
     public List<result> load(String keyword){
+
         return musicDao.load(keyword);
     }
 }
