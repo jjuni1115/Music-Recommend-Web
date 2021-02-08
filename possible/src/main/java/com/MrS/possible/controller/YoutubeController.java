@@ -1,6 +1,7 @@
 package com.MrS.possible.controller;
 
 import com.MrS.possible.Service.YoutubeService;
+import com.MrS.possible.dao.YoutubeDaoImpl;
 import com.MrS.possible.domain.Member;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.MrS.possible.dao.YoutubeDao;
@@ -19,13 +20,13 @@ import java.security.GeneralSecurityException;
 @RequestMapping(value="/ytube")
 public class YoutubeController {
     @Autowired
+    private YoutubeDao youtubeDao = new YoutubeDaoImpl();
     private final YoutubeService youtubeService;
-    private final YoutubeDao youtubeDao;
+
 //    private static final YoutubeService youtubeService_search = null;
 
-    public YoutubeController(final YoutubeService youtubeService, final YoutubeDao youtubeDao){
+    public YoutubeController(final YoutubeService youtubeService){
         this.youtubeService = youtubeService;
-        this.youtubeDao = youtubeDao;
     }
 
     // search Music at Youtube, using Youtube API : U must Issue your API key and insert into YoutubeServiceImpl method
@@ -39,13 +40,10 @@ public class YoutubeController {
         Member member = new Member(resources2.getId(), resources2.getAccount());
         System.out.println(youtubedt.getArtist() + " " + youtubedt.getTitle());
 
-        String VideoId;
-        VideoId = youtubeService.search(youtubedt); // Service.search impl, return MostView videoId
-        youtubedt.setVideoID(VideoId);
-        System.out.println(VideoId);
+        youtubedt = youtubeService.search(youtubedt); // Service.search impl, return MostView videoId
 
         // Video ID update to DB music table
-        youtubeDao.videoidInsert(VideoId, youtubedt);
+        youtubeDao.videoidInsert(youtubedt);
 
         // YoutubeDT class > Y_M class : set necessary Fields
         YoutubeDT.Y_M yt_music = new YoutubeDT.Y_M(member.getId(), member.getAccount(), youtubedt.getArtist(), youtubedt.getTitle(), youtubedt.getVideoID());

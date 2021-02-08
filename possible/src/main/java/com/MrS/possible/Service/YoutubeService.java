@@ -6,7 +6,8 @@ import com.MrS.possible.domain.YoutubeDT;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+@FunctionalInterface
 public interface YoutubeService {
 
-    public String search(YoutubeDT youtubedt) throws GeneralSecurityException, IOException, GoogleJsonResponseException;
+    public YoutubeDT search(YoutubeDT youtubedt) throws GeneralSecurityException, IOException, GoogleJsonResponseException;
 }

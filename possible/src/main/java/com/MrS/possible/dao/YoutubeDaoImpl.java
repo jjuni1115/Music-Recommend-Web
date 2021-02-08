@@ -21,11 +21,9 @@ public class YoutubeDaoImpl implements YoutubeDao{
 
     // When you search music, music.videoid column will update immediately
     @Override
-    public void videoidInsert(String videoId, YoutubeDT youtubedt) {
-
-        System.out.println("here" +  youtubedt.getVideoID());
-        youtubedt = sqlSession.selectOne(Namespace + "selectMusic", youtubedt);
-        youtubedt.setVideoID(videoId);
+    public void videoidInsert(YoutubeDT youtubedt) {
+        YoutubeDT youtubedt2 = sqlSession.selectOne(Namespace + "selectMusic", youtubedt);
+        if(youtubedt2 == null) return;
         System.out.println(youtubedt.getArtist() + youtubedt.getVideoID());
         sqlSession.insert(Namespace + "searchResult", youtubedt);  // music에 모든 data 들어가면 주석 풀기
     }

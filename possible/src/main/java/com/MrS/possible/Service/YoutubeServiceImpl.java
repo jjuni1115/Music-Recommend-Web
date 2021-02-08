@@ -11,10 +11,13 @@ import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.Video;
 import com.MrS.possible.domain.YoutubeDT;
 
+import org.apache.ibatis.reflection.SystemMetaObject;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -27,57 +30,72 @@ public class YoutubeServiceImpl implements YoutubeService {
     private static final JsonFactory JSON_FACTORY = new JacksonFactory();
     private static final long NUMBER_OF_VIDEOS_RETURNED = 1;
     public static YouTube youtube_type;
-    // AIzaSyBqqNfLZ8URYN-W1jbReGlsyYMlP8wnTUI
-    // AIzaSyABoT_EDIh6ydzpPeregb-5jNTe1rjzBTY
-    private static final String API_KEY = "AIzaSyABoT_EDIh6ydzpPeregb-5jNTe1rjzBTY";  // Youtube API Key
-    private static final String MAX_RESULT = "4"; // When you Search by Youtube API, Number of Videos to get
+    YoutubeApiConf YoutubeConfig = YoutubeApiConf.getInstance();  //Singleton getInstance
+    private final String API_KEY = YoutubeConfig.getAPI(1);  // Youtube API Key (parameter 1 or 2)
+    public final String MAX_RESULT = YoutubeConfig.getMaxCount(); // When you Search by Youtube API, Number of Videos to get
 
-    private static double put_youtubeDT(Iterator<Video> iteratorSearchResults, YoutubeDT youtubeDT){
+    private double[] put_youtubeDT(List<Video> videoList){  // Most viewCount video Index return
         System.out.println("+====================================================+");
 
-        Video singleVideo = iteratorSearchResults.next();
+        BigInteger mostView = new BigInteger("0");
+        Video singleVideo;
+        int idx = 0;  int videoIdx = 0;
+        double[] result = new double[2];
+        Iterator<Video> VL = videoList.iterator();  //iterator loop
+        while(VL.hasNext()) {
+            singleVideo = VL.next();
 
-        // video type check & set Single video's data to youtubeDT class field
-        if (singleVideo.getKind().equals("youtube#video")) {
-            youtubeDT.setViewCount(singleVideo.getStatistics().getViewCount());
-            youtubeDT.setDuration(singleVideo.getContentDetails().getDuration());
+            BigInteger viewCount = singleVideo.getStatistics().getViewCount();
+            String duration = singleVideo.getContentDetails().getDuration();
+
+            int T = duration.indexOf("T");   int M = duration.indexOf("M");
+            // video length : more than 1hour || more then 6min : It's not a Music
+            if (duration.charAt(0) != 'P'
+                    || Integer.parseInt(duration.substring(T+1, M)) >= 6){
+                continue;
+            }
+
+            if (result[1] < viewCount.doubleValue()) {
+                result[0] = idx;
+                result[1] = viewCount.doubleValue();
+            }
+            idx++;
         }
 
-        // video length : more than 1hour || more then 6min : It's not a Music
-        int T = youtubeDT.getDuration().indexOf("T");
-        int M = youtubeDT.getDuration().indexOf("M");
-        if (youtubeDT.getDuration().charAt(0) != 'P'
-                || Integer.parseInt(youtubeDT.getDuration().substring(T+1, M)) >= 6){
-            return 1.0;
-        }
-        return youtubeDT.getViewCount().doubleValue(); // return viewCount
+        return result; // return [Index, viewCount]
     }
 
     // Get 1 video's detail Data : viewCount, title, Duration... What ever you want
     // Get videoId -> return viewCount
-    public double get_youtubeDT(String videoId) {
-        YoutubeDT youtubeDT = new YoutubeDT();
-        double viewCount = 0;
-        try{
-            youtubeDT.setVideoID(videoId);
+    public double[] get_youtubeDT(String[] videoId) {
 
+        double[] idxViewCount = new double[2];
+        try{
             youtube_type = new YouTube.Builder(HTTP_TRANSPORT, JSON_FACTORY, new HttpRequestInitializer(){
                 public void initialize(HttpRequest request) throws IOException {
-
                 }
             }).setApplicationName("youtube-video-duration-get").build();
 
             // Youtube API's List type
             YouTube.Videos.List videos = youtube_type.videos().list("id, statistics, contentDetails");
             videos.setKey(API_KEY); // set API Key
-            videos.setId(StringtoJsontoValue(videoId, "videoId"));  // set videoId
-            videos.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);  // 1 video
 
-            // Get Request & processing
-            List<Video> videoList = videos.execute().getItems();
-            if (videoList != null){
-                viewCount = put_youtubeDT(videoList.iterator(), youtubeDT);  // Transfer Data to put youtubeDT
+            List<Video> videoList = new ArrayList<>();
+            for(int i=0; i<Integer.parseInt(MAX_RESULT); i++){
+                YoutubeDT youtubeDT = new YoutubeDT();
+                youtubeDT.setVideoID(videoId[i]);
+
+                videos.setId(StringtoJsontoValue(videoId[i], "videoId"));  // set videoId
+                videos.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);  // 1 video
+
+                // Get Request & processing
+                videoList.addAll(videos.execute().getItems());  // add video to videoList
             }
+
+            if (videoList.size() > 0){
+                idxViewCount = put_youtubeDT(videoList);  // Transfer Data to put youtubeDT
+            }
+
         }
         catch(GoogleJsonResponseException e){
             System.out.println("Json Resp Exception :" + e.getDetails().getCode() + ":" +
@@ -89,7 +107,9 @@ public class YoutubeServiceImpl implements YoutubeService {
         catch(Throwable t){
             t.printStackTrace();
         }
-        return viewCount;
+        System.out.println("viewCount : " + idxViewCount[1]);
+
+        return idxViewCount;
     }
 
     // Impl : ""key" : "data"" -> make JSON format {"key" : "data"} -> json.getString("key") = value
@@ -102,21 +122,14 @@ public class YoutubeServiceImpl implements YoutubeService {
     // check ViewCount & get most view count 'VideoID'
     private String mostview(String[] videoId, String[] thumbnailPath, YoutubeDT youtubedt){
         // get Most View VideoID
-        double[] result = new double[Integer.parseInt(MAX_RESULT)];
-        double temp = 0.0;
-        int answer = 0;
-        for (int i=0; i<Integer.parseInt(MAX_RESULT); i++){
-            result[i] = get_youtubeDT(videoId[i]);
-            if (result[i] > temp){
-                temp = result[i];
-                answer = i;
-            }
-        }
+        double[] result;
+        result = get_youtubeDT(videoId);
 
         // Parsing & YoutubeDT.setThumbnailPath() field
-        youtubedt.setThumbnailPath(StringtoJsontoValue(thumbnailPath[answer], "url"));
+        youtubedt.setThumbnailPath(StringtoJsontoValue(thumbnailPath[(int)result[0]], "url"));
+        youtubedt.setViewCount(BigInteger.valueOf((long) result[1]));   //double type -> BigInteger type
 
-        return StringtoJsontoValue(videoId[answer], "videoId"); // return videoId
+        return StringtoJsontoValue(videoId[(int)result[0]], "videoId"); // return videoId
     }
 
     // Make URL, Setting
@@ -131,7 +144,7 @@ public class YoutubeServiceImpl implements YoutubeService {
     }
 
     // youtube search : (artist-title) format & return json type data & Parsing & processing)
-    public String search(YoutubeDT youtubedt) throws IOException{
+    public YoutubeDT search(YoutubeDT youtubedt) throws IOException{
         // getAPI_URL : Make URL format and set Options like maxResult, API_KEY insert, Query(artist-title)
         URL url = new URL(getAPI_URL(youtubedt));  // get url
         HttpURLConnection con = (HttpURLConnection) url.openConnection();  // openConnection
@@ -139,7 +152,7 @@ public class YoutubeServiceImpl implements YoutubeService {
 
         //BufferReader, UTF-8
         BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8));
-        StringBuffer response = new StringBuffer();
+//        StringBuffer response = new StringBuffer();
 
         String input;
         // videoId, thumbnailPath to deal with YoutubeDT field name
@@ -149,7 +162,7 @@ public class YoutubeServiceImpl implements YoutubeService {
         // read Request & Parsing based on String <- Because Request video's json format is redundant
         int tmp = 0;
         while((input = br.readLine()) != null){
-            response.append(input);
+//            response.append(input);
             if (input.contains("\"videoId\": ")){
                 videoId[tmp] = input;
             }
@@ -167,7 +180,7 @@ public class YoutubeServiceImpl implements YoutubeService {
 
         // Impl mostview() -> YoutubeDT.setVideoID() = Most View count 'videoId' is into YoutubeDT.videoId field.
         youtubedt.setVideoID(mostview(videoId, thumbnailPath, youtubedt));
-        return youtubedt.getVideoID();
+        return youtubedt;  // return youtubedt : videoId, title, artist, viewCount
 
     }
 

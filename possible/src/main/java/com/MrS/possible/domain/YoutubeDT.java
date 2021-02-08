@@ -1,5 +1,6 @@
 package com.MrS.possible.domain;
 
+import com.MrS.possible.Service.YoutubeServiceImpl;
 import lombok.Builder;
 import org.apache.ibatis.session.ResultContext;
 import org.apache.ibatis.session.ResultHandler;
@@ -11,7 +12,7 @@ import java.math.BigInteger;
 public class YoutubeDT {
     private String videoID;
     private String Duration;
-    private BigInteger viewCount;  // viewCount must be BigInteger : api : .getViewCount()
+    private BigInteger viewCount;  // viewCount must be BigInteger : api : .getViewCount()      //  = new BigInteger[Integer.parseInt(YoutubeServiceImpl.MAX_RESULT)]
     private String Artist;
     private String title;
     private String thumbnailPath;
