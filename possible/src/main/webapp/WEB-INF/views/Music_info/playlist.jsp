@@ -58,7 +58,6 @@
         })
         })
     </script>
-
     <script type="text/javascript">
         $(function load (){                               //load my playlist
             //$('#playlist').change(function(){
@@ -77,6 +76,25 @@
                         alert("error: load playlist");
                 }
                 //})
+            })
+        })
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function (){
+            $("#new_playlist").click(function (){
+                var param={'keyword':${sessionScope.member.id}+'//'+$("#add_playlist").val()};
+                $.ajax({
+                    type:'POST',
+                    url:'/Music_info/new_playlist',
+                    data:param,
+                    datatype:'json',
+                    success:function(args) {
+                        alert("Create playlist sucessfully");
+                    },error:function(error){
+                        alert("error: Create playlist");
+                    }
+                    //})
+                })
             })
         })
     </script>

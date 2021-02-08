@@ -1,13 +1,10 @@
 package com.MrS.possible.controller;
 
 import com.MrS.possible.Service.MusicService;
-import com.MrS.possible.domain.Member;
-import com.MrS.possible.domain.add_playlist;
-import com.MrS.possible.domain.result;
+import com.MrS.possible.domain.*;
 import com.google.api.client.json.Json;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import com.MrS.possible.domain.Music;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -76,6 +73,20 @@ public class Music_Controller {
         List<result> playlist = new ArrayList<>();
         playlist=musicService.load(keyword);
         return playlist;
+    }
+
+    //create new playlist
+    @ResponseBody
+    @PostMapping(value = "/new_playlist")
+    public int create_playlist(String keyword){
+        System.out.println(keyword);
+        String[] array=keyword.split("//");
+        Calendar cal =Calendar.getInstance();
+        DateFormat df=new SimpleDateFormat("yyyy-MM-dd");
+        String now_time=df.format(cal.getTime());
+        playlist pl=new playlist(Integer.parseInt(array[0]),array[1],now_time);
+        musicService.create_playlist(pl);
+        return 1;
     }
 
 

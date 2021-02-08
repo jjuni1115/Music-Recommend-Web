@@ -2,6 +2,7 @@ package com.MrS.possible.dao;
 
 import com.MrS.possible.domain.Music;
 import com.MrS.possible.domain.add_playlist;
+import com.MrS.possible.domain.playlist;
 import com.MrS.possible.domain.result;
 import com.google.api.client.json.Json;
 
@@ -13,5 +14,6 @@ public interface MusicDao {
     public List<result> search_artist(String keyword);
     public int insert_playlist(add_playlist keyword);
     public List<result> load(String keyword);
+    public int create_playlist(playlist keyword);
 
 }
