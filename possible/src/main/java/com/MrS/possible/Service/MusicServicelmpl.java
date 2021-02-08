@@ -3,6 +3,7 @@ package com.MrS.possible.Service;
 import com.MrS.possible.dao.MusicDao;
 import com.MrS.possible.domain.Music;
 import com.MrS.possible.domain.add_playlist;
+import com.MrS.possible.domain.playlist;
 import com.MrS.possible.domain.result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,11 @@ public class MusicServicelmpl implements MusicService {
     }
 
     public List<result> load(String keyword){
+
         return musicDao.load(keyword);
+    }
+
+    public int create_playlist(playlist keyword){
+        return musicDao.create_playlist(keyword);
     }
 }

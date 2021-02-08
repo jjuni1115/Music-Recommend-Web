@@ -2,6 +2,7 @@ package com.MrS.possible.dao;
 
 import com.MrS.possible.domain.Music;
 import com.MrS.possible.domain.add_playlist;
+import com.MrS.possible.domain.playlist;
 import com.MrS.possible.domain.result;
 import com.google.api.client.json.Json;
 import org.apache.ibatis.session.SqlSession;
@@ -24,10 +25,12 @@ public class MusicDaolmpl implements MusicDao{
 
     @Override
     public List<result> search(String keyword) {
+
         return sqlSession.selectList("music.search",keyword);
     }
 
     public List<result> search_artist(String keyword) {
+
         return sqlSession.selectList("music.search_artist",keyword);
     }
 
@@ -38,6 +41,12 @@ public class MusicDaolmpl implements MusicDao{
     }
 
     public List<result> load(String keyword) {
+
         return sqlSession.selectList("music.load",Integer.parseInt(keyword));
+    }
+
+    public int create_playlist(playlist keyword){
+        System.out.println(keyword);
+        return sqlSession.insert("music.create_playlist",keyword);
     }
 }

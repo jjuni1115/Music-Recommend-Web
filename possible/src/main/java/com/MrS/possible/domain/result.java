@@ -1,6 +1,6 @@
 package com.MrS.possible.domain;
 
-public class result {
+public class result {             //search result
     private String title;
     private String artist;
 

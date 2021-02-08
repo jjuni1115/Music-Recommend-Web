@@ -58,7 +58,6 @@
         })
         })
     </script>
-
     <script type="text/javascript">
         $(function load (){                               //load my playlist
             //$('#playlist').change(function(){
@@ -77,6 +76,25 @@
                         alert("error: load playlist");
                 }
                 //})
+            })
+        })
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function (){
+            $("#new_playlist").click(function (){
+                var param={'keyword':${sessionScope.member.id}+'//'+$("#add_playlist").val()};
+                $.ajax({
+                    type:'POST',
+                    url:'/Music_info/new_playlist',
+                    data:param,
+                    datatype:'json',
+                    success:function(args) {
+                        alert("Create playlist sucessfully");
+                    },error:function(error){
+                        alert("error: Create playlist");
+                    }
+                    //})
+                })
             })
         })
     </script>
@@ -134,7 +152,7 @@
 <body>
 <div class="box1">
     <h1>Muse</h1>
-    <h2>어서오세요 당신만의 음악을 알려드립니다. </h2>
+    <h2>playlist</h2>
 </div>
 <button onclick="history.back()">뒤로가기</button> &nbsp; ID : ${sessionScope.member.id} &nbsp; ACCOUNT : ${sessionScope.member.account}
 <br><br>
@@ -148,6 +166,8 @@
     <option value="" selected>--선택--</option>
 </select>
 <div class="right" id="list">
+    <input type="text" id="add_playlist" name="add_playlist" required="required">
+    <button type="submit" id="new_playlist" name="new_playlist">생성</button><br>
     플레이리스트<br>
     <select name="playlist" id="playlist" size="15">
         <option value="" selected>--선택--</option>

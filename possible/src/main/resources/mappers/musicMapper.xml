@@ -30,4 +30,8 @@
         where artist like CONCAT('%',#{keyword},'%');
     </select>
 
+    <insert id="create_playlist" parameterType="playlist">
+        insert ignore into playlist(list_name,release_time,user_ID) values(#{list_name},#{release_date},#{user_ID});
+    </insert>
+
 </mapper>
