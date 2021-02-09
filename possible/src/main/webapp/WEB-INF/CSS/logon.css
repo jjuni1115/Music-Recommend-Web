@@ -1,0 +1,62 @@
+
+h1 {
+    FONT-SIZE: 78px;
+    COLOR: #eeeeee;
+    PADDING-BOTTOM: 10px;
+    TEXT-ALIGN: left;
+    PADDING-TOP: 10px;
+    PADDING-LEFT: 10px;
+    BORDER-LEFT: #00b5ff 8px solid;
+}
+
+/*버튼 디자인 */
+button {
+    background-color: #00b5ff;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'BenchNine', Arial, sans-serif;
+    font-size: 1em;
+    font-size: 10px;
+    line-height: 1em;
+    outline: none;
+    padding: 12px 40px 10px;
+    position: relative;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+
+#login info{
+    border:1px solid blue;
+}
+
+#up-menu {
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+}
+
+#submit{
+    position: relative;
+    left:60px;
+    bottom:20px;
+}
+
+#serch-form{
+    margin-top: 30px;
+    margin-bottom: 100px;
+
+}
+
+body {
+    background-image: url("../views/images/background2.png");
+    background-size : auto;
+    font-family:"맑은고딕", "돋움";
+    font-size:12px;
+    color: deepskyblue;
+}
+#middle-menu{
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+}

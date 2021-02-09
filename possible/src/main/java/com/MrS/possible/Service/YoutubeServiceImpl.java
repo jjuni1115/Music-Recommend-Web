@@ -68,7 +68,6 @@ public class YoutubeServiceImpl implements YoutubeService {
     // Get 1 video's detail Data : viewCount, title, Duration... What ever you want
     // Get videoId -> return viewCount
     public double[] get_youtubeDT(String[] videoId) {
-
         double[] idxViewCount = new double[2];
         try{
             youtube_type = new YouTube.Builder(HTTP_TRANSPORT, JSON_FACTORY, new HttpRequestInitializer(){
@@ -162,7 +161,6 @@ public class YoutubeServiceImpl implements YoutubeService {
         // read Request & Parsing based on String <- Because Request video's json format is redundant
         int tmp = 0;
         while((input = br.readLine()) != null){
-//            response.append(input);
             if (input.contains("\"videoId\": ")){
                 videoId[tmp] = input;
             }

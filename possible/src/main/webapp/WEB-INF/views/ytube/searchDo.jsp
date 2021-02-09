@@ -71,7 +71,6 @@
                   data: json,
                   datatype: json,
                   success:function (data){
-                      console.log("helloooooo");
                       console.log(data);
                       var output_data = "";
                       var output_data2 = "";
@@ -92,7 +91,7 @@
                               output_data2 += "<td>" + $(this).find("title").text() + "</td>";
                               output_data2 += "</tr>";
                           }
-                          tmp = tmp + 1;
+                          tmp += 1;
                       })
                       $("#dynamicTableBody").append(output_data);
                       $("#dynamicTableBody2").append(output_data2);
