@@ -21,7 +21,7 @@
     <select id="load" resultType="result">
         SELECT title, artist
         FROM music,user,playlist,rel
-        WHERE user.ID=playlist.user_ID AND playlist.ID=rel.playlist_ID AND rel.music_ID=music.ID AND user.ID=#{keyword}
+        WHERE user.ID=playlist.user_ID AND playlist.ID=rel.playlist_ID AND rel.music_ID=music.ID AND user.ID=#{id} AND playlist.list_name=#{list_name}
     </select>
 
     <select id="search_artist" resultType="result">
@@ -33,5 +33,11 @@
     <insert id="create_playlist" parameterType="playlist">
         insert ignore into playlist(list_name,release_time,user_ID) values(#{list_name},#{release_date},#{user_ID});
     </insert>
+
+    <select id="load_playlist" resultType="String">
+        select list_name
+        from playlist
+        where user_ID=#{id};
+    </select>
 
 </mapper>

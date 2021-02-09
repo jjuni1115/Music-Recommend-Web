@@ -1,9 +1,6 @@
 package com.MrS.possible.dao;
 
-import com.MrS.possible.domain.Music;
-import com.MrS.possible.domain.add_playlist;
-import com.MrS.possible.domain.playlist;
-import com.MrS.possible.domain.result;
+import com.MrS.possible.domain.*;
 import com.google.api.client.json.Json;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,13 +37,17 @@ public class MusicDaolmpl implements MusicDao{
         return sqlSession.insert("music.playlist",keyword);
     }
 
-    public List<result> load(String keyword) {
+    public List<result> load(load_pl keyword) {
 
-        return sqlSession.selectList("music.load",Integer.parseInt(keyword));
+        return sqlSession.selectList("music.load",keyword);
     }
 
     public int create_playlist(playlist keyword){
         System.out.println(keyword);
         return sqlSession.insert("music.create_playlist",keyword);
+    }
+
+    public List<String> load_playlist(String keyword){
+        return sqlSession.selectList("music.load_playlist",Integer.parseInt(keyword));
     }
 }

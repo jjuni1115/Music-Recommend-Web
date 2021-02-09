@@ -60,14 +60,15 @@
     </script>
     <script type="text/javascript">
         $(function load (){                               //load my playlist
-            //$('#playlist').change(function(){
-                var param={'keyword':${sessionScope.member.id}};
+            $('#my_playlist').dblclick(function(){
+                var param={'keyword':${sessionScope.member.id}+"//"+$("#my_playlist").val()};
                 $.ajax({
                     type:'POST',
                     url:'/Music_info/load_playlist',
                     data:param,
                     datatype:'json',
                     success:function(args) {
+                        $("#playlist option").remove();
                         $(args).find("item").each(function () {
                             $("#playlist").append("<option value='"+$(this).find("title").text()+"//"+$(this).find("artist").text()+"'>"+$(this).find("title").text()+" - "+$(this).find("artist").text()+"</option>");
                         })
@@ -76,6 +77,7 @@
                         alert("error: load playlist");
                 }
                 //})
+            })
             })
         })
     </script>
@@ -95,6 +97,27 @@
                     }
                     //})
                 })
+            })
+        })
+    </script>
+    <script>
+        $(function load_my_playlist (){
+            var param={'keyword':${sessionScope.member.id}};
+            $.ajax({
+                type:'POST',
+                url:'/Music_info/load_my_playlist',
+                data:param,
+                datatype:'json',
+                success:function(args) {
+                    console.log(args)
+                    $(args).find("item").each(function () {
+                        $("#my_playlist").append("<option value='"+$(this).text()+"'>"+$(this).text()+"</option>");
+                    })
+
+                },error:function(error){
+                    alert("error: load_my_playlist");
+                }
+                //})
             })
         })
     </script>
@@ -168,7 +191,11 @@
 <div class="right" id="list">
     <input type="text" id="add_playlist" name="add_playlist" required="required">
     <button type="submit" id="new_playlist" name="new_playlist">생성</button><br>
-    플레이리스트<br>
+    플레이리스트
+    <select name="my_playlist" id="my_playlist">
+        <option value="" selected>--선택--</option>
+    </select>
+    <br>
     <select name="playlist" id="playlist" size="15">
         <option value="" selected>--선택--</option>
     </select>

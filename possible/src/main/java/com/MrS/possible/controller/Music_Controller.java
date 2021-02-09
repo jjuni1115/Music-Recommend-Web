@@ -38,6 +38,15 @@ public class Music_Controller {
         session.setAttribute("member", member_);
     }
 
+    @ResponseBody
+    @PostMapping(value="/load_my_playlist")
+    public List<String> load_my_playlist(String keyword){
+        List<String> playlist=new ArrayList<String>();
+        playlist=musicService.load_playlist(keyword);
+        System.out.println(playlist);
+        return playlist;
+    }
+
     //search music
     @ResponseBody
     @PostMapping(value = "/list")
@@ -70,8 +79,11 @@ public class Music_Controller {
     @PostMapping(value = "/load_playlist")
     public List<result> load_playlist(String keyword){
         System.out.println(keyword);
+        String[] array=keyword.split("//");
+        load_pl temp=new load_pl(Integer.parseInt(array[0]),array[1]);
         List<result> playlist = new ArrayList<>();
-        playlist=musicService.load(keyword);
+        playlist=musicService.load(temp);
+        System.out.println(playlist);
         return playlist;
     }
 
