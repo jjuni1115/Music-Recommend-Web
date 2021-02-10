@@ -40,7 +40,7 @@
     <script type="text/javascript">
         $(function (){
             $("#songs").dblclick(function(){                 //add playlist
-                var params={"keyword":${sessionScope.member.id}+"//"+$("#songs").val()};
+                var params={"keyword":${sessionScope.member.id}+"//"+$("#songs").val()+"//"+$("#my_playlist").val()};
                 $.ajax({
                     type:"POST",
                     url:"/Music_info/insert_playlist",

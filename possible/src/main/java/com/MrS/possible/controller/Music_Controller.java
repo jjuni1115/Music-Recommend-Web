@@ -69,7 +69,7 @@ public class Music_Controller {
     public int insert(String keyword){
         System.out.println(keyword);
         String[] array =keyword.split("//");   // //를 기준으로 구분 ex) id//title//artist
-        add_playlist param=new add_playlist(Integer.parseInt(array[0]),array[1],array[2]);
+        add_playlist param=new add_playlist(Integer.parseInt(array[0]),array[1],array[2],array[3 ]);
         musicService.insert_playlist(param);
         return 1;
     }
