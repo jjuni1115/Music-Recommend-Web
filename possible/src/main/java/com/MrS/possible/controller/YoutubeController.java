@@ -33,7 +33,7 @@ public class YoutubeController {
 //    @ResponseBody
     @PostMapping(value="/searchDo")
     public void search(YoutubeDT resources, Member resources2, HttpSession session) throws GeneralSecurityException, IOException, GoogleJsonResponseException {
-        System.out.println(resources);
+
         // Make YoutubeDT field & get (title, artist) to search music
         YoutubeDT youtubedt = new YoutubeDT(resources.getTitle(), resources.getArtist());
 

@@ -2,6 +2,7 @@ package com.MrS.possible.controller;
 
 import com.MrS.possible.domain.Member;
 import com.MrS.possible.Service.MemberService;
+import org.apache.log4j.ConsoleAppender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -48,6 +49,7 @@ public class MemberController {
     @GetMapping("/logout")
     public String logout(HttpSession session){
         session.invalidate();  // Session.Expire
+
         return "index";
     }
 
@@ -98,6 +100,14 @@ public class MemberController {
         member = memberService.check_id(member);
 
         return member.getAccount();
+    }
+
+    @PostMapping(value="/infoChange")
+    public void infoChange(Member resource ,HttpSession session){
+        Member member = new Member(resource.getId(), resource.getAccount(), resource.getPassword(), resource.getFirst_name()
+        , resource.getLast_name(), resource.getAge(), resource.getClass_(), resource.getMoney(), resource.getSex());
+
+        session.setAttribute("member", member);
     }
 
 
