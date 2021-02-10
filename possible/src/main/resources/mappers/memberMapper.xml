@@ -41,6 +41,18 @@
         where artist = #{artist}, title = #{title}
     </insert>
 
+    <update id="infoChange">
+        update user set
+            PASSWORD = #{password},
+            first_name = #{first_name},
+            last_name = #{last_name},
+            age = #{age},
+            class_ = #{class_},
+            money = #{money},
+            sex = #{sex}
+        where ACCOUNT = #{account};
+    </update>
+
 <!--    result map 을 사용해서 Member 객체와 이름이 동일하지 않아도 Data 가 받아와 지도록 하는 방법 -->
 <!--    DB의 id column 값을 ID : ~~ 로 가져온다.  -> Member 필드의 변수명과 같도록. -->
 <!-- DB 컬럼의 '_'가 있을 때 resultMap을 사용치 않고 sql을 그대로 가져오면 변수이름이 같아도 Member 필드에 값이 들어가지 않음.  null 반환-->

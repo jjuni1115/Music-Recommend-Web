@@ -33,7 +33,7 @@
 <body>
 <div id="content">
     <h3>${sessionScope.member.first_name} ${sessionScope.member.last_name} (님) 정보 변경</h3>
-    <form action="/member/changeCommit" method="get">
+    <form action="/member/changeCommit" method="post">
         <table class='w-pct60'>
             <tr>
                 <th class='w-px160'>First Name</th>
@@ -65,12 +65,25 @@
                 <th class='w-px160'>Password</th>
                 <td><input type="text" name="password" value="${sessionScope.member.password}"/></td>
             </tr>
+            <tr>
+                <th class='w-px160'>Age</th>
+                <td><input type="text" name="age" value="${sessionScope.member.age}"/></td>
+            </tr>
+            <tr>
+                <th class='w-px160'>Money</th>
+                <td><input type="text" name="money" value="${sessionScope.member.money}"/></td>
+            </tr>
+            <tr>
+                <th class='w-px160'>Class</th>
+                <td><input type="hidden" name="class_" value="${sessionScope.member.class_}"/>
+                    ${sessionScope.member.class_} </td>
+            </tr>
         </table>
     </form>
 
     <div class="btnSet">
         <a class="btn-fill" onclick="$('form').submit()">저장</a>
-        <a class="btn-empty" href="list.cu">취소</a>
+        <a class="btn-empty" onclick="history.back()">취소</a>
     </div>
 </div>
 

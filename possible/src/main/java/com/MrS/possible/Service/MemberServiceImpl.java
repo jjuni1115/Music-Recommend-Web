@@ -45,5 +45,10 @@ public class MemberServiceImpl implements MemberService{
         member = memberDao.detail(member);
         return member;
     }
+
+    @Override
+    public void infoChange(Member member) {
+        memberDao.infoChange(member);
+    }
 }
 

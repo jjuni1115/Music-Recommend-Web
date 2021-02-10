@@ -109,7 +109,7 @@ public class Music_Controller {
         DateFormat df=new SimpleDateFormat("yyyyMMdd");
         Date date=null;
         try {
-            date=df.parse("20131212");   //setting current date  20131212
+            date=df.parse("20210201");   //setting current date  20131212
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -117,7 +117,7 @@ public class Music_Controller {
         while(true) {
             List<Music> musicList = new ArrayList<>();
             String curr=df.format(cal.getTime());
-            if(curr.equals("20060922")){    //setting target date  20060922
+            if(curr.equals("20131213")){    //setting target date  20060922
                 break;
             }
             String url = "https://music.bugs.co.kr/chart/track/day/total?chartdate=" + curr;
@@ -135,7 +135,7 @@ public class Music_Controller {
             title = tmp.select("p.title");
             artist = tmp.select("p.artist");
             String artist_name;
-            for (int i = 0; i < 95; i++) {
+            for (int i = 0; i < 90; i++) {
                 int adult;
                 if (tmp.get(i).attr("multiartist").equals("Y")) {           //Store only representative artists if there are many artists
                     artist_name = artist.get(i).select("a").first().text();

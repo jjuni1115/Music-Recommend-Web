@@ -1,10 +1,12 @@
 package com.MrS.possible.controller;
 
+import com.MrS.possible.Service.MemberServiceImpl;
 import com.MrS.possible.domain.Member;
 import com.MrS.possible.Service.MemberService;
 import org.apache.log4j.ConsoleAppender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -108,8 +110,25 @@ public class MemberController {
         , resource.getLast_name(), resource.getAge(), resource.getClass_(), resource.getMoney(), resource.getSex());
 
         session.setAttribute("member", member);
+        member = null;  // Free
     }
 
+    @PostMapping(value="/changeCommit")
+    public ModelAndView infoChangeCommit(Member resource, HttpSession session){
+        Member member = new Member(resource.getId(), resource.getAccount(), resource.getPassword(), resource.getFirst_name()
+                , resource.getLast_name(), resource.getAge(), resource.getClass_(), resource.getMoney(), resource.getSex());
+
+        // commit Data to DB
+//        MemberService MS = new MemberServiceImpl();  // Spring의 AutoWired Annotation 사용
+        memberService.infoChange(member);
+
+        member = null;  // Free
+        session.invalidate();  // invalidate Session & go to index Page
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("msg", "다시 로그인 해주세요 ㅎㅎ");
+        mv.setViewName("index");
+        return mv;
+    }
 
     //    @GetMapping(value = "/")
 //    public ModelAndView home() {

@@ -8,4 +8,5 @@ public interface MemberService {
     public Member check_id(Member account);
     public void register(Member member);
     public Member detail(Member member);
+    public void infoChange(Member member);
 }

@@ -37,5 +37,11 @@ public class MemberDaoImpl implements MemberDao {
         member = sqlSession.selectOne(Namespace + "detail", member);
         return member;
     }
+
+    @Override
+    public void infoChange(Member member) {
+        sqlSession.update(Namespace + "infoChange", member);
+//        sqlSession.close();   <- session.close() is not allowed in Spring Manager
+    }
 }
 
