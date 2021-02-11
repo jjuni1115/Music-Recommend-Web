@@ -31,6 +31,7 @@ ID INT PRIMARY KEY Auto_Increment,
 list_name VARCHAR(50) NOT null,
 release_time DATE DEFAULT '2000-01-01',
 user_ID INT NOT NULL,
+is_share TINYINT(1) NOT null default 0,
 FOREIGN KEY(user_ID) REFERENCES user(ID)
 );
 
@@ -41,3 +42,10 @@ FOREIGN KEY(playlist_ID) REFERENCES playlist(ID),
 FOREIGN KEY(music_ID) REFERENCES music(ID),
 PRIMARY KEY(playlist_ID, music_ID)
 );
+
+
+
+
+
+// ALTER TABLE `playlist`
+  	ADD COLUMN `is_share` TINYINT(1) NOT NULL DEFAULT '0' AFTER `user_ID`;
