@@ -8,4 +8,5 @@ import java.util.List;
 public interface YoutubeDao {
     public void videoidInsert(YoutubeDT youtubedt);
     public List<RecResult>[] rec(String videoID);
+    public String checkGetvideoID(YoutubeDT youtubedt);
 }

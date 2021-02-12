@@ -41,10 +41,18 @@ public class YoutubeController {
         Member member = new Member(resources2.getId(), resources2.getAccount());
         System.out.println(youtubedt.getArtist() + " " + youtubedt.getTitle());
 
-        youtubedt = youtubeService.search(youtubedt); // Service.search impl, return MostView videoId
+        // If song's VideoId is already stored in DB, select videoId from DB & Do not search method(youtube API)
+        String tmp;
+        if ((tmp = youtubeDao.checkGetvideoID(youtubedt)) != null){
+            youtubedt.setVideoID(tmp);
+        }
+        else{
+            // Using Youtube API
+            youtubedt = youtubeService.search(youtubedt); // Service.search impl, return MostView videoId
 
-        // Video ID update to DB music table
-        youtubeDao.videoidInsert(youtubedt);
+            // Video ID update to DB music table
+            youtubeDao.videoidInsert(youtubedt);
+        }
 
         // YoutubeDT class > Y_M class : set necessary Fields
         YoutubeDT.Y_M yt_music = new YoutubeDT.Y_M(member.getId(), member.getAccount(), youtubedt.getArtist(), youtubedt.getTitle(), youtubedt.getVideoID());

@@ -22,9 +22,8 @@ public class YoutubeDaoImpl implements YoutubeDao{
     // When you search music, music.videoid column will update immediately
     @Override
     public void videoidInsert(YoutubeDT youtubedt) {
-        YoutubeDT youtubedt2 = sqlSession.selectOne(Namespace + "selectMusic", youtubedt);
-        if(youtubedt2 == null) return;
-        System.out.println(youtubedt.getArtist() + youtubedt.getVideoID());
+        YoutubeDT youtubedt2 = sqlSession.selectOne(Namespace + "selectMusic", youtubedt); //DB에 있는 곡이면 행 추출
+        if(youtubedt2 == null) return;  // 검색한 곡이 DB에 없는 곡이었다면 return
         sqlSession.insert(Namespace + "searchResult", youtubedt);  // music에 모든 data 들어가면 주석 풀기
     }
 
@@ -39,6 +38,10 @@ public class YoutubeDaoImpl implements YoutubeDao{
         return arr;
     }
 
-    // 나중에 db에 노래 들어가면 유튜브 노래 검색 시 videoid 받은 거 videoid 컬럼 업데이트하기
+    @Override
+    public String checkGetvideoID(YoutubeDT youtubedt) {
+        return sqlSession.selectOne(Namespace + "getVideoId", youtubedt);
+    }
+
 
 }

@@ -86,7 +86,7 @@
             $('#playlist').dblclick(function(){
                 var artistTitle = $('#playlist')[0].value.split("//");  // artist, title split
                 location.href = "/ytube/searchDo?" + "id=" + ${sessionScope.member.id} + "&account=" +
-                ${sessionScope.member.account} + "&Artist=" + artistTitle[0] + "&title=" + artistTitle[1];
+                ${sessionScope.member.account} + "&Artist=" + artistTitle[1] + "&title=" + artistTitle[0];
                 // getMapping & searchDo method needs memberId, memberAccount, artist, title parameter
             });
         })

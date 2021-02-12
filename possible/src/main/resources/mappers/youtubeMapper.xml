@@ -42,6 +42,11 @@
         LIMIT 12;
     </select>
 
+    <select id="getVideoId" resultType="String">
+        select videoid
+        from music
+        where artist like CONCAT(#{Artist}) and title like CONCAT(#{title});
+    </select>
 
 <!-- Result of SQL Column's name mapping to RecResult's Field -->
     <resultMap type="RecResult" id="RecResult_Map">
