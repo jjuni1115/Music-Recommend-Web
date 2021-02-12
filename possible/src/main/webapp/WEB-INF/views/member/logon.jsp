@@ -49,8 +49,8 @@
     </form>
 </div>
 
-<div id="serch-form">
-    <form action="/ytube/searchDo" method="post">
+<div id="search-form">
+    <form action="/ytube/searchDo" method="get">
         Artist : <input type="text" name="Artist" id="artist"/><br>
         Title : <input type="text" name="title" id="title" minlength="1"/>
         <input type="hidden" name="id" value="${sessionScope.member.id}"/>

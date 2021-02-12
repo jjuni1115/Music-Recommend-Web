@@ -8,6 +8,7 @@ import com.MrS.possible.dao.YoutubeDao;
 import com.MrS.possible.domain.YoutubeDT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,7 +32,7 @@ public class YoutubeController {
 
     // search Music at Youtube, using Youtube API : U must Issue your API key and insert into YoutubeServiceImpl method
 //    @ResponseBody
-    @PostMapping(value="/searchDo")
+    @GetMapping(value="/searchDo")
     public void search(YoutubeDT resources, Member resources2, HttpSession session) throws GeneralSecurityException, IOException, GoogleJsonResponseException {
 
         // Make YoutubeDT field & get (title, artist) to search music

@@ -81,6 +81,17 @@
             })
         })
     </script>
+    <script lang="javascript">
+        $(document).ready(function(){
+            $('#playlist').dblclick(function(){
+                var artistTitle = $('#playlist')[0].value.split("//");  // artist, title split
+                location.href = "/ytube/searchDo?" + "id=" + ${sessionScope.member.id} + "&account=" +
+                ${sessionScope.member.account} + "&Artist=" + artistTitle[0] + "&title=" + artistTitle[1];
+                // getMapping & searchDo method needs memberId, memberAccount, artist, title parameter
+            });
+        })
+    </script>
+
     <script type="text/javascript">
         $(document).ready(function (){
             $("#new_playlist").click(function (){
@@ -121,57 +132,13 @@
             })
         })
     </script>
-    <style>
-        .right{
-            position: absolute;
-            top: 50px;
-            left:700px;
-        }
 
-
-        button {
-            background-color: #00b5ff;
-            border: none;
-            color: #ffffff;
-            cursor: pointer;
-            display: inline-block;
-            font-family: 'BenchNine', Arial, sans-serif;
-            font-size: 1em;
-            font-size: 10px;
-            line-height: 1em;
-            outline: none;
-            padding: 6px 20px 5px;
-            position: relative;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-        .right{
-            position: absolute;
-            top: 150px;
-            left:700px;
-        }
-        h1 {
-            FONT-SIZE: 78px;
-            COLOR: #eeeeee;
-            PADDING-BOTTOM: 10px;
-            TEXT-ALIGN: left;
-            PADDING-TOP: 10px;
-            PADDING-LEFT: 10px;
-            BORDER-LEFT: #00b5ff 8px solid;
-        }
-
-        h2 {
-            FONT-SIZE: 12px;
-            COLOR: #eeeeee;
-            PADDING-BOTTOM: 10px;
-            TEXT-ALIGN: left;
-            PADDING-TOP: 10px;
-            PADDING-LEFT: 10px;
-            BORDER-LEFT: #00b5ff 8px solid;
-        }
-
-    </style>
 </head>
+
+<style>
+    <%@ include file ="../../CSS/playlist.css" %>
+</style>
+
 <body>
 <div class="box1">
     <h1>Muse</h1>
