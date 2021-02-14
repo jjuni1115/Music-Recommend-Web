@@ -63,6 +63,8 @@
     <form action="/Music_info/playlist" method="post">
         <input type="hidden" name="id" value=${sessionScope.member.id} />
         <input type="hidden" name="account" value=${sessionScope.member.account} />
+        <input type="hidden" name="first_name" value=${sessionScope.member.first_name} />
+        <input type="hidden" name="last_name" value=${sessionScope.member.last_name} />
         Music Recommend : <button type="submit" id="submit_recommend" >플레이 리스트 & 음악 추천</button><br>
     </form>
 </div>
@@ -75,6 +77,7 @@
     account = ${sessionScope.member.account}
     password = ${sessionScope.member.password}
     age = ${sessionScope.member.age}
+    name = ${sessionScope.member.first_name}
 <br>
     <c:if test="${not empty sessionScope.member.id}">
         ${sessionScope.member.account}님 로그인 성공

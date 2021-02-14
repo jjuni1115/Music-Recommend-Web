@@ -58,6 +58,19 @@ public class Member {
         this.account = account;
     }
 
+    public Member(Long ID, String Account, String first_name, String last_name){
+        this.ID = ID;
+        this.account = Account;
+        this.first_name = first_name;
+        this.last_name = last_name;
+    }
+
+    public Member(Long ID, String first_name, String last_name){
+        this.ID = ID;
+        this.first_name = first_name;
+        this.last_name = last_name;
+    }
+
     public Long getId() {
         return ID;
     }

@@ -2,24 +2,15 @@ package com.MrS.possible.controller;
 
 import com.MrS.possible.Service.MusicService;
 import com.MrS.possible.domain.*;
-import com.google.api.client.json.Json;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,7 +25,8 @@ public class Music_Controller {
     // Go to playlist & recommend page
     @PostMapping(value="/playlist")
     public void recommend(Member member, HttpSession session){
-        Member member_ = new Member(member.getId(), member.getAccount());
+        Member member_ = new Member(member.getId(), member.getAccount(), member.getFirst_name(), member.getLast_name());
+        System.out.println(member_.getFirst_name());
         session.setAttribute("member", member_);
     }
 
@@ -77,27 +69,29 @@ public class Music_Controller {
     //load my playlist
     @ResponseBody
     @PostMapping(value = "/load_playlist")
-    public List<result> load_playlist(String keyword){
+    public List<result> load_playlist(String keyword) {
         System.out.println(keyword);
-        String[] array=keyword.split("//");
-        load_pl temp=new load_pl(Integer.parseInt(array[0]),array[1]);
+        String[] array = keyword.split("//");
+        load_pl temp = new load_pl(Integer.parseInt(array[0]), array[1]);
         List<result> playlist = new ArrayList<>();
-        playlist=musicService.load(temp);
+        playlist = musicService.load(temp);
         System.out.println(playlist);
         return playlist;
     }
 
     //create new playlist
     @ResponseBody
-    @PostMapping(value = "/new_playlist")
-    public int create_playlist(String keyword){
-        System.out.println(keyword);
-        String[] array=keyword.split("//");
+    @PostMapping(value = "/new_playlist", produces="text/plain")
+    public int create_playlist(NewPlaylist keyword){
+        NewPlaylist NP = new NewPlaylist(keyword.getId(), keyword.getFirst_name(), keyword.getLast_name(), keyword.getList_name());
+
         Calendar cal =Calendar.getInstance();
         DateFormat df=new SimpleDateFormat("yyyy-MM-dd");
         String now_time=df.format(cal.getTime());
-        playlist pl=new playlist(Integer.parseInt(array[0]),array[1],now_time);
+        playlist pl=new playlist(NP.getId().intValue(),NP.getList_name(),now_time);
         musicService.create_playlist(pl);
+        // 사용자 이름 추가해서 share_list 테이블 insert 하기, is_share 컬럼은 기본값 0으로 설정 / 02.14
+        // playlist_ID, user_ID, firstName, lastname,list_name, release_time, is_share 컬럼에 넣기
         return 1;
     }
 
@@ -197,5 +191,51 @@ public class Music_Controller {
     @PostMapping("/share")
     public void share(Member resource, HttpSession session){
         session.setAttribute("member", resource);
+    }
+}
+
+class NewPlaylist{
+    Long id;
+    String first_name;
+    String last_name;
+    String list_name;
+
+    public NewPlaylist(Long id, String first_name, String last_name, String list_name) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.list_name = list_name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
+    }
+
+    public String getList_name() {
+        return list_name;
+    }
+
+    public void setList_name(String list_name) {
+        this.list_name = list_name;
     }
 }
