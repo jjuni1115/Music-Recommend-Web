@@ -60,7 +60,7 @@
     </script>
     <script type="text/javascript">
         $(function load (){                               //load my playlist
-            $('#my_playlist').dblclick(function(){
+            $('#load').click(function(){
                 var param={'keyword':${sessionScope.member.id}+"//"+$("#my_playlist").val()};
                 $.ajax({
                     type:'POST',
@@ -168,6 +168,7 @@
     <select name="my_playlist" id="my_playlist">
         <option value="" selected>--선택--</option>
     </select>
+    <button type="submit" id="load" name="load">불러오기</button>
     <br>
     <select name="playlist" id="playlist" size="15">
         <option value="" selected>--선택--</option>
