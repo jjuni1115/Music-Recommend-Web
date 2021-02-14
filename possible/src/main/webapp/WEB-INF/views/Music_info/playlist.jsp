@@ -95,7 +95,19 @@
     <script type="text/javascript">
         $(document).ready(function (){
             $("#new_playlist").click(function (){
-                var param={'keyword':${sessionScope.member.id}+'//'+$("#add_playlist").val()};
+                <%--var obj = new Object();--%>
+                <%--obj.id = ${sessionScope.member.id};--%>
+                <%--obj.first_name = "${sessionScope.member.first_name}";--%>
+                <%--obj.last_name = "${sessionScope.member.last_name}";--%>
+                <%--obj.list_name = $("#add_playlist")[0].value;--%>
+                <%--var param = JSON.stringify(obj);--%>
+                var param={
+                        "id" : ${sessionScope.member.id},
+                        "list_name" : $("#add_playlist")[0].value,
+                        "first_name" : "${sessionScope.member.first_name}",
+                        "last_name" : "${sessionScope.member.last_name}"
+                    }
+                console.log(param);
                 $.ajax({
                     type:'POST',
                     url:'/Music_info/new_playlist',
@@ -140,6 +152,7 @@
 </style>
 
 <body>
+
 <div class="box1">
     <h1>Muse</h1>
     <h2>playlist</h2>

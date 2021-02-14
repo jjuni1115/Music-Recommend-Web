@@ -5,7 +5,7 @@
 
 <mapper namespace="memberMapper">
     <select id="login" resultType="member" resultMap="MemberMap">
-        select id, account, password, age
+        select id, account, password, age, first_name, last_name
         from user
         where account = #{account} and password = #{password};
     </select>
@@ -16,7 +16,7 @@
         where account = #{account};
     </select>
 
-    <select id="detail" resultType="com.MrS.possible.domain.Member" resultMap="MemberMap">
+    <select id="detail" resultType="member" resultMap="MemberMap">
         select *
         from user
         where id = #{ID} and account = #{account};
