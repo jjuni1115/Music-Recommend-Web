@@ -193,4 +193,9 @@ public class Music_Controller {
         musicService.insert(musicList);
 
     }
+
+    @PostMapping("/share")
+    public void share(Member resource, HttpSession session){
+        session.setAttribute("member", resource);
+    }
 }

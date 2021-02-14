@@ -156,6 +156,12 @@
     <option value="" selected>--선택--</option>
 </select>
 <div class="right" id="list">
+    <form action="/Music_info/share" method="post">
+        <input type="hidden" name="id" value="${sessionScope.member.id}">
+
+        <button type="submit" name="share_playlist" id="share_playlist">공유 플레이리스트</button>
+    </form>
+
     <input type="text" id="add_playlist" name="add_playlist" required="required">
     <button type="submit" id="new_playlist" name="new_playlist">생성</button><br>
     플레이리스트
