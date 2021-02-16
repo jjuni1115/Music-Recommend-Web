@@ -105,7 +105,8 @@
                         "id" : ${sessionScope.member.id},
                         "list_name" : $("#add_playlist")[0].value,
                         "first_name" : "${sessionScope.member.first_name}",
-                        "last_name" : "${sessionScope.member.last_name}"
+                        "last_name" : "${sessionScope.member.last_name}",
+                        "is_share" : $("#share").is(":checked")
                     }
                 console.log(param);
                 $.ajax({
@@ -174,7 +175,7 @@
 
         <button type="submit" name="share_playlist" id="share_playlist">공유 플레이리스트</button>
     </form>
-
+    <input type="checkbox" id="share" name="share" value="공유">공유
     <input type="text" id="add_playlist" name="add_playlist" required="required">
     <button type="submit" id="new_playlist" name="new_playlist">생성</button><br>
     플레이리스트

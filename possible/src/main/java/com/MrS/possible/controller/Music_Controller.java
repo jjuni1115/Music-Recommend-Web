@@ -83,13 +83,16 @@ public class Music_Controller {
     @ResponseBody
     @PostMapping(value = "/new_playlist", produces="text/plain")
     public int create_playlist(NewPlaylist keyword){
-        NewPlaylist NP = new NewPlaylist(keyword.getId(), keyword.getFirst_name(), keyword.getLast_name(), keyword.getList_name());
-
+        NewPlaylist NP = new NewPlaylist(keyword.getId(), keyword.getFirst_name(), keyword.getLast_name(), keyword.getList_name(),keyword.getIs_share());
+        String share_chk=keyword.getIs_share();
         Calendar cal =Calendar.getInstance();
         DateFormat df=new SimpleDateFormat("yyyy-MM-dd");
         String now_time=df.format(cal.getTime());
         playlist pl=new playlist(NP.getId().intValue(),NP.getList_name(),now_time);
         musicService.create_playlist(pl);
+        if(share_chk.equals("true")){
+            musicService.add_sharelist(pl);
+        }
         // 사용자 이름 추가해서 share_list 테이블 insert 하기, is_share 컬럼은 기본값 0으로 설정 / 02.14
         // playlist_ID, user_ID, firstName, lastname,list_name, release_time, is_share 컬럼에 넣기
         return 1;
@@ -199,12 +202,14 @@ class NewPlaylist{
     String first_name;
     String last_name;
     String list_name;
+    String is_share;
 
-    public NewPlaylist(Long id, String first_name, String last_name, String list_name) {
+    public NewPlaylist(Long id, String first_name, String last_name, String list_name,String is_share) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.list_name = list_name;
+        this.is_share=is_share;
     }
 
     public Long getId() {
@@ -238,4 +243,8 @@ class NewPlaylist{
     public void setList_name(String list_name) {
         this.list_name = list_name;
     }
+
+    public String getIs_share() { return is_share; }
+
+    public void setIs_share(String is_share) { this.is_share = is_share; }
 }
