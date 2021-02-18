@@ -49,4 +49,16 @@
                 #{list_name},#{release_date},#{is_share});
     </insert>
 
+    <select id="load_sharelist" resultType="String">
+        select list_name
+        from share_list
+        where is_share=1;
+    </select>
+
+    <select id="sharelist" resultType="result">
+        SELECT title, artist
+        FROM music,share_list,rel
+        where share_list.playlist_ID=rel.playlist_ID and music.ID=rel.music_ID and share_list.list_name=#{keyword};
+    </select>
+
 </mapper>

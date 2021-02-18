@@ -47,4 +47,12 @@ public class MusicServicelmpl implements MusicService {
     public int add_sharelist(NewPlaylist keyword){
         return musicDao.add_sharelist(keyword);
     }
+
+    public List<String> load_sharelist(){
+        return musicDao.load_sharelist();
+    }
+
+    public List<result> sharelist(String keyword){
+        return musicDao.sharelist(keyword);
+    }
 }

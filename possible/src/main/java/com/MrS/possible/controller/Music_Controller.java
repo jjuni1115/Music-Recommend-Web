@@ -190,6 +190,26 @@ public class Music_Controller {
     public void share(Member resource, HttpSession session){
         session.setAttribute("member", resource);
     }
+
+    @ResponseBody
+    @PostMapping(value="/load_sharelist")
+    public List<String> load_sharelist(String data){
+        List<String> sharelist=new ArrayList<String>();
+        sharelist=musicService.load_sharelist();
+        System.out.println("sharelist");
+        System.out.println(sharelist);
+        return sharelist;
+    }
+
+    @ResponseBody
+    @PostMapping(value="/sharelist")
+    public List<result> sharelist(String keyword) {
+        System.out.println("1");
+        List<result> playlist = new ArrayList<>();
+        playlist = musicService.sharelist(keyword);
+        System.out.println(playlist);
+        return playlist;
+    }
 }
 
 

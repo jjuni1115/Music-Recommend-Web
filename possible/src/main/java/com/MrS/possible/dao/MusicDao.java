@@ -14,5 +14,7 @@ public interface MusicDao {
     public int create_playlist(playlist keyword);
     public List<String> load_playlist(String keyword);
     public int add_sharelist(NewPlaylist keyword);
+    public List<String> load_sharelist();
+    public List<result> sharelist(String keyword);
 
 }
