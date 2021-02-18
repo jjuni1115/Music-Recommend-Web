@@ -68,22 +68,27 @@ public class Music_Controller {
     //load my playlist
     @ResponseBody
     @PostMapping(value = "/load_playlist")
-    public List<result> load_playlist(search_keyword keyword) {
+    public Object[] load_playlist(search_keyword keyword) {
         load_pl temp = new load_pl(Integer.parseInt(keyword.getKeyword()), keyword.getName());
         List<result> playlist = new ArrayList<>();
-        playlist = musicService.load(temp);
+        Object[] obj = musicService.load(temp);
+//        playlist =
+//        playlist.add();
+        playlist = (List<result>) obj[0];
+        boolean is_share = (boolean) obj[1];
         System.out.println(playlist);
-        return playlist;
+        System.out.println(is_share);
+        return obj;
     }
 
     //create new playlist
     @ResponseBody
-    @PostMapping(value = "/new_playlist", produces="text/plain")
+    @PostMapping(value = "/new_playlist")
     public int create_playlist(NewPlaylist keyword){
         Calendar cal =Calendar.getInstance();
         DateFormat df=new SimpleDateFormat("yyyy-MM-dd");
         String now_time=df.format(cal.getTime());
-        NewPlaylist NP = new NewPlaylist(keyword.getId(), keyword.getFirst_name(), keyword.getLast_name(), keyword.getList_name(),keyword.getIs_share(),now_time);
+        NewPlaylist NP = new NewPlaylist((Long)keyword.getId(), keyword.getFirst_name(), keyword.getLast_name(), keyword.getList_name(),keyword.getIs_share(),now_time);
         playlist pl=new playlist(NP.getId().intValue(),NP.getList_name(),now_time);
         musicService.create_playlist(pl);
         musicService.add_sharelist(NP);

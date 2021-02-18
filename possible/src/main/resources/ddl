@@ -31,7 +31,7 @@ ID INT PRIMARY KEY Auto_Increment,
 list_name VARCHAR(50) NOT null,
 release_time DATE DEFAULT '2000-01-01',
 user_ID INT NOT NULL,
-FOREIGN KEY(user_ID) REFERENCES user(ID)
+FOREIGN KEY(user_ID) REFERENCES user(ID) ON DELETE CASCADE ON UPDATE cascade
 );
 
 CREATE TABLE if NOT exists rel(

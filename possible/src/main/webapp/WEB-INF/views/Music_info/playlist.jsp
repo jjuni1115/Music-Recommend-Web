@@ -64,7 +64,7 @@
         $(function load (){                               //load my playlist
             $('#load').click(function(){
                 //var param={'keyword':sessionScope.member.id}+"//"+$("#my_playlist").val()};
-                var param={'keyword':${sessionScope.member.id},
+                var param={"keyword": ${sessionScope.member.id},
                             "name":$("#my_playlist").val()};
                 $.ajax({
                     type:'POST',
@@ -73,10 +73,23 @@
                     datatype:'json',
                     success:function(args) {
                         $("#playlist option").remove();
-                        $(args).find("item").each(function () {
-                            $("#playlist").append("<option value='"+$(this).find("title").text()+"//"+$(this).find("artist").text()+"'>"+$(this).find("title").text()+" - "+$(this).find("artist").text()+"</option>");
-                        })
 
+                        // console.log(args);
+                        // console.log(Object.keys($(args).find("item").find("title")).length - 2);  //  음원 갯수
+                        let lenObject = (Object.keys($(args).find("item").find("title")).length - 2 + 1);  // Object type으로 받아와서 사용, Object 길이는 [음원 개수 + 공유여부(1개)]
+                        for(let i=0; i<(lenObject - 1); i++){
+                            $("#playlist").append("<option value='"+$(args).find("item").find("title")[i].textContent+
+                                "//"+$(args).find("item").find("artist")[i].textContent+
+                                "'>"+$(args).find("item").find("title")[i].textContent+
+                                " - "+$(args).find("item").find("artist")[i].textContent+"</option>");
+                        }
+
+                        if ($(args).find("item")[lenObject - 1].textContent == "true") $("#isShare").attr("checked", true);
+                        else $("#isShare").attr("checked", false);
+
+                        // $(args).find("item").each(function () {
+                        //     $("#playlist").append("<option value='"+$(this).find("title").text()+"//"+$(this).find("artist").text()+"'>"+$(this).find("title").text()+" - "+$(this).find("artist").text()+"</option>");
+                        // })
                     },error:function(error){
                         alert("error: load playlist");
                 }
@@ -106,7 +119,7 @@
                 <%--obj.list_name = $("#add_playlist")[0].value;--%>
                 <%--var param = JSON.stringify(obj);--%>
                 var param={
-                        "id" : ${sessionScope.member.id},
+                        "id" : "${sessionScope.member.id}",
                         "list_name" : $("#add_playlist")[0].value,
                         "first_name" : "${sessionScope.member.first_name}",
                         "last_name" : "${sessionScope.member.last_name}",
@@ -186,7 +199,7 @@
     <select name="my_playlist" id="my_playlist">
         <option value="" selected>--선택--</option>
     </select>
-    <button type="submit" id="load" name="load">불러오기</button>
+    <button type="submit" id="load" name="load">불러오기</button> 공유 여부<input type="checkbox" id="isShare" name="isShare" value="공유">
     <br>
     <select name="playlist" id="playlist" size="15">
         <option value="" selected>--선택--</option>

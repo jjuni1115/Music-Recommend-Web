@@ -5,6 +5,7 @@ import com.MrS.possible.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -30,7 +31,7 @@ public class MusicServicelmpl implements MusicService {
         return musicDao.insert_playlist(keyword);
     }
 
-    public List<result> load(load_pl keyword){
+    public Object[] load(load_pl keyword){
 
         return musicDao.load(keyword);
     }

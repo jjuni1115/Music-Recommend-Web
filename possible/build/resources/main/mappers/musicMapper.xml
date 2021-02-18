@@ -19,10 +19,17 @@
     </insert>
 
     <select id="load" resultType="result">
-        SELECT title, artist
-        FROM music,user,playlist,rel
-        WHERE user.ID=playlist.user_ID AND playlist.ID=rel.playlist_ID AND rel.music_ID=music.ID AND user.ID=#{id} AND playlist.list_name=#{list_name}
+        select title, artist
+        from music, rel
+        where ID = music_ID and playlist_ID = (select ID from playlist where list_name like CONCAT(#{list_name}) and user_ID = #{id});
     </select>
+
+    <select id="load2" resultType="boolean">
+        select IF(is_share, 'true', 'false') as is_share
+        from share_list
+        where list_name like #{list_name};
+    </select>
+
 
     <select id="search_artist" resultType="result">
         select title,artist
