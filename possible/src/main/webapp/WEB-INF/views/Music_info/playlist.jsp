@@ -16,7 +16,9 @@
             $("#To_search").click(function (){
                 //var radioVal = $('input[name="chk_info"]:checked').val();
                 //console.log(radioVal)
-                var params={"keyword":$('input[name="chk_info"]:checked').val()+"//"+$("#keyword").val()};
+                //var params={"keyword":$('input[name="chk_info"]:checked').val()+"//"+$("#keyword").val()};
+                var params={"keyword":$('input[name="chk_info"]:checked').val(),
+                            "name":$("#keyword").val()}
                 $.ajax({
                     type:"POST",
                     url:"/Music_info/list",
@@ -61,7 +63,9 @@
     <script type="text/javascript">
         $(function load (){                               //load my playlist
             $('#load').click(function(){
-                var param={'keyword':${sessionScope.member.id}+"//"+$("#my_playlist").val()};
+                //var param={'keyword':sessionScope.member.id}+"//"+$("#my_playlist").val()};
+                var param={'keyword':${sessionScope.member.id},
+                            "name":$("#my_playlist").val()};
                 $.ajax({
                     type:'POST',
                     url:'/Music_info/load_playlist',

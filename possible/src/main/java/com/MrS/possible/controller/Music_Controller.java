@@ -42,15 +42,14 @@ public class Music_Controller {
     //search music
     @ResponseBody
     @PostMapping(value = "/list")
-    public List<result> search(String keyword){     //search music information using artist or title
-        System.out.println(keyword);
-        String[] array =keyword.split("//");  // //를 기준으로 구분 ex) title//keyword
+    public List<result> search(search_keyword keyword){     //search music information using artist or title
+        System.out.println(keyword.getKeyword());
         List<result> musicList = new ArrayList<>();
-        if(array[0].equals("title")) {               //search by title
-            musicList=musicService.search(array[1]);
+        if(keyword.getKeyword().equals("title")) {               //search by title
+            musicList=musicService.search(keyword.getName());
         }
         else{                                        //search by artist
-            musicList=musicService.search_artist(array[1]);
+            musicList=musicService.search_artist(keyword.getName());
         }
         return musicList;
     }
@@ -69,10 +68,8 @@ public class Music_Controller {
     //load my playlist
     @ResponseBody
     @PostMapping(value = "/load_playlist")
-    public List<result> load_playlist(String keyword) {
-        System.out.println(keyword);
-        String[] array = keyword.split("//");
-        load_pl temp = new load_pl(Integer.parseInt(array[0]), array[1]);
+    public List<result> load_playlist(search_keyword keyword) {
+        load_pl temp = new load_pl(Integer.parseInt(keyword.getKeyword()), keyword.getName());
         List<result> playlist = new ArrayList<>();
         playlist = musicService.load(temp);
         System.out.println(playlist);
@@ -247,4 +244,30 @@ class NewPlaylist{
     public String getIs_share() { return is_share; }
 
     public void setIs_share(String is_share) { this.is_share = is_share; }
+}
+
+class search_keyword{
+    String keyword;
+    String name;
+
+    public search_keyword(String keyword, String name) {
+        this.keyword = keyword;
+        this.name = name;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
