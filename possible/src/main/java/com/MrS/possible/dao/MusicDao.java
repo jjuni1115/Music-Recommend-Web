@@ -13,6 +13,6 @@ public interface MusicDao {
     public List<result> load(load_pl keyword);
     public int create_playlist(playlist keyword);
     public List<String> load_playlist(String keyword);
-    public int add_sharelist(playlist keyword);
+    public int add_sharelist(NewPlaylist keyword);
 
 }

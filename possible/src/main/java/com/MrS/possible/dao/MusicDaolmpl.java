@@ -51,7 +51,7 @@ public class MusicDaolmpl implements MusicDao{
         return sqlSession.selectList("music.load_playlist",Integer.parseInt(keyword));
     }
 
-    public int add_sharelist(playlist keyword){
+    public int add_sharelist(NewPlaylist keyword){
         System.out.println(keyword);
         return sqlSession.insert("music.add_sharelist",keyword);
     }

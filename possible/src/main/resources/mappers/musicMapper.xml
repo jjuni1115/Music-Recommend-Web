@@ -42,11 +42,11 @@
 
     <insert id="add_sharelist" parameterType="playlist">
         insert ignore into share_list(playlist_ID,user_ID,first_name,last_name,list_name,release_time,is_share)
-        values((select ID from playlist where user_ID=#{user_ID} and list_name=#{list_name}),
-                #{user_ID},
-                (select first_name from user where ID=#{user_ID}),
-                (select last_name from user where ID=#{user_ID}),
-                #{list_name},#{release_date},1);
+        values((select ID from playlist where user_ID=#{id} and list_name=#{list_name}),
+                #{id},
+                (select first_name from user where ID=#{id}),
+                (select last_name from user where ID=#{id}),
+                #{list_name},#{release_date},#{is_share});
     </insert>
 
 </mapper>
