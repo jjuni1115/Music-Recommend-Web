@@ -62,5 +62,13 @@ public class MusicServicelmpl implements MusicService {
         musicDao.toggle_share(listName);
     }
 
+    public int delete_music(add_playlist keyword){
+
+        return musicDao.delete_music(keyword);
+    }
+
+    public List<result> refresh(load_pl keyword){
+        return musicDao.refresh(keyword);
+    }
 
 }

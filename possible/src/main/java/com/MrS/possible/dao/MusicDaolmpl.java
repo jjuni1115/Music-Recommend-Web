@@ -84,4 +84,13 @@ public class MusicDaolmpl implements MusicDao{
         sqlSession.update(Namespace + "toggleShare", tmpcls);
         tmpcls = null;
     }
+
+    public int delete_music(add_playlist keyword){
+        System.out.println(keyword);
+
+        return sqlSession.insert(Namespace + "delete_music",keyword);
+    }
+    public List<result> refresh(load_pl keyword){
+        return sqlSession.selectList(Namespace+"load",keyword);
+    }
 }

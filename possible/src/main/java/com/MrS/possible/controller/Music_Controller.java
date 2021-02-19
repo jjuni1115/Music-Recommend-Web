@@ -57,12 +57,15 @@ public class Music_Controller {
     //insert into playlist
     @ResponseBody
     @PostMapping(value = "/insert_playlist")
-    public int insert(String keyword){
+    public List<result> insert(String keyword){
         System.out.println(keyword);
+        List<result> musicList = new ArrayList<>();
         String[] array =keyword.split("//");   // //를 기준으로 구분 ex) id//title//artist
         add_playlist param=new add_playlist(Integer.parseInt(array[0]),array[1],array[2],array[3 ]);
+        load_pl temp = new load_pl(Integer.parseInt(array[0]), array[3]);
         musicService.insert_playlist(param);
-        return 1;
+        musicList=musicService.refresh(temp);
+        return musicList;
     }
 
     //load my playlist
@@ -221,6 +224,19 @@ public class Music_Controller {
         playlist = musicService.sharelist(keyword);
         System.out.println(playlist);
         return playlist;
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/delete_music")
+    public List<result> delete_music(String keyword){
+        System.out.println(keyword);
+        List<result> musicList = new ArrayList<>();
+        String[] array =keyword.split("//");   // //를 기준으로 구분 ex) id//title//artist
+        add_playlist param=new add_playlist(Integer.parseInt(array[0]),array[1],array[2],array[3 ]);
+        load_pl temp = new load_pl(Integer.parseInt(array[0]), array[3]);
+        musicService.delete_music(param);
+        musicList=musicService.refresh(temp);
+        return musicList;
     }
 }
 

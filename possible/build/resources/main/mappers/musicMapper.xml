@@ -68,4 +68,13 @@
         where share_list.playlist_ID=rel.playlist_ID and music.ID=rel.music_ID and share_list.list_name=#{keyword};
     </select>
 
+    <update id="toggleShare">
+        UPDATE share_list
+        SET is_share=IF(is_share, FALSE, TRUE)
+        WHERE user_ID=#{user_ID} AND list_name LIKE #{list_name};
+    </update>
+
+    <delete id="delete_music" parameterType="add_playlist">
+        DELETE FROM rel WHERE playlist_ID=(SELECT ID FROM playlist WHERE user_ID=#{user_ID} AND list_name=#{list_name}) AND music_ID=(SELECT ID FROM music WHERE title=#{title} AND artist=#{artist});
+    </delete>
 </mapper>

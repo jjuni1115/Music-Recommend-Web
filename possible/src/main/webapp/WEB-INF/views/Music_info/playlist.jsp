@@ -10,7 +10,9 @@
 <html>
 <head>
     <title>playlist</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script> <!-- JQuery -->
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
         $(document).ready(function (){                       //search music
             $("#To_search").click(function (){
@@ -73,7 +75,11 @@
                     success:function (args) {
                         alert("플레이리스트 저장");
                         var list=$("#songs").val().split("//");
-                        $("#playlist").append("<option value='"+$("#songs").val()+"'>"+list[0]+" - "+list[1]+"</option>");
+                        $('#playlist').find('option').remove();
+                        $(args).find("item").each(function (){
+                            $("#playlist").append("<option value='"+$(this).find("title").text()+"//"+$(this).find("artist").text()+"'>"+$(this).find("title").text()+" - "+$(this).find("artist").text()+"</option>");
+                        })
+                        //$("#playlist").append("<option value='"+$("#songs").val()+"'>"+list[0]+" - "+list[1]+"</option>");
                     },
                     error:function (error){
                     alert("error: add playlist");
@@ -125,12 +131,39 @@
 
     </script>
     <script lang="javascript">
-        $(document).ready(function(){
+        $(document).ready(function(){                      //내 플레이리스트 더블클릭시
             $('#playlist').dblclick(function(){
-                var artistTitle = $('#playlist')[0].value.split("//");  // artist, title split
-                location.href = "/ytube/searchDo?" + "id=" + ${sessionScope.member.id} + "&account=" +
-                ${sessionScope.member.account} + "&Artist=" + artistTitle[1] + "&title=" + artistTitle[0];
-                // getMapping & searchDo method needs memberId, memberAccount, artist, title parameter
+                $("#dialog-message").dialog({
+                    modal:true,
+                    buttons:{
+                        "재생":function(){$(this).dialog('close');
+                                var artistTitle = $('#playlist')[0].value.split("//");  // artist, title split
+                                location.href = "/ytube/searchDo?" + "id=" + ${sessionScope.member.id} + "&account=" +
+                                ${sessionScope.member.account} + "&Artist=" + artistTitle[1] + "&title=" + artistTitle[0];},
+                        "삭제":function(){
+                            $(this).dialog('close');
+                            var params={"keyword":${sessionScope.member.id}+"//"+$("#playlist").val()+"//"+$("#my_playlist").val()};
+                            $.ajax({
+                                type:"POST",
+                                url:'/Music_info/delete_music',
+                                data:params,
+                                datatype:'json',
+                                success:function(args) {
+                                    alert("delete success");
+                                    $('#playlist').find('option').remove();
+                                    $(args).find("item").each(function (){
+                                        $("#playlist").append("<option value='"+$(this).find("title").text()+"//"+$(this).find("artist").text()+"'>"+$(this).find("title").text()+" - "+$(this).find("artist").text()+"</option>");
+                                    })
+
+                                },error:function(error){
+                                    alert("delete error!");
+                                }
+                            })
+                            },
+                        "취소":function(){$(this).dialog('close');}
+                    }
+
+                })
             });
         })
     </script>
@@ -201,6 +234,14 @@
         })
     </script>
 
+    <script>
+        $(function delete_music(){
+            $("#playlist").dblclick(function (){
+
+            })
+        })
+    </script>
+
 </head>
 
 <style>
@@ -242,6 +283,9 @@
     <select name="playlist" id="playlist" size="15">
         <option value="" selected>--선택--</option>
     </select>
+</div>
+<div id="dialog-message" title="option" style="display:none">
+    옵션을 선택하세요.
 </div>
 </body>
 </html>

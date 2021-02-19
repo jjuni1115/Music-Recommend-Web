@@ -16,7 +16,8 @@ public interface MusicDao {
     public int add_sharelist(NewPlaylist keyword);
     public List<String> load_sharelist();
     public List<result> sharelist(String keyword);
-
+    public int delete_music(add_playlist keyword);
     public void toggle_share(String[] listName);
+    public List<result> refresh(load_pl keyword);
 
 }
