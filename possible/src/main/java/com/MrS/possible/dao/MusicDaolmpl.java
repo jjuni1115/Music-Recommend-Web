@@ -71,4 +71,17 @@ public class MusicDaolmpl implements MusicDao{
     public List<result> sharelist(String keyword){
         return sqlSession.selectList("music.sharelist",keyword);
     }
+
+    @Override
+    public void toggle_share(String[] listName) {
+        class tmpClass{
+            public String list_name;
+            public String user_ID;
+        }
+        tmpClass tmpcls = new tmpClass();
+        tmpcls.list_name = listName[0];
+        tmpcls.user_ID = listName[1];
+        sqlSession.update(Namespace + "toggleShare", tmpcls);
+        tmpcls = null;
+    }
 }

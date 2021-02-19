@@ -16,4 +16,6 @@ public interface MusicService {
     public int add_sharelist(NewPlaylist keyword);
     public List<String> load_sharelist();
     public List<result> sharelist(String keyword);
+
+    public void toggle_share(String[] listName);
 }

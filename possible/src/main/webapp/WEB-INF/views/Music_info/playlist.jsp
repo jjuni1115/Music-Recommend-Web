@@ -36,6 +36,28 @@
                     }
                 })
             })
+
+            //  $('#isShare:checked').change  // 공유 버튼 체크 Toggle
+            $('#isShare').change(function () {
+                // let isShare = $('#isShare').is(":checked");
+                var list_name = $("#my_playlist")[0].value;
+                console.log(list_name);
+                var param ={
+                    "user_ID" : ${sessionScope.member.id},
+                    "list_name" : list_name
+                }
+
+                $.ajax({
+                    type: "get",
+                    url: "/Music_info/toggle_share",
+                    data: param,
+                    success: function (data) {
+                    },
+                    error: function (error) {
+                        alert("Error Occured");
+                    }
+                })
+            })
         })
     </script>
 
@@ -65,9 +87,9 @@
             $('#load').click(function(){
                 //var param={'keyword':sessionScope.member.id}+"//"+$("#my_playlist").val()};
                 var param={"keyword": ${sessionScope.member.id},
-                            "name":$("#my_playlist").val()};
+                            "name":$("#my_playlist")[0].value};
                 $.ajax({
-                    type:'POST',
+                    type:"POST",
                     url:'/Music_info/load_playlist',
                     data:param,
                     datatype:'json',
@@ -84,12 +106,15 @@
                                 " - "+$(args).find("item").find("artist")[i].textContent+"</option>");
                         }
 
-                        if ($(args).find("item")[lenObject - 1].textContent == "true") $("#isShare").attr("checked", true);
-                        else $("#isShare").attr("checked", false);
 
-                        // $(args).find("item").each(function () {
-                        //     $("#playlist").append("<option value='"+$(this).find("title").text()+"//"+$(this).find("artist").text()+"'>"+$(this).find("title").text()+" - "+$(this).find("artist").text()+"</option>");
-                        // })
+                        if ($(args).find("item")[lenObject - 1].textContent == "true"){
+                            console.log("공유여부 : " + $(args).find("item")[lenObject - 1].textContent);
+                            $("#isShare").prop("checked", true);
+                        }
+                        else {
+                            console.log("공유여부 : " + $(args).find("item")[lenObject - 1].textContent);
+                            $("#isShare").prop("checked", false);
+                        }
                     },error:function(error){
                         alert("error: load playlist");
                 }
@@ -97,6 +122,7 @@
             })
             })
         })
+
     </script>
     <script lang="javascript">
         $(document).ready(function(){
@@ -118,6 +144,18 @@
                 <%--obj.last_name = "${sessionScope.member.last_name}";--%>
                 <%--obj.list_name = $("#add_playlist")[0].value;--%>
                 <%--var param = JSON.stringify(obj);--%>
+                console.log($("#my_playlist")[0].length);
+                console.log($("#my_playlist")[0]);
+                let playlistNum = $("#my_playlist")[0].length - 1;
+
+                // 플레이리스트 중복 체크 후 ajax 날리기
+                for(var i=1; i<=playlistNum; i++){
+                    console.log($("#my_playlist").find("option")[i].textContent);
+                    if($("#my_playlist").find("option")[i].textContent == $("#add_playlist")[0].value){
+                        alert("동일한 플레이리스트가 존재합니다.")
+                        return;
+                    }
+                }
                 var param={
                         "id" : "${sessionScope.member.id}",
                         "list_name" : $("#add_playlist")[0].value,

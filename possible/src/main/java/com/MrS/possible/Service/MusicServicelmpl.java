@@ -56,4 +56,11 @@ public class MusicServicelmpl implements MusicService {
     public List<result> sharelist(String keyword){
         return musicDao.sharelist(keyword);
     }
+
+    @Override
+    public void toggle_share(String[] listName) {
+        musicDao.toggle_share(listName);
+    }
+
+
 }

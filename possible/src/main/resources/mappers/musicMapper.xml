@@ -68,4 +68,9 @@
         where share_list.playlist_ID=rel.playlist_ID and music.ID=rel.music_ID and share_list.list_name=#{keyword};
     </select>
 
+    <update id="toggleShare">
+        UPDATE share_list
+        SET is_share=IF(is_share, FALSE, TRUE)
+        WHERE user_ID=#{user_ID} AND list_name LIKE #{list_name};
+    </update>
 </mapper>

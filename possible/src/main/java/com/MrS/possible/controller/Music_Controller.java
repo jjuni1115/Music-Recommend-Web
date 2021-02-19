@@ -72,13 +72,20 @@ public class Music_Controller {
         load_pl temp = new load_pl(Integer.parseInt(keyword.getKeyword()), keyword.getName());
         List<result> playlist = new ArrayList<>();
         Object[] obj = musicService.load(temp);
-//        playlist =
-//        playlist.add();
         playlist = (List<result>) obj[0];
         boolean is_share = (boolean) obj[1];
-        System.out.println(playlist);
-        System.out.println(is_share);
+//        System.out.println(playlist);
+//        System.out.println(is_share);
         return obj;
+    }
+
+    @GetMapping(value="/toggle_share")
+    public @ResponseBody String toggleShare(@RequestParam Map<String, String> resource){
+        String[] data = new String[2];
+        data[0] = resource.get("list_name");  data[1] = resource.get("user_ID");
+        musicService.toggle_share(data);
+
+        return "complete";
     }
 
     //create new playlist

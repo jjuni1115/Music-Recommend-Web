@@ -17,4 +17,6 @@ public interface MusicDao {
     public List<String> load_sharelist();
     public List<result> sharelist(String keyword);
 
+    public void toggle_share(String[] listName);
+
 }
