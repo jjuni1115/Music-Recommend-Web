@@ -51,10 +51,12 @@ public class YoutubeServiceImpl implements YoutubeService{
         SearchDo SD = new SearchDo(youtubeDao, memberDao);
         SD.start();
 
-
         try{
-            SD.join();
+            SD.join();          //Main Thread가 searchDo Thread 위에 업혀서 대기
 
+            // youtube Search API 작업이 끝나면 아래 데이터 형식에 맞추어 준비한 후 session.setAttribute()로 페이지 넘겨줌.
+            // session은 youtubeDaoImpl 객체에 session을 저장해두었음  <- Controller에서 DaoImpl() 객체 생성 시 sesison 넘겨서 초기화
+            // YoutubeDT class > Y_M class : set necessary Fields
             YoutubeDT.Y_M yt_music = new YoutubeDT.Y_M(memberDao.getMember().getId(), memberDao.getMember().getAccount(),
                     youtubeDao.getYoutubedt().getArtist(), youtubeDao.getYoutubedt().getTitle(), youtubeDao.getYoutubedt().getVideoID());
 

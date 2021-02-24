@@ -34,7 +34,7 @@ public class YoutubeController {
 
         // Make YoutubeDT field & get (title, artist) to search music
         YoutubeDT youtubedt = new YoutubeDT(resources.getTitle(), resources.getArtist());
-        youtubeDao.setYoutubedt(youtubedt, session);
+        youtubeDao.setYoutubedt(youtubedt, session);        // 객체 생성시 youtubedt, session 넣어둠
 
         Member member = new Member(resources2.getId(), resources2.getAccount());
         memberDao.setMember(member);
@@ -48,7 +48,7 @@ public class YoutubeController {
         else{
             // Using Youtube API
 //            youtubedt = youtubeService.search(youtubedt); // Service.search impl, return MostView videoId
-            youtubeService = new YoutubeServiceImpl(youtubeDao, memberDao);        // 생성자 호출 시 YoutubeService에 youtubeDao를 넘겨둔다.
+            youtubeService = new YoutubeServiceImpl(youtubeDao, memberDao);        // 생성자 호출 시 YoutubeService에 youtubeDao, memberDao를 넘겨둔다.
 //            MemberDao tmpMember = new MemberDaoImpl(member);
             youtubeService.searchDo();
 

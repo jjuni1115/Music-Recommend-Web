@@ -16,7 +16,7 @@ public class MemberDaoImpl implements MemberDao {
 
     private static final String Namespace = "memberMapper.";
 
-    public void setMember(Member member) {
+    public void setMember(Member member) {      // 생성자에서 member를 받아서 member 값을 저장해둔다. <= 나중에 다른 곳에서 Dao에 접근하여 가져갈 수 있다.
         this.member = member;
     }
 

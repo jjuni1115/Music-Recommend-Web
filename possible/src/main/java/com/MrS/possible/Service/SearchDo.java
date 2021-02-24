@@ -79,10 +79,9 @@ public class SearchDo extends Thread{
 
             int T = duration.indexOf("T");   int M = duration.indexOf("M");
             // video length : more than 1hour || more then 6min : It's not a Music
-            if (duration.charAt(0) != 'P'
-                    || Integer.parseInt(duration.substring(T+1, M)) >= 6){
+            if (duration.charAt(0) != 'P' ){
                 continue;
-            }
+            }// || Integer.parseInt(duration.substring(T+1, M)) >= 6
 
             if (result[1] < viewCount.doubleValue()) {
                 result[0] = idx;
@@ -210,12 +209,7 @@ public class SearchDo extends Thread{
         // Impl mostview() -> YoutubeDT.setVideoID() = Most View count 'videoId' is into YoutubeDT.videoId field.
         youtubedt.setVideoID(mostview(videoId, thumbnailPath, youtubedt));
 
-        // YoutubeDT class > Y_M class : set necessary Fields
-//        YoutubeDT.Y_M yt_music = new YoutubeDT.Y_M(memberDao.getMember().getId(), memberDao.getMember().getAccount(), youtubedt.getArtist(), youtubedt.getTitle(), youtubedt.getVideoID());
-        Thread.sleep(3000);
-//        System.out.println("in thread");
-//        youtubeDao.getSession().setAttribute("youtubedt", yt_music); // 2021.01.19
-
+        Thread.sleep(4000);  // Use :  When Test Thread
 
         return youtubedt;  // return youtubedt : videoId, title, artist, viewCount
 

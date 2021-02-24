@@ -25,8 +25,8 @@ public class YoutubeDaoImpl implements YoutubeDao{
         this.youtubedt = youtubedt;
     }
 
-    public void setYoutubedt(YoutubeDT youtubedt, HttpSession session){
-        this.youtubedt = youtubedt;
+    public void setYoutubedt(YoutubeDT youtubedt, HttpSession session){     // youtubedt와 session 값을 Dao 생성자를 통해 객체 생성시 저장해두고
+        this.youtubedt = youtubedt;                                         // 나중에 다른 곳에서 Dao에 접근하여 이 값을 사용할 수 있다.
         this.session = session;
     }
 
