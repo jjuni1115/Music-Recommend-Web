@@ -12,7 +12,17 @@ public class MemberDaoImpl implements MemberDao {
     @Qualifier("sqlSession")
     SqlSession sqlSession;
 
+    private Member member;
+
     private static final String Namespace = "memberMapper.";
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    public Member getMember(){
+        return this.member;
+    }
 
     // Logon
     public Member logon(Member member){

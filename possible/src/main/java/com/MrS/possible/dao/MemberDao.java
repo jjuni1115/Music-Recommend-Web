@@ -9,4 +9,6 @@ public interface MemberDao {
     public void register(Member member);
     public Member detail(Member member);
     public void infoChange(Member member);
+    public Member getMember();
+    public void setMember(Member member);
 }

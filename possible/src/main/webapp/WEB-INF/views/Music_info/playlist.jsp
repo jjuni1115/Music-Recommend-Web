@@ -139,7 +139,7 @@
                         "재생":function(){$(this).dialog('close');
                                 var artistTitle = $('#playlist')[0].value.split("//");  // artist, title split
                                 location.href = "/ytube/searchDo?" + "id=" + ${sessionScope.member.id} + "&account=" +
-                                ${sessionScope.member.account} + "&Artist=" + artistTitle[1] + "&title=" + artistTitle[0];},
+                                "${sessionScope.member.account}" + "&Artist=" + artistTitle[1] + "&title=" + artistTitle[0];},
                         "삭제":function(){
                             $(this).dialog('close');
                             var params={"keyword":${sessionScope.member.id}+"//"+$("#playlist").val()+"//"+$("#my_playlist").val()};

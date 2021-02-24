@@ -1,6 +1,5 @@
 package com.MrS.possible.dao;
 
-import com.MrS.possible.domain.Music;
 import com.MrS.possible.domain.RecResult;
 import com.MrS.possible.domain.YoutubeDT;
 import org.apache.ibatis.session.SqlSession;
@@ -8,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Repository
@@ -18,6 +17,26 @@ public class YoutubeDaoImpl implements YoutubeDao{
     SqlSession sqlSession;
 
     private static final String Namespace = "youtubeMapper.";
+
+    private YoutubeDT youtubedt;
+    private HttpSession session;
+
+    public void setYoutubedt(YoutubeDT youtubedt){
+        this.youtubedt = youtubedt;
+    }
+
+    public void setYoutubedt(YoutubeDT youtubedt, HttpSession session){
+        this.youtubedt = youtubedt;
+        this.session = session;
+    }
+
+    public YoutubeDT getYoutubedt(){
+        return this.youtubedt;
+    }
+
+    public HttpSession getSession(){
+        return this.session;
+    }
 
     // When you search music, music.videoid column will update immediately
     @Override
