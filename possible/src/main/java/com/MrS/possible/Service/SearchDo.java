@@ -209,7 +209,7 @@ public class SearchDo extends Thread{
         // Impl mostview() -> YoutubeDT.setVideoID() = Most View count 'videoId' is into YoutubeDT.videoId field.
         youtubedt.setVideoID(mostview(videoId, thumbnailPath, youtubedt));
 
-        Thread.sleep(4000);  // Use :  When Test Thread
+//        Thread.sleep(4000);  // Use :  When Test Thread
 
         return youtubedt;  // return youtubedt : videoId, title, artist, viewCount
 

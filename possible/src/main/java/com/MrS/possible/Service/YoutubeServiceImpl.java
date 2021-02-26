@@ -49,10 +49,10 @@ public class YoutubeServiceImpl implements YoutubeService{
 
     public void searchDo(){
         SearchDo SD = new SearchDo(youtubeDao, memberDao);
-        SD.start();
-
+        SD.start(); // Thread start (페이지 여러개 띄우고 동시에 검색 시작하면 쓰레드 확인 가능)  // SD.join() 아래 구문을 Controller 하단으로 옮겨서 테스트하면 차이 확인 가능
+ 
         try{
-            SD.join();          //Main Thread가 searchDo Thread 위에 업혀서 대기
+            SD.join();          //Main Thread가 searchDo Thread 위에 업혀서 대기 -> 작업 후 페이지 넘기기
 
             // youtube Search API 작업이 끝나면 아래 데이터 형식에 맞추어 준비한 후 session.setAttribute()로 페이지 넘겨줌.
             // session은 youtubeDaoImpl 객체에 session을 저장해두었음  <- Controller에서 DaoImpl() 객체 생성 시 sesison 넘겨서 초기화
