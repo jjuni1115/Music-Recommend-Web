@@ -1,4 +1,44 @@
-body.h1 {
+*{
+    margin: 0 auto;
+    font-size:12px;
+    color: deepskyblue;
+    /*background-image: url("../views/images/background2.png");*/
+    background-color: darkslategrey;
+}
+
+#container{
+    margin-top:100px;
+    width:400px;
+    height:700px;
+    position: relative;
+}
+
+#title{
+    height:200px;
+    width: 400px;
+    position:absolute;
+    top:50px;
+    left:0px;
+    opacity: 0.7;
+}
+
+#title h1:hover{
+    cursor:pointer;
+}
+
+#login_box{
+    position:absolute;
+    width:300px;
+    height:120px;
+    top:250px;
+    left:0px;
+    border:solid 1px #bbbb00;
+    border-radius:15px;
+    margin:10px 0 0 10px;
+    padding:10px 0 0 15px;
+}
+
+h1 {
     FONT-SIZE: 78px;
     COLOR: #eeeeee;
     PADDING-BOTTOM: 10px;
@@ -8,7 +48,7 @@ body.h1 {
     BORDER-LEFT: #00b5ff 8px solid;
 }
 
-body.h2 {
+h2 {
     FONT-SIZE: 12px;
     COLOR: #eeeeee;
     PADDING-BOTTOM: 10px;
@@ -22,79 +62,80 @@ body.h2 {
 button {
     background-color: #00b5ff;
     border: none;
+    width:100px;
     color: #ffffff;
-    cursor: pointer;
     display: inline-block;
     font-family: 'BenchNine', Arial, sans-serif;
     font-size: 1em;
-    font-size: 10px;
     line-height: 1em;
     outline: none;
     padding: 6px 20px 5px;
     position: relative;
     text-transform: uppercase;
     font-weight: 700;
+    box-sizing: border-box;
 }
 
-/* 이미지 파일 불러오기 불가능 */
-body {
-    background-image: url("../views/images/background2.png");
-    background-size : auto;
-    font-family:"맑은고딕", "돋움";
-    font-size:12px;
-    color: deepskyblue;
+button:hover{
+    cursor:pointer;
+    border: 1px solid red;
+    opacity: 0.7;
 }
 
-* {
-    margin:0;
-    padding:0;
-}
+
 ul {
     list-style-type: none;
+    padding-left: 0px;
 }
 
-#login_box {
-    width:220px;
-    height:120px;
-    border:solid 1px #bbbb00;
-    border-radius:15px;
-    margin:10px 0 0 10px;
-    padding:10px 0 0 15px;
-}
-h2 {
-    font-family:"Arial";
-    margin-bottom:10px;
-}
+
 #login_box input {
     width:100px;
     height:18px;
 }
 #id_pass, #login_btn {
-    display: inline-block;
-    vertical-align: top;
+    display: block;
+    float:left;
+
 }
+
 #id_pass span {
     display: inline-block;
     width:20px;
+    text-align: left;
 }
 #pass {
     margin-top:3px;
 }
-#login_btn button {
+#id_pass #To_login {
     margin-left:5px;
-    padding:12px;
+    padding:5px;
     border-radius:5px;
+    position: absolute;
+    top: 60px;
+    left: 150px;
+    box-sizing: border-box;
 }
-#btns {
-    margin:12px 0 0 0;
+
+#signup {
     text-decoration:underline;
+    margin-left:5px;
+    padding:5px;
+    border-radius:5px;
+    position: absolute;
+    top: 90px;
+    left: 25px;
+    box-sizing: border-box;
 }
-#btns li {
-    margin-left:10px;
-    display:inline;
-}
-#To_login{
-    position: relative;
-    left:135px;
+
+#footer{
+    display: inline;
+    height:50px;
+    width: 400px;
+    position: absolute;
     bottom:30px;
+    right:30px;
+    color: antiquewhite;
+    font-style: italic;
+    text-align: right;
 }

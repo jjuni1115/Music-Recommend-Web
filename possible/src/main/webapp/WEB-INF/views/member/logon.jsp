@@ -23,6 +23,14 @@
         //after all document read, function start -> so, you can use doc.variance, jsp value
         $(document).ready(function(){
         });
+
+        window.onload = function(){
+            setTimeout(function(){
+                console.log("here");
+                document.querySelector("#welcome").setAttribute("style", "display: none");
+            }, 3000);
+        };
+
     </script>
 
 </head>
@@ -32,61 +40,75 @@
 </style>
 <body>
 
-<h1>Muse</h1>
+<div id="container">
+    <div id="topTitle">
+        <hr>
+        <h1 onclick="location.reload();">Muse</h1>
+    </div>
 
 
-<div id="up-menu">
-    <button onclick="javascript:location.href='/';">홈</button>
-    <button onclick="javascript:location.href='/member/logout';">로그아웃</button>
+    <div id="up-menu">
+        <hr>
+        <button onclick="javascript:location.href='/';">홈</button>
+        <button onclick="javascript:location.href='/member/logout';">로그아웃</button>
+    </div>
+
+    <br>
+    <div id="middle-menu">
+        <hr>
+        <div id="userInfo">
+            <form action="/member/detail" method="post">
+                <input type="hidden" name="id" value="${sessionScope.member.id}"/>
+                <input type="hidden" name="account" value="${sessionScope.member.account}" />
+                <button type="submit" name="detail" value="회원정보">회원정보</button>
+            </form>
+        </div>
+
+        <div id="musicInfo">
+            <form action="/Music_info/playlist" method="post">
+                <input type="hidden" name="id" value=${sessionScope.member.id} />
+                <input type="hidden" name="account" value=${sessionScope.member.account} />
+                <input type="hidden" name="first_name" value=${sessionScope.member.first_name} />
+                <input type="hidden" name="last_name" value=${sessionScope.member.last_name} />
+                <button type="submit" id="submit_recommend" >플레이 리스트 & 음악 추천</button><br>
+            </form>
+        </div>
+
+    </div>
+    <div id="search-form">
+        <form action="/ytube/searchDo" method="get">
+            Artist : <input type="text" name="Artist" id="artist"/><br>
+            Title : <input type="text" name="title" id="title" minlength="1"/>
+            <input type="hidden" name="id" value="${sessionScope.member.id}"/>
+            <input type="hidden" name="account" value="${sessionScope.member.account}" />
+            <button id="submit" type="submit">음악검색</button><br>
+        </form>
+    </div>
+
+    <div id="welcome" style="color: skyblue">
+        <h2>${sessionScope.member.first_name} 님 환영합니다.</h2>
+    </div>
 </div>
-
-<br>
-<div id="middle-menu">
-    <form action="/member/detail" method="post">
-        <input type="hidden" name="id" value="${sessionScope.member.id}"/>
-        <input type="hidden" name="account" value="${sessionScope.member.account}" />
-        <button type="submit" name="detail" value="회원정보">회원정보</button>
-    </form>
-</div>
-
-<div id="search-form">
-    <form action="/ytube/searchDo" method="get">
-        Artist : <input type="text" name="Artist" id="artist"/><br>
-        Title : <input type="text" name="title" id="title" minlength="1"/>
-        <input type="hidden" name="id" value="${sessionScope.member.id}"/>
-        <input type="hidden" name="account" value="${sessionScope.member.account}" />
-        <button id="submit" type="submit">음악검색</button><br>
-    </form>
-</div>
-<%--    Serial ID : <p id="videoIDd"></p>--%>
-
-    <form action="/Music_info/playlist" method="post">
-        <input type="hidden" name="id" value=${sessionScope.member.id} />
-        <input type="hidden" name="account" value=${sessionScope.member.account} />
-        <input type="hidden" name="first_name" value=${sessionScope.member.first_name} />
-        <input type="hidden" name="last_name" value=${sessionScope.member.last_name} />
-        Music Recommend : <button type="submit" id="submit_recommend" >플레이 리스트 & 음악 추천</button><br>
-    </form>
-</div>
-<div id="player" class="youtube">
-</div>
-
-
-<div id="login info">
-    id = ${sessionScope.member.id}
-    account = ${sessionScope.member.account}
-    password = ${sessionScope.member.password}
-    age = ${sessionScope.member.age}
-    name = ${sessionScope.member.first_name}
-<br>
-    <c:if test="${not empty sessionScope.member.id}">
-        ${sessionScope.member.account}님 로그인 성공
-    </c:if>
-</div>
-
 
 </body>
 </html>
+
+
+
+
+<%--<div id="login info">--%>
+<%--    id = ${sessionScope.member.id}--%>
+<%--    account = ${sessionScope.member.account}--%>
+<%--    password = ${sessionScope.member.password}--%>
+<%--    age = ${sessionScope.member.age}--%>
+<%--    name = ${sessionScope.member.first_name}--%>
+<%--<br>--%>
+<%--    <c:if test="${not empty sessionScope.member.id}">--%>
+<%--        ${sessionScope.member.account}님 로그인 성공--%>
+<%--    </c:if>--%>
+<%--</div>--%>
+
+
 
 
 

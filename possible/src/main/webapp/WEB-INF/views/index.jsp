@@ -33,18 +33,18 @@
       // id : #, class : .
       $('#To_login').click(function() {
         var json = {
-          account : $('#account').val(),
-          password : $('#password').val()
+          account : $('#account')[0].value,
+          password : $('#password')[0].value
         };
 
         // for(let i=0; i<Object.keys(json).length; i++){
         if (json["account"].length < 4) {
-          alert($(json["account"]).attr("placeholder") + "입력해주세요.");
+          alert($("#account").getAttribute("placeholder") + "를 입력해주세요.");
           $("#" + json["account"]).focus();
-          return;
         }
       });
     });
+
   </script>
 
 
@@ -54,39 +54,48 @@
 </style>
 
 <body>
+  <div id="container">
+    <div id="title">
+      <h1 onclick="location.reload();">Muse</h1>
+      <h2>어서오세요 당신만의 음악을 알려드립니다. </h2>
+    </div>
 
-  <h1>Muse</h1>
-  <h2>어서오세요 당신만의 음악을 알려드립니다. </h2>
+    <div id="login_box">
+      <h3>Member Login</h3>
+      <br>
+      <ul id="input_button">
+        <li id="id_pass">
+          <ul>
+            <form action="/member/logon" method="post">
+              <li><span>ID</span>&nbsp;<input type="text" id="account"
+                                         name="account" placeholder="아이디"><br></li>
+              <!-- id -->
+              <li id="pass"><span>PW</span> <input type="password"
+                                                   id="password" name="password" placeholder="비밀번호"><br>
 
-  <div id="login_box">
-    <h3>Member Login</h3>
-    <ul id="input_button">
-      <li id="id_pass">
-        <ul>
-          <form action="/member/logon" method="post">
-          <li><span>ID</span> <input type="text" id="account"
-                                     name="account" placeholder="아이디"><br></li>
-          <!-- id -->
-          <li id="pass"><span>PW</span> <input type="password"
-                                               id="password" name="password" placeholder="비밀번호"><br>
+              <li>
+                <button type="submit" id="To_login">To Login</button>
+              </li>
 
-            <li>
-              <button type="submit" id="To_login">To Login</button>
-            </li>
+            </form>
+          </ul>
+        </li>
 
-          </form>
-        </ul>
-      </li>
-
-    </ul>
-    <ul id="btns">
-      <li><form action="/member/signup" method="get">
-        <%--    <input type="text" name="account" placeholder="아이디2"><br>--%>
-        <%--    <input type="password" name="password" placeholder="비밀번호2"><br>--%>
-        <button type="submit" id="signup">To Sign Up</button>
-      </form></li>
-    </ul>
+      </ul>
+      <ul id="btns">
+        <li><form action="/member/signup" method="get">
+          <%--    <input type="text" name="account" placeholder="아이디2"><br>--%>
+          <%--    <input type="password" name="password" placeholder="비밀번호2"><br>--%>
+          <button type="submit" id="signup">To Sign Up</button>
+        </form></li>
+      </ul>
+    </div>
   </div>
+
+  <div id="footer">
+    <p>Developed by  KJW & JJH</p>
+  </div>
+
 
 <div>${msg}</div>
 
